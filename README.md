@@ -6,5 +6,6 @@ SVN:
 2. Finna src folderinn fyrir það verkefni og hægri smella og gera SVN Checkout.
 URL of repository:
 https://github.com/steina1989/hbv401g-17v-6d/trunk
+
 Checkout directory:
 C:..... Slóðin á src möppuna ykkar. (á að enda á \src)
