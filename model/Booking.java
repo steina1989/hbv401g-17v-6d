@@ -11,6 +11,7 @@ public class Booking {
 	private String comment;
 	
 	
+
 	public Buyer getBuyer() {
 		return buyer;
 	}

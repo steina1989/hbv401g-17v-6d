@@ -6,6 +6,8 @@ public class Buyer {
 	private String gender;
 	private int cellphone;
 	private String email;
+	
+	
 	public String getName() {
 		return name;
 	}
