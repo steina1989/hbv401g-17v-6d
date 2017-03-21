@@ -4,15 +4,14 @@ import java.sql.*;
 import javax.swing.*;
 
 public class SqlConnection {
-	Connection conn=null;
+	Connection conn=null; // names the connection
 	public static Connection dbConnector(){
-		
 		try{
 			Class.forName("org.sqlite.JDBC");
 			Connection conn=DriverManager.getConnection("jdbc:sqlite:C:\\Ólafur\\Skóli\\Tölvunarfræði\\Annað ár\\Vor\\Þróun Hugnúnaðar\\Gagnagrunnur\\Dagsferdir.sqlite");
-			JOptionPane.showMessageDialog(null,"connection succsessfull"); // message that the connection was succsesfull
-			return conn;
-		}catch(Exception e){
+			JOptionPane.showMessageDialog(null,"connection succsessfull"); // message that the connection was succsessfull
+			return conn; // returns the connection to the program that calls for it.
+		}catch(Exception e){ // error report
 			JOptionPane.showMessageDialog(null,e);
 			return null;
 		}
