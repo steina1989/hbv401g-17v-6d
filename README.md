@@ -12,3 +12,4 @@ Checkout directory:
 C:..... Slóðin á src möppuna ykkar. (á að enda á \src)
 
 Hallgrímur var hér!
+Jónas var hér!
