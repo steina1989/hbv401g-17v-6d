@@ -1,4 +1,4 @@
-package controller;
+package storage;
 
 public class DatabaseController {
 
