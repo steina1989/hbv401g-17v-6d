@@ -10,3 +10,5 @@ https://github.com/steina1989/hbv401g-17v-6d/trunk
 
 Checkout directory:
 C:..... Slóðin á src möppuna ykkar. (á að enda á \src)
+
+Hallgrímur var hér!
