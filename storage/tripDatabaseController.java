@@ -12,7 +12,7 @@ import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class tripDatabaseController {
+public class TripDatabaseController {
 
 public static getTripsByParameter{
 	get.DatabaseControlller.conn
