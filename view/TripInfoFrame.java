@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.BoxLayout;
 import java.awt.GridLayout;
+import java.time.Duration;
 import java.util.*;
 
 import javax.swing.JComboBox;
@@ -28,15 +29,16 @@ public class TripInfoFrame extends JFrame {
 	private JTextField txtProduct;
 	private JTextField txtTripName;
 	private JTextField txtPrice;
-	private JTextField textField;
 	private Trip trip;
 	private int noGuests;
 	private String name, description, category;
 	private int id, price, seatsAvailable, seatsUsed;
-	private Date date;
+	private Calendar date;
 	private ArrayList<Review> review; 
 	private Location location;
 	private ArrayList<Guide> guide;
+	private Duration duration;
+	private JTextField txtId;
 	
 	/**
 	 * Launch the application.
@@ -46,8 +48,23 @@ public class TripInfoFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public TripInfoFrame() {
-		name = "Phallic"
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		// Dummy variables
+		name = "Phallic";
+		id = 023213;
+		//SimpleDateFormat sdf = new SimpleDateFormat("yyyy MMM dd HH:mm");
+		//Calendar date = new GregorianCalendar(2013,0,31,10,12);
+		//review = new Review()
+		//location = new Location() 
+		price = 25;
+		description = "Looking at Icelandic phallics";
+		seatsAvailable = 29;
+		seatsUsed = 10;
+		category = "Sight seeing";
+		// guides = new Guides();
+		//duration = new Duration();
+		
+		
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
 		setBounds(100, 100, 696, 397);
 		getContentPane().setLayout(null);
 		
@@ -78,15 +95,10 @@ public class TripInfoFrame extends JFrame {
 		txtTripName.setColumns(10);
 		
 		txtPrice = new JTextField();
-		txtPrice.setText("Price");
+		txtPrice.setText(Integer.toString(price));
 		txtPrice.setBounds(209, 61, 146, 26);
 		getContentPane().add(txtPrice);
 		txtPrice.setColumns(10);
-		
-		textField = new JTextField();
-		textField.setBounds(209, 107, 146, 26);
-		getContentPane().add(textField);
-		textField.setColumns(10);
 		
 		JLabel lblTotalPrice = new JLabel("Total Price:");
 		lblTotalPrice.setBounds(85, 289, 97, 20);
@@ -103,5 +115,15 @@ public class TripInfoFrame extends JFrame {
 		JLabel label = new JLabel("$");
 		label.setBounds(197, 64, 16, 20);
 		getContentPane().add(label);
+		
+		txtId = new JTextField();
+		txtId.setText(Integer.toString(id));
+		txtId.setBounds(493, 19, 146, 26);
+		getContentPane().add(txtId);
+		txtId.setColumns(10);
+		
+		JLabel lblId = new JLabel("id:");
+		lblId.setBounds(468, 22, 45, 20);
+		getContentPane().add(lblId);
 	}
 }
