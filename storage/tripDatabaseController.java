@@ -10,9 +10,11 @@ import java.sql.Statement;
 
 /* !!!! ------ THINGS IN THIS CODE THAT ARE STILL WAITING TO BE DONE ------- !!!!
  * + change the values on the getters so i can get them
- * 		- date and revew
+ * 		- date(date) and revew(char)
+ * + can connect to the database and create the SQL command but nothing happens for some reason
+ * 		and no error report at all. Starting to suspect that the jar files are not being accsessed
  * + Figure out a proper way to relay the array with the SQL results */
-
+//------------------------------------------------------------------------------
 
 
 public class tripDatabaseController {
@@ -108,7 +110,7 @@ for(int i=1; i< orders.length;i++ ){
 	 }
 	System.out.println(sqlinput);
 	}
-	 sqlinput = sqlinput + ";"; // to end the command
+	sqlinput = sqlinput + ";"; // to end the command
 	 System.out.println(sqlinput);
  //-------------------------------------------------------------------------------------------------------------
 	
