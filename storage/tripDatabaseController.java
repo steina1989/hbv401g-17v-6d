@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+
+
 /* Things in this code still left to do  
  * + change the values on the getters
  * 		- date, price and others
@@ -129,7 +131,7 @@ public static void main(String [] args){
 	 String Seats = rs.getString("TripCategory");
 // --------------------------------------------------------------------------------------------------------------
 	 
-//------------------------INSERT SQL RESULT INTO VARIABLE TO BE SENT FORWARD ------------------------------------	 
+//------------------------INSERT SQL RESULT INTO ARRAY VARIABLE TO BE SENT FORWARD ------------------------------------	 
 	 // Insert the newly gotten line into the array that will be returned to other classes
 	 sqlreturn = new String [numberOfLines][8];
 	 for(int i =0;i<=8;i++){
