@@ -108,7 +108,7 @@ for(int i=1; i< orders.length;i++ ){
 	 }
 	System.out.println(sqlinput);
 	}
-	 sqlinput = sqlinput + " ;"; // to end the command
+	 sqlinput = sqlinput + ";"; // to end the command
 	 System.out.println(sqlinput);
  //-------------------------------------------------------------------------------------------------------------
 	
