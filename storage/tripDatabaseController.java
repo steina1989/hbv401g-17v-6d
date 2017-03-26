@@ -152,7 +152,7 @@ for(int i=1; i< TOrders.length;i++ ){
 				
 // --------------------------------------------------------------------------------------------------------------
 	 
-//------------------------INSERT SQL RESULT INTO ARRAY VARIABLE TO BE SENT FORWARD ------------------------------------	 
+//------------------------> INSERT SQL RESULT INTO ARRAY VARIABLE TO BE SENT FORWARD <------------------------------------	 
 	 // Insert the newly gotten line into the array that will be returned to other classes
 			
 		    sqlreturn = new String [numberOfLines][10];
@@ -189,7 +189,7 @@ for(int i=1; i< TOrders.length;i++ ){
 			 System.out.print(", Description: " + Description);
 			 System.out.println(", Seats: " + Seats );
 			 
-				} 
+				} }
 	 if(rs != null){
 			rs.close();
 		}
@@ -200,7 +200,7 @@ for(int i=1; i< TOrders.length;i++ ){
 			conn.close();
 			}
 		
-	 }
+	 
 //------------------------------------------------------------------------------------------------------------------------------------	 
 	  //return [][] sqlreturn; // sends the outcome of the SQL query back, needs work.
 
