@@ -1,12 +1,11 @@
 package storage;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-
+// C:\Users\ÓlafurKonráð\workspace\Daytrip 
 
 /* !!!! ------ THINGS IN THIS CODE THAT ARE STILL WAITING TO BE DONE ------- !!!!
  * + change the values on the getters so i can get them
@@ -38,36 +37,35 @@ public static void main(String [] args){
 	
 	
 //------------------ INPUT TEST ----------------------------------------------
-	String [] orders;  // hardcoding for testing supposed intake of info
-	orders = new String [13];
-	orders[0] = "NA"; // row number??
-	orders[1] = "NA"; // TripId
-	orders[2] = "NA";  // TripName
-	orders[3] = "NA"; // TripDate_higer than
-	orders[4] = "NA"; // TripDate lower than
-	orders[5] = "NA"; // TripReviews
-	orders[6] = "Reykjavik"; // TripLocation
-	orders[7] = "NA"; // TripPrice higher than
-	orders[8] = "NA"; // TripPrice lower than
-	orders[9] = "NA"; // TripDescription
-	orders[10] = "NA"; // TripSeats
-	orders[11] = "NA"; // TripCategory
-	orders[12] = "jonas"; //TripGuides
+	String [] TOrders;  // hardcoding for testing supposed intake of info
+	TOrders = new String [13];
+	TOrders[0] = "NA"; // row number??
+	TOrders[1] = "NA"; // TripId
+	TOrders[2] = "NA";  // TripName
+	TOrders[3] = "NA"; // TripDate_higer than
+	TOrders[4] = "NA"; // TripDate lower than
+	TOrders[5] = "NA"; // TripReviews mabe not usable for text but for starsnumber(would be added later)
+	TOrders[6] = "NA"; // TripLocation
+	TOrders[7] = "NA"; // TripPrice higher than
+	TOrders[8] = "NA"; // TripPrice lower than
+	TOrders[9] = "NA"; // TripDescription
+	TOrders[10] = "NA"; // TripSeats
+	TOrders[11] = "NA"; // TripCategory
+	TOrders[12] = "NA"; //TripGuides
 // ---------------------------------------------------------------------
 	
 // ------------ CREATING THE SQL COMMAND FROM INPUT -----------------------------------------------------------
 	
 	String and = "";
-	int start = 1;
+	int start = 0;
 	String sqlinput="SELECT * FROM Daytrips ";// the string that is the SQL command
-for(int i=1; i< orders.length;i++ ){
+for(int i=1; i< TOrders.length;i++ ){
 		
-	if(orders[i] != "NA"){ // if the compartment is empty then skip this array slot.
+	if(TOrders[i] != "NA"){ // if the compartment is empty then skip this array slot.
+		start++;
 		if(start == 1){ // to seperate searching for everything versus specific search
 			sqlinput = sqlinput + " WHERE";
-					if(start==1){
-						and = "";
-					}	
+						
 				}
 		if(start==2 ){// starting an sql where querey with AND relays only errors, this should prevent that.
 			and= " AND";
@@ -77,39 +75,43 @@ for(int i=1; i< orders.length;i++ ){
 		    	  				if(i<=3){
 									
 				    	  			if(i==1){// TripId
-										sqlinput = sqlinput + and + " ( TripId = '" + orders[i] + "' )";
+										sqlinput = sqlinput + and + " ( TripId == '" + TOrders[i] + "' )";
 									}if(i==2){// TripName
-										sqlinput = sqlinput + and + " ( TripName = '" + orders[i] + "' )"; 
+										sqlinput = sqlinput + and + " ( TripName == '" + TOrders[i] + "' )"; 
 									}if(i==3){// TripDate_higer or same as
-									sqlinput = sqlinput + and + " ( TripDate >= " + orders[i] + " )";}
+									sqlinput = sqlinput + and + " ( TripDate >= " + TOrders[i] + " )";}
 								}else{	
-									
 									if(i==4){// TripDate lower or same as
-										sqlinput = sqlinput + and + " ( TripDate <= " + orders[i] + " )";
+										sqlinput = sqlinput + and + " ( TripDate <= " + TOrders[i] + " )";
 									}if(i==5){// TripReviews
-										sqlinput = sqlinput + and + " ( TripReviews = '" + orders[i] + "' )"; 
+										sqlinput = sqlinput + and + " ( TripReviews == '" + TOrders[i] + "' )"; 
 									}if(i==6){// TripLocation
-										sqlinput = sqlinput + and + " ( TripLocation = '" + orders[i] + "' )";}									}
+										sqlinput = sqlinput + and + " ( TripLocation == '" + TOrders[i] + "' )";}
+								
+								}
 		            	  }else{	
 		            			if(i<=9){
 									if(i==7){// TripPrice higher than
-										sqlinput = sqlinput + and + " ( TripPrice >= " + orders[i] + " )";
+										sqlinput = sqlinput + and + " ( TripPrice >= " + TOrders[i] + " )";
 									}if(i==8){// TripPrice lower than
-										sqlinput = sqlinput + and + " ( TripPrice <= " + orders[i] + " )";
+										sqlinput = sqlinput + and + " ( TripPrice <= " + TOrders[i] + " )";
 									}if(i==9){// TripDescription
-										sqlinput = sqlinput + and + " ( TripDescription = '" + orders[i] + "' )";}
+										sqlinput = sqlinput + and + " ( TripDescription == '" + TOrders[i] + "' )";}
 		            			}else{
 									if(i==10){// TripSeats
-										sqlinput = sqlinput + and + " ( TripSeats == " + orders[i] + " )";
+										sqlinput = sqlinput + and + " ( TripSeats == " + TOrders[i] + " )";
 									}if(i==11){// TripCategory
-										sqlinput = sqlinput + and + " ( TripCategory = '" + orders[i] + "' )";}
+										sqlinput = sqlinput + and + " ( TripCategory == '" + TOrders[i] + "' )";}
 		            				}if(i==12){// TripCategory
-										sqlinput = sqlinput + and + " ( TripGuides = '" + orders[i] + "' )";}
-		            		}
-		      start++;
+										sqlinput = sqlinput + and + " ( TripGuides == '" + TOrders[i] + "' )";}
+		            				
+		            	  		}
+		            	  
+							}
+		      
 	 }
 	System.out.println(sqlinput);
-	}
+	
 	sqlinput = sqlinput + ";"; // to end the command
 	 System.out.println(sqlinput);
  //-------------------------------------------------------------------------------------------------------------
@@ -118,17 +120,18 @@ for(int i=1; i< orders.length;i++ ){
      ResultSet rs = stmt.executeQuery(sqlinput);// Send in completed SQL query.
     
  //------------------------------- COLLECT THE RESAULTS FROM SQL COMMAND -----------------------------------------    
-     String [][] sqlreturn;
-     int numberOfLines = 1;
-	 //STEP 5: Extract data from result set
+
+       String [][] sqlreturn;
+     int numberOfLines = 0;
+	// STEP 5: Extract data from result set
 	 while(rs.next()){
 				 //Retrieve by column name
 				 int id = rs.getInt("TripId");
 				 String id2 = Integer.toString(id);
 				 String name = rs.getString("TripName");
-				// int Date = rs.getInt("TripDate");
+				 String Date = rs.getString("TripDate");
 				// String Date2 = Integer.toString(Date);
-				// String Reviews = rs.getString("TripReviews");
+				String Reviews = rs.getString("TripReviews");
 				 String Location = rs.getString("TripLocation");
 				 int Price = rs.getInt("TripPrice");
 				 String Price2 = Integer.toString(Price);
@@ -136,35 +139,46 @@ for(int i=1; i< orders.length;i++ ){
 				 int Seats = rs.getInt("TripCategory");
 				 String Seats2 = Integer.toString(Seats);
 				 String Guides = rs.getString("TripGuides");
+				 
+				 System.out.print(id2+ " : ");
+				 System.out.print(name+ " : ");
+				 System.out.print(Date+ " : ");
+				 System.out.print(Reviews+ " : ");
+				 System.out.print(Location+ " : ");
+				 System.out.print(Price2+ ":");
+				 System.out.print(Description+ " : ");
+				 System.out.print(Seats+ " : ");
+				 System.out.println(Guides+ " : ");
+				
 // --------------------------------------------------------------------------------------------------------------
 	 
 //------------------------INSERT SQL RESULT INTO ARRAY VARIABLE TO BE SENT FORWARD ------------------------------------	 
 	 // Insert the newly gotten line into the array that will be returned to other classes
-			/* 
-		    sqlreturn = new String [numberOfLines][9];
+			
+		    sqlreturn = new String [numberOfLines][10];
 				 for(int i =0;i<=9;i++){
 					
-					 if(i==1)
+					 if(i==0)
 					 sqlreturn [numberOfLines][i] = id2 ;
-					 if(i==2)
+					 if(i==1)
 					 sqlreturn [numberOfLines][i] = name ;
-					  if(i==3)//{
-					 sqlreturn [numberOfLines][i] = ""; //Date2 };
+					  if(i==2){
+					sqlreturn [numberOfLines][i] = Date; }
+					 if(i==3)
+					 sqlreturn [numberOfLines][i] =  Reviews ;
 					 if(i==4)
-					 sqlreturn [numberOfLines][i] = "";// Reviews ;
-					 if(i==5)
 					 sqlreturn [numberOfLines][i] = Location ;
-					 if(i==6)
+					 if(i==5)
 					 sqlreturn [numberOfLines][i] = Price2 ;
-					 if(i==7)
+					 if(i==6)
 					 sqlreturn [numberOfLines][i] = Description ;
-					 if(i==8)
+					 if(i==7)
 					 sqlreturn [numberOfLines][i] = Seats2 ;
-					 if(i==9)
+					 if(i==8)
 						 sqlreturn [numberOfLines][i] = Guides ;	 
 				 
-			 numberOfLines++;
-			*/
+			 numberOfLines++; 
+			
 			 //Display values
 			 System.out.print("ID: " + id);
 			 System.out.print(", Name: " + name);
@@ -174,7 +188,8 @@ for(int i=1; i< orders.length;i++ ){
 			 System.out.print(", Price: " + Price );
 			 System.out.print(", Description: " + Description);
 			 System.out.println(", Seats: " + Seats );
-				 }
+			 
+				} 
 	 if(rs != null){
 			rs.close();
 		}
@@ -183,7 +198,9 @@ for(int i=1; i< orders.length;i++ ){
 		}
 		if(conn != null){
 			conn.close();
-	}
+			}
+		
+	 }
 //------------------------------------------------------------------------------------------------------------------------------------	 
 	  //return [][] sqlreturn; // sends the outcome of the SQL query back, needs work.
 
