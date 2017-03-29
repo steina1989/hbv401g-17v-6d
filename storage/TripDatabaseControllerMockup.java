@@ -12,9 +12,9 @@ public class TripDatabaseControllerMockup {
 	
 	
 	
-	public ArrayList<Trip> getTripsByParameter(String[] filter)
+	public ArrayList<Trip> getTripsByParameter(ArrayList<String> filterArray)
 	{
-		return
+		return null;
 	}
 
 }

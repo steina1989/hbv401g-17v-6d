@@ -4,6 +4,7 @@ import view.FilterPanel;
 import view.MainFrame;
 import storage.TripDatabaseController;
 import storage.TripDatabaseControllerMockup;
+import view.ListOfTripsPanel;
 
 import java.sql.ResultSet;
 import java.text.DateFormat;
@@ -24,9 +25,9 @@ public class TripController {
 		mainFrame = mf;
 	}
 	
-	public ArrayList<Trip> search(ArrayList<String> filter){
-		
-		listOfTrips =  tripDatabaseController.getTripsByParameter(filter);
+	private ArrayList<Trip> search(ArrayList<String> filterArray)
+	{		
+		listOfTrips =  tripDatabaseController.getTripsByParameter(filterArray);
 		
 	}
 
@@ -50,9 +51,9 @@ public class TripController {
 		return filter;
 	}
 	
-	public searchClicked()
+	public void searchClicked()
 	{
-		FilterPanel fp = mf.getListOfTripPanel().getFilterPanel();
+		FilterPanel fp =  ((ListOfTripsPanel) mainFrame.getListOfTripsPanel()).getFilterPanel();
 		ArrayList<String> filterArray = getFilterArray(fp); 
 		search(filterArray);
 	}
