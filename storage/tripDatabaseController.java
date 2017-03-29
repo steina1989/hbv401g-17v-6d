@@ -1,5 +1,12 @@
 package storage;
 import java.sql.Connection;
+<<<<<<< .mine
+
+import java.sql.Date;
+||||||| .r57
+import java.sql.Date;
+=======
+>>>>>>> .r59
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,11 +28,11 @@ import java.sql.Statement;
 + addReview(review : Review) : void
 */
 
-public class tripDatabaseController {
+public class TripDatabaseController {
 
 	// JDBC driver
 		static final String JDBC_DRIVER = "org.sqlite.JDBC";
-		static final String DB_URL = "jdbc:sqlite:C:\\Users\\ÓlafurKonráð\\workspace\\Daytrip\\src\\storage\\DayTrips.sqlite";
+		static final String DB_URL = "jdbc:sqlite:C:\\Users\\stein\\workspace\\Daytrip\\src\\storage\\DayTrips.sqlite";
 	
 
 		public static String [][] getTripsByParameter(String [] ViewTripOrder){

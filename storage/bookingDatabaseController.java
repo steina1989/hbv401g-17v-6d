@@ -19,7 +19,7 @@ ATH ++++ WHAT STILL NEEDS TO BE FIXED +++++ ATH
 
 */
 
-public class bookingDatabaseController {
+public class BookingDatabaseController {
 
 	// JDBC driver
 			static final String JDBC_DRIVER = "org.sqlite.JDBC";
