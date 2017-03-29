@@ -2,28 +2,9 @@ package unitTests;
 
 import static org.junit.Assert.*;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
-
-public class TripControllerTest {
-
-	
-	@Before
-	public void setUp() {
-
-	}
-	
-	@After
-	public void tearDown() {
-		
-	}
-	
-	
-	@Test
-	public void test() {
-		fail("Not yet implemented");
-	}
-
-}
 
 /*
 Prufum search aðferðina()
@@ -39,3 +20,22 @@ Search kallar á getTripsByParameter sem skilar lista, tripctrller(enn inní searc
 
 
 */
+
+public class TripControllerTest {
+
+	
+	@Before
+	public void setUp() throws Exception {
+	}
+
+	@After
+	public void tearDown() throws Exception {
+	}
+
+	@Test
+	public void test() {
+		fail("Not yet implemented");
+	}
+
+}
+
