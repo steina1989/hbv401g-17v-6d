@@ -2,9 +2,15 @@ package unitTests;
 
 import static org.junit.Assert.*;
 
+import javax.swing.JFrame;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import controller.TripController;
+import storage.TripDatabaseControllerMockup;
+import view.MainFrame;
 
 /*
 Prufum search aðferðina()
@@ -22,19 +28,26 @@ Search kallar á getTripsByParameter sem skilar lista, tripctrller(enn inní searc
 */
 
 public class TripControllerTest {
+	
+
 
 	
 	@Before
 	public void setUp() throws Exception {
+		JFrame mainFrame = new MainFrame();
+		TripDatabaseControllerMockup tripDBcontroller = new TripDatabaseControllerMockup();
+		TripController tripController;
 	}
 
 	@After
 	public void tearDown() throws Exception {
+		mainFrame = null;
+		tripdbcontroller = null;
 	}
 
 	@Test
 	public void test() {
-		fail("Not yet implemented");
+		trip
 	}
 
 }
