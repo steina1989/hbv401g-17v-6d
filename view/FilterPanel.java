@@ -1,6 +1,8 @@
 package view;
 
 import javax.swing.JPanel;
+
+import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JTextArea;
 import javax.swing.JList;
@@ -9,6 +11,9 @@ import javax.swing.JSlider;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 import javax.swing.JTextField;
 import javax.swing.JSplitPane;
 
@@ -16,8 +21,10 @@ public class FilterPanel extends JPanel {
 
 	private Date dateLow;
 	private Date dateHigh;
-	private int priceLow;
-	private int priceHigh;
+	private Integer priceLow;
+	private Integer priceHigh;
+	private String category;
+	private String name;
 	
 	/**
 	 * Create the panel.
@@ -58,6 +65,18 @@ public class FilterPanel extends JPanel {
 		this.priceHigh = priceHigh;
 	}
 	
+	public String getCategory() {
+		return category;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	
 	
 	

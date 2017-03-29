@@ -5,6 +5,14 @@ public class Review {
 	private String text;
 	private int stars;
 	
+	
+	
+	public Review(Buyer author, String text, int stars) {
+		this.author = author;
+		this.text = text;
+		this.stars = stars;
+		
+	}
 	public Buyer getAuthor() {
 		return author;
 	}

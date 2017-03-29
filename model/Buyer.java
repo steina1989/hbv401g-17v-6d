@@ -8,6 +8,16 @@ public class Buyer {
 	private String email;
 	
 	
+	
+	public Buyer(String name, int age, String gender, int cellphone, String email) {
+		this.name = name;
+		this.age = age;
+		this.gender = gender;
+		this.cellphone = cellphone;
+		this.email = email;
+	}
+	
+	
 	public String getName() {
 		return name;
 	}

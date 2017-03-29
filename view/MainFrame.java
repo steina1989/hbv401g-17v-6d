@@ -74,4 +74,11 @@ public class MainFrame extends JFrame {
 		enterBookingPanelButton.setBounds(288, 228, 136, 23);
 		contentPane.add(enterBookingPanelButton);
 	}
+
+	public JPanel getListOfTripsPanel() {
+		return listOfTripsPanel;
+	}
+	
+	
+	
 }
