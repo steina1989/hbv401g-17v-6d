@@ -29,25 +29,28 @@ Search kallar á getTripsByParameter sem skilar lista, tripctrller(enn inní searc
 
 public class TripControllerTest {
 	
-
+	
+	private JFrame mainFrame;
+	private TripDatabaseControllerMockup tripDBcontroller;
+	private TripController tripController;
 
 	
 	@Before
 	public void setUp() throws Exception {
-		JFrame mainFrame = new MainFrame();
-		TripDatabaseControllerMockup tripDBcontroller = new TripDatabaseControllerMockup();
-		TripController tripController;
+		mainFrame = new MainFrame();
+		tripDBcontroller = new TripDatabaseControllerMockup();
+		tripController = new TripController(mainFrame, tripDBcontroller);
 	}
 
 	@After
 	public void tearDown() throws Exception {
 		mainFrame = null;
-		tripdbcontroller = null;
+		tripDBcontroller = null;
 	}
 
 	@Test
 	public void test() {
-		trip
+		
 	}
 
 }
