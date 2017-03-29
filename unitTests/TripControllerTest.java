@@ -6,6 +6,18 @@ import org.junit.Test;
 
 public class TripControllerTest {
 
+	
+	@Before
+	public void setUp() {
+
+	}
+	
+	@After
+	public void tearDown() {
+		
+	}
+	
+	
 	@Test
 	public void test() {
 		fail("Not yet implemented");
