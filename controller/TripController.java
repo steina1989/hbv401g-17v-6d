@@ -6,7 +6,6 @@ import storage.TripDatabaseController;
 import storage.TripDatabaseControllerMockup;
 import view.ListOfTripsPanel;
 
-import java.sql.ResultSet;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -25,10 +24,9 @@ public class TripController {
 		mainFrame = mf;
 	}
 	
-	private ArrayList<Trip> search(ArrayList<String> filterArray)
+	private void search(ArrayList<String> filterArray)
 	{		
-		listOfTrips =  tripDatabaseController.getTripsByParameter(filterArray);
-		
+		listOfTrips =  tripDatabaseController.getTripsByParameter(filterArray);		
 	}
 
 	public ArrayList<Trip> getListOfTrips() {
