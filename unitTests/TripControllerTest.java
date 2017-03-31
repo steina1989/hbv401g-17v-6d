@@ -6,6 +6,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 
 import javax.swing.JFrame;
 
@@ -17,7 +18,9 @@ import controller.TripController;
 import storage.TripDatabaseController;
 import storage.TripDatabaseControllerMockup;
 import storage.TripDatabaseControllerMockupEmpty;
+import storage.TripDatabaseControllerMockupNotEmptyList;
 import view.MainFrame;
+import model.*;
 
 /*
 Prufum search aðferðina()
@@ -54,12 +57,47 @@ public class TripControllerTest extends TripController {
 		TripDatabaseControllerMockupEmpty tripDatabaseController = new TripDatabaseControllerMockupEmpty();
 		this.setTripDatabaseController(tripDatabaseController);
 		this.search(new ArrayList<String>(Arrays.asList("tripName", "02/11/2017", "03/30/2017", "500", "490", "skiing")));
-		
-		assertEquals(new ArrayList<String>(),this.getListOfTrips());
+		assertEquals(true,this.getListOfTrips() instanceof ArrayList<?>);
+		assertEquals(0,this.getListOfTrips().size());
 	}
-
-
 	
+	@Test
+	public void checkTypes(){
+		TripDatabaseControllerMockupNotEmptyList tripDatabaseController = new TripDatabaseControllerMockupNotEmptyList();
+		this.setTripDatabaseController(tripDatabaseController);
+		this.search(new ArrayList<String>(Arrays.asList("tripName", "02/11/2017", "03/30/2017", "500", "490", "skiing")));
+		
+		ArrayList<Trip> trips = this.getListOfTrips();
+		
+		for(Trip trip : trips)
+		{
+			assertTrue(trip instanceof Trip);
+			assertTrue(trip.getName() instanceof String);
+			assertTrue(trip.getId() == (int)trip.getId() );
+			assertTrue(trip.getDate() instanceof Date);
+			assertTrue(trip.getReviews() instanceof ArrayList<?>);
+			assertTrue(trip.getLocation() instanceof Location);
+			assertTrue(trip.getPrice() == (int)trip.getPrice());
+			assertTrue(trip.getDescription() instanceof String);
+			assertTrue(trip.getSeatsAvailable() == (int) trip.getSeatsAvailable());
+			assertTrue(trip.getGuides() instanceof ArrayList<?>);
+		}
+	}
+		
+
+
+	@Test(expected=IllegalArgumentException.class)
+	public void filterParameterShort()
+	{
+			
+			TripDatabaseControllerMockupNotEmptyList tripDatabaseController = new TripDatabaseControllerMockupNotEmptyList();
+			this.setTripDatabaseController(tripDatabaseController);
+			this.search(new ArrayList<String>(Arrays.asList("tripName", "02/11/2017", "03/30/2017", "500", "490")));
+			ArrayList<Trip> trips = this.getListOfTrips();
+
+	}
+		
+
 	
 }
 

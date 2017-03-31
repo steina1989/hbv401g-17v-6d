@@ -10,6 +10,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import javax.management.RuntimeErrorException;
+
 import model.Trip;
 
 
@@ -31,6 +33,8 @@ public class TripController {
 	
 	protected void search(ArrayList<String> filterArray)
 	{
+		if(filterArray.size()!=6) throw new IllegalArgumentException();
+		
 		listOfTrips =  tripDatabaseController.getTripsByParameter(filterArray);
 		
 				
