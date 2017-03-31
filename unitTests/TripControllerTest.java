@@ -1,25 +1,16 @@
 package unitTests;
 
 import static org.junit.Assert.*;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
-
-import javax.swing.JFrame;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
 import controller.TripController;
-import storage.TripDatabaseController;
-import storage.TripDatabaseControllerMockup;
+import storage.TripDatabaseControllerMockupCategorySkiing;
 import storage.TripDatabaseControllerMockupEmpty;
 import storage.TripDatabaseControllerMockupNotEmptyList;
-import view.MainFrame;
 import model.*;
 
 /*
@@ -66,9 +57,7 @@ public class TripControllerTest extends TripController {
 		TripDatabaseControllerMockupNotEmptyList tripDatabaseController = new TripDatabaseControllerMockupNotEmptyList();
 		this.setTripDatabaseController(tripDatabaseController);
 		this.search(new ArrayList<String>(Arrays.asList("tripName", "02/11/2017", "03/30/2017", "500", "490", "skiing")));
-		
 		ArrayList<Trip> trips = this.getListOfTrips();
-		
 		for(Trip trip : trips)
 		{
 			assertTrue(trip instanceof Trip);
@@ -84,20 +73,31 @@ public class TripControllerTest extends TripController {
 		}
 	}
 		
-
-
 	@Test(expected=IllegalArgumentException.class)
 	public void filterParameterShort()
 	{
-			
-			TripDatabaseControllerMockupNotEmptyList tripDatabaseController = new TripDatabaseControllerMockupNotEmptyList();
-			this.setTripDatabaseController(tripDatabaseController);
-			this.search(new ArrayList<String>(Arrays.asList("tripName", "02/11/2017", "03/30/2017", "500", "490")));
-			ArrayList<Trip> trips = this.getListOfTrips();
+		TripDatabaseControllerMockupNotEmptyList tripDatabaseController = new TripDatabaseControllerMockupNotEmptyList();
+		this.setTripDatabaseController(tripDatabaseController);
+		this.search(new ArrayList<String>(Arrays.asList("tripName", "02/11/2017", "03/30/2017", "500", "490")));
+		ArrayList<Trip> trips = this.getListOfTrips();
 
 	}
-		
 
-	
+	//Á þetta Test að vera með?
+	//Erum við ekki að testa mockupið hérna?
+	@Test 
+	public void checkCategory()
+	{
+		TripDatabaseControllerMockupCategorySkiing tripDatabaseController = new TripDatabaseControllerMockupCategorySkiing();
+		this.setTripDatabaseController(tripDatabaseController);
+		this.search(new ArrayList<String>(Arrays.asList("tripName", "02/11/2017", "03/30/2017", "500", "490", "skiing")));
+		ArrayList<Trip> trips = this.getListOfTrips();
+		for(Trip trip : trips)
+		{
+			assertEquals("skiing", trip.getCategory());
+		}
+		
+	}
+			
 }
 

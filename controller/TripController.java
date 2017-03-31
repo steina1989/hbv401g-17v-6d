@@ -34,15 +34,11 @@ public class TripController {
 	protected void search(ArrayList<String> filterArray)
 	{
 		if(filterArray.size()!=6) throw new IllegalArgumentException();
-		
 		listOfTrips =  tripDatabaseController.getTripsByParameter(filterArray);
-		
-				
-		// create tripNameArray out of listOfTrips
-		//mainFrame.getListOfTripsPanel().setDefaultListModel(tripNameArray);
 	}
 
-	public ArrayList<Trip> getListOfTrips() {
+	public ArrayList<Trip> getListOfTrips() 
+	{
 		return listOfTrips;
 	}
 
@@ -74,9 +70,8 @@ public class TripController {
 	{
 		this.tripDatabaseController = tdc;
 	}
-
-		
-		
+	
+	
 	}
 	
 	

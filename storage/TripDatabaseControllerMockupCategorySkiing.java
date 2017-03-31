@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 import model.*;
 
-public class TripDatabaseControllerMockupNotEmptyList extends TripDatabaseControllerMockup {
+public class TripDatabaseControllerMockupCategorySkiing extends TripDatabaseControllerMockup {
 
 	
 	Buyer buyer = new Buyer("Jói",25,"Apache", 8489152, "joi@apache.com");
@@ -14,8 +14,8 @@ public class TripDatabaseControllerMockupNotEmptyList extends TripDatabaseContro
 	ArrayList<Review> reviewList = new ArrayList<Review>(Arrays.asList(review));
 	Date date = new Date();
 	Location location = new Location(new ArrayList<String>(), "Reykjavík", "Ísafjörður");
-	Trip trip = new Trip("Esjuferð", 1, date, reviewList, location, 1000,"Lýsing:blaaa", 20,"action", new ArrayList<Guide>()); 
-	Trip trip2 = new Trip("Sjóferð", 4, date, reviewList, location, 1000,"Lýsing:blaaa", 20,"action", new ArrayList<Guide>()); 
+	Trip trip = new Trip("Bláfjöll", 1, date, reviewList, location, 1000,"Lýsing:blaaa", 20,"skiing", new ArrayList<Guide>()); 
+	Trip trip2 = new Trip("Hlíðarfjall", 2, date, reviewList, location, 1000,"Lýsing:bla", 20,"skiing", new ArrayList<Guide>()); 
 	
 	
 	@Override
