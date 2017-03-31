@@ -1,6 +1,8 @@
 package view;
 
-import javax.swing.JPanel;
+import javax.swing.*;
+
+import controller.BookingController;
 
 public class ViewBookingsPanel extends JPanel {
 	private BookingController bookingController;
