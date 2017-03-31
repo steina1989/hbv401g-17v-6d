@@ -3,7 +3,7 @@ package controller;
 import view.FilterPanel;
 import view.MainFrame;
 import storage.TripDatabaseController;
-import storage.TripDatabaseControllerMockup;
+import storage.TripDatabaseControllerMockupEmpty;
 import view.ListOfTripsPanel;
 
 import java.text.DateFormat;
@@ -17,16 +17,26 @@ import model.Trip;
 public class TripController {
 	
 	MainFrame mainFrame;
-	TripDatabaseControllerMockup tripDatabaseController;
+	TripDatabaseController tripDatabaseController;
 	ArrayList<Trip> listOfTrips;
+	
+	public TripController() {
+		
+	}
 	
 	public TripController(MainFrame mf, TripDatabaseController dbctrl){
 		mainFrame = mf;
+		tripDatabaseController = dbctrl;
 	}
 	
-	private void search(ArrayList<String> filterArray)
-	{		
-		listOfTrips =  tripDatabaseController.getTripsByParameter(filterArray);		
+	protected void search(ArrayList<String> filterArray)
+	{
+		listOfTrips =  tripDatabaseController.getTripsByParameter(filterArray);
+		
+		
+		
+		// create tripNameArray out of listOfTrips
+		//mainFrame.getListOfTripsPanel().setDefaultListModel(tripNameArray);
 	}
 
 	public ArrayList<Trip> getListOfTrips() {
@@ -36,7 +46,7 @@ public class TripController {
 	private ArrayList<String> getFilterArray(FilterPanel fp)
 	{
 		ArrayList<String> filter = new ArrayList<String>();
-		DateFormat df = new SimpleDateFormat("MM/dd/yyy");
+		DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
 		
 		
 		filter.add(fp.getName());
@@ -56,7 +66,9 @@ public class TripController {
 		search(filterArray);
 	}
 
-	
+	protected void setTripDatabaseController(TripDatabaseController tdc) {
+		tripDatabaseController = tdc;
+	}
 		
 		
 	}

@@ -15,7 +15,7 @@ public class MainFrame extends JFrame {
 	
 	// TODO: uncomment when classes have been added to view folder
 	//private BookingController bookingController;
-	private JPanel listOfTripsPanel;
+	private ListOfTripsPanel listOfTripsPanel;
 	//private JPanel viewBookingsPanel;
 	//private JFrame tripInfoFrame;
 	//private JPanel checkoutPanel;
