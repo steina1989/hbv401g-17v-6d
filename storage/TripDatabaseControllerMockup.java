@@ -6,7 +6,7 @@ import java.util.Date;
 
 import model.*;
 
-public class TripDatabaseControllerMockup {
+public class TripDatabaseControllerMockup extends TripDatabaseController {
 	
 	Buyer buyer = new Buyer("Jói",25,"Apache", 8489152, "joi@apache.com");
 	Review review = new Review(buyer, "Flott ferð", 4);
@@ -16,7 +16,7 @@ public class TripDatabaseControllerMockup {
 	Trip trip = new Trip("Esjuferð", 1, date, reviewList, location, 1000,"Lýsing:blaaa", 20,"skiing", new ArrayList<Guide>()); 
 
 	
-	
+	@Override
 	public ArrayList<Trip> getTripsByParameter(ArrayList<String> filterArray)
 	{
 		return new ArrayList<Trip>(Arrays.asList(trip));

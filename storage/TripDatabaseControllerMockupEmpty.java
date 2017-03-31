@@ -4,10 +4,8 @@ import java.util.ArrayList;
 
 import model.*;
 
-public class TripDatabaseControllerMockupEmpty extends TripDatabaseController {
+public class TripDatabaseControllerMockupEmpty extends TripDatabaseControllerMockup {
 
-	
-	//Gera fleiri ferðir og bæta þeim við arraylist<Trip>
 	
 	
 	public ArrayList<Trip> getTripsByParameter(ArrayList<String> filterArray)

@@ -15,6 +15,7 @@ import org.junit.Test;
 
 import controller.TripController;
 import storage.TripDatabaseController;
+import storage.TripDatabaseControllerMockup;
 import storage.TripDatabaseControllerMockupEmpty;
 import view.MainFrame;
 
@@ -37,49 +38,28 @@ Search kallar á getTripsByParameter sem skilar lista, tripctrller(enn inní searc
 
 public class TripControllerTest extends TripController {
 
-	private MainFrame mainFrame;
-	private TripController tripController;
-	private TripDatabaseController tripDatabaseController;
 
-	//public TripControllerTest() {
-	//	super();
-	//}
-	
-	//public TripControllerTest(MainFrame mf, TripDatabaseController dbctrl) {
-	//	super(mf, dbctrl);
-	//}
-	
 	@Before
 	public void setUp() throws Exception {
-	  mainFrame = new MainFrame();
-		//tripController = this;
-		//new TripController(mainFrame, tripDatabaseController);
-		
-		//this.setListOfTrips(tripDatabaseController.initializeListOfTripsVariable());
+
 	}
 
 	@After
 	public void tearDown() throws Exception{
-		mainFrame = null;
-		tripDatabaseController = null;
-		tripController = null;
 		
 	}
 
 	@Test
 	public void searchReturnsEmptyList() {
-		tripDatabaseController = new TripDatabaseControllerMockupEmpty();
+		TripDatabaseControllerMockupEmpty tripDatabaseController = new TripDatabaseControllerMockupEmpty();
 		this.setTripDatabaseController(tripDatabaseController);
-		
 		this.search(new ArrayList<String>(Arrays.asList("tripName", "02/11/2017", "03/30/2017", "500", "490", "skiing")));
 		
-		assertEquals(new ArrayList<String>(), tripController.getListOfTrips());
+		assertEquals(new ArrayList<String>(),this.getListOfTrips());
 	}
 
-	//@Test
-	//public void searchReturnsCorrectTypes() {
-	//	tripDatabaseController = new TripDatabaseControllerMockupHasTrips();
-	//}
 
+	
+	
 }
 

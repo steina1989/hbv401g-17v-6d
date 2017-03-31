@@ -17,7 +17,7 @@ import model.Trip;
 public class TripController {
 	
 	MainFrame mainFrame;
-	TripDatabaseController tripDatabaseController;
+	protected TripDatabaseController tripDatabaseController;
 	ArrayList<Trip> listOfTrips;
 	
 	public TripController() {
@@ -33,8 +33,7 @@ public class TripController {
 	{
 		listOfTrips =  tripDatabaseController.getTripsByParameter(filterArray);
 		
-		
-		
+				
 		// create tripNameArray out of listOfTrips
 		//mainFrame.getListOfTripsPanel().setDefaultListModel(tripNameArray);
 	}
@@ -65,10 +64,13 @@ public class TripController {
 		ArrayList<String> filterArray = getFilterArray(fp); 
 		search(filterArray);
 	}
-
-	protected void setTripDatabaseController(TripDatabaseController tdc) {
-		tripDatabaseController = tdc;
+	 
+	
+	protected void setTripDatabaseController(TripDatabaseController tdc)
+	{
+		this.tripDatabaseController = tdc;
 	}
+
 		
 		
 	}
