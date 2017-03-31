@@ -52,7 +52,6 @@ public class TripControllerTest extends TripController {
 	@Before
 	public void setUp() throws Exception {
 	  mainFrame = new MainFrame();
-		tripDatabaseController = new TripDatabaseControllerMockupEmpty();
 		//tripController = this;
 		//new TripController(mainFrame, tripDatabaseController);
 		
@@ -60,10 +59,11 @@ public class TripControllerTest extends TripController {
 	}
 
 	@After
-	public void tearDown() throws Exception {
+	public void tearDown() throws Exception{
 		mainFrame = null;
 		tripDatabaseController = null;
 		tripController = null;
+		
 	}
 
 	@Test

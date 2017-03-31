@@ -14,13 +14,12 @@ public class TripDatabaseControllerMockup {
 	Date date = new Date();
 	Location location = new Location(new ArrayList<String>(), "Reykjavík", "Ísafjörður");
 	Trip trip = new Trip("Esjuferð", 1, date, reviewList, location, 1000,"Lýsing:blaaa", 20,"skiing", new ArrayList<Guide>()); 
-	
-	//Gera fleiri ferðir og bæta þeim við arraylist<Trip>
+
 	
 	
 	public ArrayList<Trip> getTripsByParameter(ArrayList<String> filterArray)
 	{
-		return null;
+		return new ArrayList<Trip>(Arrays.asList(trip));
 	}
 
 }
