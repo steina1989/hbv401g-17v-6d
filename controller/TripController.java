@@ -45,7 +45,6 @@ public class TripController {
 	}
 	
 	
-	
 	public ArrayList<Trip> getListOfTrips() 
 	{
 		return listOfTrips;

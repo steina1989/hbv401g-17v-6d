@@ -16,7 +16,6 @@ public class TripControllerTest extends TripController {
 	String[] illegalParameters;
 
 	
-
 	@Before
 	public void setUp() throws Exception {
 		//The legal parameter will be set with TripController functions with further development.
