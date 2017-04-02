@@ -15,13 +15,13 @@ public class TripDatabaseControllerMockupCategorySkiing extends TripDatabaseCont
 	Date datefirst = new Date(1);
 	Date datesecond = new Date(2);
 	Location location = new Location(new ArrayList<String>(), "Reykjavík", "Ísafjörður");
-	Trip trip = new Trip("Bláfjöll", 1, datefirst, reviewList, location, 1000,"Lýsing:blaaa", 20,"skiing", new ArrayList<Guide>()); 
-	Trip trip2 = new Trip("Hlíðarfjall", 2, datesecond, reviewList, location, 1000,"Lýsing:bla", 20,"skiing", new ArrayList<Guide>()); 
+	Trip trip1 = new Trip("Bláfjöll", 1, datesecond, reviewList, location, 1000,"Lýsing:blaaa", 20,"skiing", new ArrayList<Guide>()); 
+	Trip trip2 = new Trip("Hlíðarfjall", 2, datefirst, reviewList, location, 1000,"Lýsing:bla", 20,"skiing", new ArrayList<Guide>()); 
 	
 	
 	@Override
 	public ArrayList<Trip> getTripsByParameter(ArrayList<String> filterArray) {
-		return new ArrayList<Trip>(Arrays.asList(trip,trip2));
+		return new ArrayList<Trip>(Arrays.asList(trip1,trip2));
 	}
 
 }
