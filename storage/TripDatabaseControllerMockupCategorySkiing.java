@@ -12,10 +12,11 @@ public class TripDatabaseControllerMockupCategorySkiing extends TripDatabaseCont
 	Buyer buyer = new Buyer("Jói",25,"Apache", 8489152, "joi@apache.com");
 	Review review = new Review(buyer, "Flott ferð", 4);
 	ArrayList<Review> reviewList = new ArrayList<Review>(Arrays.asList(review));
-	Date date = new Date();
+	Date datefirst = new Date(1);
+	Date datesecond = new Date(2);
 	Location location = new Location(new ArrayList<String>(), "Reykjavík", "Ísafjörður");
-	Trip trip = new Trip("Bláfjöll", 1, date, reviewList, location, 1000,"Lýsing:blaaa", 20,"skiing", new ArrayList<Guide>()); 
-	Trip trip2 = new Trip("Hlíðarfjall", 2, date, reviewList, location, 1000,"Lýsing:bla", 20,"skiing", new ArrayList<Guide>()); 
+	Trip trip = new Trip("Bláfjöll", 1, datefirst, reviewList, location, 1000,"Lýsing:blaaa", 20,"skiing", new ArrayList<Guide>()); 
+	Trip trip2 = new Trip("Hlíðarfjall", 2, datesecond, reviewList, location, 1000,"Lýsing:bla", 20,"skiing", new ArrayList<Guide>()); 
 	
 	
 	@Override

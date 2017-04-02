@@ -5,10 +5,11 @@ import view.MainFrame;
 import storage.TripDatabaseController;
 import storage.TripDatabaseControllerMockupEmpty;
 import view.ListOfTripsPanel;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import javax.management.RuntimeErrorException;
 
@@ -36,7 +37,19 @@ public class TripController {
 		if(filterArray.size()!=6) throw new IllegalArgumentException();
 		listOfTrips =  tripDatabaseController.getTripsByParameter(filterArray);
 	}
-
+	
+	
+	public void sortByDate(){
+		Collections.sort(listOfTrips, new Comparator<Trip>(){
+			@Override
+			public int compare(Trip t1, Trip t2){
+				return t1.getDate().compareTo(t2.getDate());
+			}
+		});
+	}
+	
+	
+	
 	public ArrayList<Trip> getListOfTrips() 
 	{
 		return listOfTrips;
@@ -46,7 +59,6 @@ public class TripController {
 	{
 		ArrayList<String> filter = new ArrayList<String>();
 		DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-		
 		
 		filter.add(fp.getName());
 		filter.add(df.format(fp.getDateLow()));
