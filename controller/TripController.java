@@ -3,16 +3,12 @@ package controller;
 import view.FilterPanel;
 import view.MainFrame;
 import storage.TripDatabaseController;
-import storage.TripDatabaseControllerMockupEmpty;
 import view.ListOfTripsPanel;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-
-import javax.management.RuntimeErrorException;
-
 import model.Trip;
 
 

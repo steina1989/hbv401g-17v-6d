@@ -1,7 +1,8 @@
-package storage;
+package unitTests;
 
 import java.util.ArrayList;
 import model.*;
+import storage.TripDatabaseController;
 
 abstract public class TripDatabaseControllerMockup extends TripDatabaseController {
 	
