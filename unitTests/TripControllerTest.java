@@ -19,7 +19,7 @@ public class TripControllerTest extends TripController {
 
 	@Before
 	public void setUp() throws Exception {
-		//The parameters will be implemented as TripController functions with further development.
+		//The legal parameter will be set with TripController functions with further development.
 		legalParameters = new String[6]; 
 		illegalParameters = new String[5];
 		//setTripDatabaseController not used in setup since we refer to different mockupObjects in the tests.
