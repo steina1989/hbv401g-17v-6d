@@ -3,12 +3,10 @@ package unitTests;
 import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import controller.TripController;
-import storage.TripDatabaseControllerMockupCategorySkiing;
 import storage.TripDatabaseControllerMockupEmpty;
 import storage.TripDatabaseControllerMockupNotEmptyList;
 import model.*;
@@ -23,7 +21,8 @@ public class TripControllerTest extends TripController {
 
 	@Before
 	public void setUp() throws Exception {
-		legalParameters = new String[6];
+		//The parameters will be implemented as TripController functions with further development.
+		legalParameters = new String[6]; 
 		illegalParameters = new String[5];
 		//setTripDatabaseController not used in setup since we refer to different mockupObjects in the tests.
 	}
