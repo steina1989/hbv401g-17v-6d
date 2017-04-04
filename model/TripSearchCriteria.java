@@ -1,8 +1,12 @@
 package model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class TripSearchCriteria {
+	
+	private SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-DD HH:MM");
+	
   private String name;
   private Date dateLow;
   private Date dateHigh;

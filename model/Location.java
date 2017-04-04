@@ -7,6 +7,9 @@ public class Location {
 	private ArrayList<String> destinations;
 	private String placeOfDeparture, placeOfReturn;
 	
+	public Location() {
+		
+	}
 
 	// The Location class has one constructor
 	public Location(ArrayList<String> destination, String placeOfDepartue, String placeOfReturn){

@@ -7,6 +7,14 @@ import model.Review;
 import model.Trip;
 
 public interface TripSearchEngineInterface {
+	
+	// Attribute defines an
+	// attribute to sort by
+	public enum Attribute {
+		NAME,
+		DATE,
+		PRICE;
+	}
 	 
   // Returns a list of trips based on criteria
   // see tripSearchEngine.Criteria class
@@ -22,8 +30,9 @@ public interface TripSearchEngineInterface {
   // private enum Attribute {NAME, DATE, PRICE};
   // if ascending is true the list is sorted in ascending order
   // else it is sorted in descending order.
-  public ArrayList<Trip> sortBy(ArrayList<Trip>listOfTripsToSort,
-                                         Enum attribute, Boolean ascending);
+  public ArrayList<Trip> sortBy(Attribute attribute,
+  															ArrayList<Trip>listOfTripsToSort,
+  															Boolean ascending);
  
   // Returns listOfTripsToFilter filtered by criteria
   // see tripSearchEngine.Criteria class

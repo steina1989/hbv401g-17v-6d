@@ -7,7 +7,7 @@ public class Trip {
 	private String name;
 	private int id;
 	private Date date;
-	private ArrayList<Review> reviews;
+	private int numberOfReviews;
 	private Location location;
 	private int price;
 	private String description;
@@ -17,13 +17,13 @@ public class Trip {
 	
 	
 	
-	public Trip(String name, int id, Date date, ArrayList<Review> reviews, Location location, int price,
+	public Trip(String name, int id, Date date, int numberOfReviews, Location location, int price,
 			String description, int seatsAvailable, String category, ArrayList<Guide> guides) {
 		super();
 		this.name = name;
 		this.id = id;
 		this.date = date;
-		this.reviews = reviews;
+		this.numberOfReviews = numberOfReviews;
 		this.location = location;
 		this.price = price;
 		this.description = description;
@@ -49,11 +49,11 @@ public class Trip {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	public ArrayList<Review> getReviews() {
-		return reviews;
+	public int getNumberOfReviews() {
+		return numberOfReviews;
 	}
-	public void setReviews(ArrayList<Review> reviews) {
-		this.reviews = reviews;
+	public void setReviews(int numberOfReviews) {
+		this.numberOfReviews = numberOfReviews;
 	}
 	public Location getLocation() {
 		return location;
