@@ -41,6 +41,7 @@ public class TripDatabaseControllerOli {
 	 * 7[tripSeatsAvailable] Integer, 
 	 * 8[tripCategory] Text);
 	 */
+	
 	public ArrayList<Trip> getTripsByParameter(TripSearchCriteria criteria) throws SQLException{
 
 		ArrayList<Trip> listOfTrips = new ArrayList<Trip>(); // Will return this in the end.
@@ -52,7 +53,7 @@ public class TripDatabaseControllerOli {
 			rs = stmt.executeQuery(sqlinput); // Send in completed SQL query.
 
 			// Extract data from result set
-			// We pass rs.get methods with name of column in the database. Lots of lines, but easy to modify later.
+			// We pass rs.get methods with name of column in the database. Lots of lines, but makes it easier to modify later.
 			while(rs.next())
 			{
 				Trip trip = new Trip();
@@ -62,10 +63,7 @@ public class TripDatabaseControllerOli {
 				trip.setSeatsAvailable(rs.getInt("tripSeatsAvailable"));
 				trip.setDescription(rs.getString("tripDescription"));
 				trip.setPrice(rs.getInt("tripPrice"));
-				
-
-				System.out.println(trip);
-				
+								
 				listOfTrips.add(trip);
 			}
 
@@ -98,8 +96,12 @@ public class TripDatabaseControllerOli {
 	public static void main(String[] args) throws ClassNotFoundException, SQLException
 	{
 		TripDatabaseControllerOli tdbd = new TripDatabaseControllerOli();
-		tdbd.connect();	
-		tdbd.getTripsByParameter(null);
+
+		ArrayList<Trip> trips = tdbd.getTripsByParameter(null);
+		for (Trip trip : trips)
+		{
+			System.out.println(trip);
+		}
 	}
 
 }	//end

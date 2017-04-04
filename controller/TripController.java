@@ -39,7 +39,7 @@ public class TripController {
 		Collections.sort(listOfTrips, new Comparator<Trip>(){
 			@Override
 			public int compare(Trip t1, Trip t2){
-				return t1.getDate().compareTo(t2.getDate());
+				return t1.getDateOfDeparture().compareTo(t2.getDateOfDeparture());
 			}
 		});
 	}
