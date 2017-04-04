@@ -52,7 +52,7 @@ public class TripDatabaseControllerOli {
 			rs = stmt.executeQuery(sqlinput); // Send in completed SQL query.
 
 			// Extract data from result set
-			// We pass rs.get methods with name of column in the database.
+			// We pass rs.get methods with name of column in the database. Lots of lines, but easy to modify later.
 			while(rs.next())
 			{
 				Trip trip = new Trip();
@@ -61,6 +61,8 @@ public class TripDatabaseControllerOli {
 				trip.setCategory(rs.getString("tripCategory"));
 				trip.setSeatsAvailable(rs.getInt("tripSeatsAvailable"));
 				trip.setDescription(rs.getString("tripDescription"));
+				trip.setPrice(rs.getInt("tripPrice"));
+				
 
 				System.out.println(trip);
 				
@@ -84,7 +86,7 @@ public class TripDatabaseControllerOli {
 	
 
 	/*
-	 * 
+	 * Needed to translate TripSearchCriteria into sql code for the getTripsByParameter function.
 	 */
 	private String generateSQL(TripSearchCriteria criteria)
 	{
