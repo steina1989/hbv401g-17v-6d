@@ -56,6 +56,7 @@ public class TripDatabaseControllerOli {
 		 * category
 		 * location (part of the country)
 		*/
+	
 	}
 
 		// Aðferðin þarf að skila svona á endanum
@@ -95,7 +96,6 @@ public class TripDatabaseControllerOli {
 					start++;
 					if(start == 1){ // to seperate searching for everything versus specific search
 						sqlinput = sqlinput + " WHERE";
-
 							}
 					if(start==2 ){// starting an sql where querey with AND relays only errors, this should prevent that.
 						and= " AND";
@@ -122,7 +122,8 @@ public class TripDatabaseControllerOli {
 
 
 				System.out.println(sqlinput);
-
+				}
+			}
 				sqlinput = sqlinput + ";"; // to end the command
 				 System.out.println(sqlinput);
 			 //-------------------------------------------------------------------------------------------------------------
@@ -167,7 +168,7 @@ public class TripDatabaseControllerOli {
 				 // Insert the newly gotten line into the array that will be returned to other classes
 
 
-							 for(int j =0;i<=9;i++){
+							 for(int j =0;j<=9;j++){
 
 								 if(j==0)
 								 sqlreturn [numberOfLines][j] = id2 ;
@@ -202,6 +203,7 @@ public class TripDatabaseControllerOli {
 
 							}
 							 }
+				 
 				 if(rs != null){
 						rs.close();
 					}
@@ -211,7 +213,7 @@ public class TripDatabaseControllerOli {
 					if(conn != null){
 						conn.close();
 						}
-
+					return sqlreturn;
 
 			//------------------------------------------------------------------------------------------------------------------------------------
 
@@ -221,9 +223,10 @@ public class TripDatabaseControllerOli {
 				}catch(Exception e){
 				 //Handle errors for Class.forName
 				 e.printStackTrace();
-				}finally{return sqlreturn;}
+				}finally{
+					}
 
 		}
 
 			
-	//end
+}	//end
