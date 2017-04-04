@@ -6,7 +6,8 @@ public class Trip {
 	
 	private String name;
 	private int id;
-	private Date date;
+	private Date dateOfDeparture;
+	private Date dateOfReturn;
 	private int numberOfReviews;
 	private Location location;
 	private int price;
@@ -33,12 +34,7 @@ public class Trip {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public Date getDate() {
-		return date;
-	}
-	public void setDate(Date date) {
-		this.date = date;
-	}
+
 	public int getNumberOfReviews() {
 		return numberOfReviews;
 	}
@@ -82,6 +78,26 @@ public class Trip {
 		this.guides = guides;
 	}	
 	
+	public Date getDateOfDeparture() {
+		return dateOfDeparture;
+	}
+
+	public void setDateOfDeparture(Date dateOfDeparture) {
+		this.dateOfDeparture = dateOfDeparture;
+	}
+	
+	public Date getDateOfReturn() {
+		return dateOfReturn;
+	}
+
+	public void setDateOfReturn(Date dateOfReturn) {
+		this.dateOfReturn = dateOfReturn;
+	}
+
+	public void setNumberOfReviews(int numberOfReviews) {
+		this.numberOfReviews = numberOfReviews;
+	}
+
 	public String toString(){
 		return "Name: "+ this.name + " Id: " + this.id;
 	}

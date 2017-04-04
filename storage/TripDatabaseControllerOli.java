@@ -15,6 +15,8 @@ public class TripDatabaseControllerOli {
 
 	static String DB_URL;
 	private static Connection conn;
+	private static Statement stmt;
+	private static ResultSet rs;
 
 	/*
 	 * Connects to database. 
@@ -39,41 +41,51 @@ public class TripDatabaseControllerOli {
 	 * 7[tripSeatsAvailable] Integer, 
 	 * 8[tripCategory] Text);
 	 */
-	public static void getTripsByParameter(TripSearchCriteria criteria){
+	public static ArrayList<Trip> getTripsByParameter(TripSearchCriteria criteria) throws SQLException{
 
 		ArrayList<Trip> listOfTrips = new ArrayList<Trip>(); // Will return this in the end.
-		Statement stmt = null;
+		stmt = null;
 		try{
 			connect();
 			stmt = conn.createStatement();
 			String sqlinput = "SELECT * FROM Trips;"; // To be replaced by generateSQL(criteria)
-			ResultSet rs = stmt.executeQuery(sqlinput); // Send in completed SQL query.
+			rs = stmt.executeQuery(sqlinput); // Send in completed SQL query.
 
 			// Extract data from result set
+			// We pass rs.get methods with name of column in the database.
 			while(rs.next())
 			{
 				Trip trip = new Trip();
-				trip.setId((int)rs.getObject(1));
-				trip.setName((String)rs.getObject(2));
-				//trip.setDate((Date)rs.getObject(2));
+				trip.setId(rs.getInt("tripId"));
+				trip.setName(rs.getString("tripName"));
+				trip.setCategory(rs.getString("tripCategory"));
+				trip.setSeatsAvailable(rs.getInt("tripSeatsAvailable"));
+				trip.setDescription(rs.getString("tripDescription"));
+
 				System.out.println(trip);
+				
+				listOfTrips.add(trip);
 			}
 
+		}
+		//Handle errors for JDBC
+		catch(SQLException se) {se.printStackTrace();}
+		//Handle errors for Class.forName
+		catch(Exception e){e.printStackTrace();}
+
+
+		finally{
 			if(rs != null) rs.close();
 			if(stmt != null) stmt.close();
 			if(conn != null) conn.close();
-
-			}
-		//Handle errors for JDBC
-		catch(SQLException se) {se.printStackTrace();}
-		
-		catch(Exception e){e.printStackTrace();}
-			//Handle errors for Class.forName
-			
-		finally{}
-
+		}
+		return listOfTrips;
 	}
+	
 
+	/*
+	 * 
+	 */
 	private String generateSQL(TripSearchCriteria criteria)
 	{
 		return null;
