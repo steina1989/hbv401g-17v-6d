@@ -17,20 +17,10 @@ public class Trip {
 	
 	
 	
-	public Trip(String name, int id, Date date, int numberOfReviews, Location location, int price,
-			String description, int seatsAvailable, String category, ArrayList<Guide> guides) {
-		super();
-		this.name = name;
-		this.id = id;
-		this.date = date;
-		this.numberOfReviews = numberOfReviews;
-		this.location = location;
-		this.price = price;
-		this.description = description;
-		this.seatsAvailable = seatsAvailable;
-		this.category = category;
-		this.guides = guides;
-	}
+	public Trip(){}
+	
+	
+	
 	public String getName() {
 		return name;
 	}
@@ -91,6 +81,10 @@ public class Trip {
 	public void setGuides(ArrayList<Guide> guides) {
 		this.guides = guides;
 	}	
+	
+	public String toString(){
+		return "Name: "+ this.name + " Id: " + this.id;
+	}
 
 	
 	
