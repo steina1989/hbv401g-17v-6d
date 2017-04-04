@@ -8,8 +8,8 @@ import org.junit.Before;
 import org.junit.Test;
 import controller.TripController;
 import model.*;
-import storage.TripDatabaseControllerMockupEmpty;
-import storage.TripDatabaseControllerMockupNotEmptyList;
+import unitTests.TripDatabaseControllerMockupEmpty;
+import unitTests.TripDatabaseControllerMockupNotEmptyList;
 
 
 public class TripControllerTest extends TripController {
