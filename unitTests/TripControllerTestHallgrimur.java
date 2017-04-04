@@ -12,7 +12,7 @@ import org.junit.Test;
 import controller.TripSearchEngine;
 import model.Trip;
 import model.TripSearchCriteria;
-import storage.TripDatabaseControllerMockupEmpty;
+import unitTests.TripDatabaseControllerMockupEmpty;
 
 public class TripControllerTestHallgrimur {
 	
