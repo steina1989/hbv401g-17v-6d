@@ -13,15 +13,15 @@ import model.TripSearchCriteria;
 
 public class TripDatabaseControllerOli {
 
-	static String DB_URL;
-	private static Connection conn;
-	private static Statement stmt;
-	private static ResultSet rs;
+	private String DB_URL;
+	private Connection conn;
+	private Statement stmt;
+	private ResultSet rs;
 
 	/*
 	 * Connects to database. 
 	 */
-	private static void connect() throws ClassNotFoundException, SQLException
+	private void connect() throws ClassNotFoundException, SQLException
 	{
 		File resourcesDirectory = new File("src/storage");
 		DB_URL = "jdbc:sqlite:" + resourcesDirectory.getAbsolutePath() + "\\TripDatabase.db";
@@ -41,7 +41,7 @@ public class TripDatabaseControllerOli {
 	 * 7[tripSeatsAvailable] Integer, 
 	 * 8[tripCategory] Text);
 	 */
-	public static ArrayList<Trip> getTripsByParameter(TripSearchCriteria criteria) throws SQLException{
+	public ArrayList<Trip> getTripsByParameter(TripSearchCriteria criteria) throws SQLException{
 
 		ArrayList<Trip> listOfTrips = new ArrayList<Trip>(); // Will return this in the end.
 		stmt = null;
@@ -97,8 +97,9 @@ public class TripDatabaseControllerOli {
 	// Just for testing
 	public static void main(String[] args) throws ClassNotFoundException, SQLException
 	{
-		connect();	
-		getTripsByParameter(null);
+		TripDatabaseControllerOli tdbd = new TripDatabaseControllerOli();
+		tdbd.connect();	
+		tdbd.getTripsByParameter(null);
 	}
 
 }	//end

@@ -98,6 +98,7 @@ public class Trip {
 		this.numberOfReviews = numberOfReviews;
 	}
 
+	@Override
 	public String toString(){
 		return "Name: "+ this.name + " Id: " + this.id;
 	}
