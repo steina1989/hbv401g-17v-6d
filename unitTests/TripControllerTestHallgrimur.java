@@ -1,36 +1,68 @@
 package unitTests;
 
 import static org.junit.Assert.*;
+
 import java.util.ArrayList;
 import java.util.Arrays;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import controller.TripController;
-import model.*;
+
+import controller.TripSearchEngine;
+import model.Trip;
+import model.TripSearchCriteria;
 import storage.TripDatabaseControllerMockupEmpty;
-import storage.TripDatabaseControllerMockupNotEmptyList;
 
-
-public class TripControllerTest extends TripController {
-
-	String[] legalParameters;
-	String[] illegalParameters;
-
+public class TripControllerTestHallgrimur {
 	
+	private TripSearchEngine tripSearchEngine;
+	private TripSearchCriteria criteria;
+	private ArrayList<Trip> searchResults;
+
 	@Before
 	public void setUp() throws Exception {
-		//The legal parameter will be set with TripController functions with further development.
-		legalParameters = new String[6]; 
-		illegalParameters = new String[5];
-		//setTripDatabaseController not used in setup since we refer to different mockupObjects in the tests.
+		tripSearchEngine = new TripSearchEngine();
+		criteria = new TripSearchCriteria();
+		searchResults = new ArrayList<Trip>();
 	}
 
 	@After
-	public void tearDown() throws Exception{
-		this.setTripDatabaseController(null);
-		legalParameters = null;
-		illegalParameters = null;
+	public void tearDown() throws Exception {
+		tripSearchEngine = null;
+		criteria = null;
+		searchResults = null;
+	}
+	
+	// if criteria.dateLow > criteria.dateHigh search should return empty list.
+	@Test
+	public void searchReturnsEmptyListOnOverclampedDates() {
+
+		//
+		// create dateLow, dateHigh here
+		// and let dateLow > dateHigh
+		//
+		this.criteria.setDateLow(dateLow);
+		this.criteria.setDateHigh(dateHigh);
+
+		this.searchResults = this.tripSearchEngine.search(criteria);
+		
+		// did we get an empty ArrayList?
+		assertEquals(true, this.searchResults instanceof ArrayList<?>);
+		assertEquals(0, this.searchResults.size());
+	}
+	
+	// if criteria.priceLow > criteria.priceHigh search should return empty list
+	@Test
+	public void searchReturnsEmptyListOnOverclampedPrices() {
+		this.criteria.setPriceLow(1000);
+		this.criteria.setPriceHigh(950);
+		
+		this.searchResults = this.tripSearchEngine.search(criteria);
+		
+		// did we get an empty ArrayList?
+		assertEquals(true, this.searchResults instanceof ArrayList<?>);
+		assertEquals(0, this.searchResults.size());
 	}
 
 	@Test
