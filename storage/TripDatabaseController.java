@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-
 import model.Review;
 import model.Trip;
 import model.TripSearchCriteria;
@@ -43,7 +42,7 @@ public class TripDatabaseController {
 	 * 7[tripSeatsAvailable] Integer, 
 	 * 8[tripCategory] Text);
 	 */
-	
+
 	public ArrayList<Trip> getTripsByCriteria(TripSearchCriteria criteria) throws SQLException{
 
 		ArrayList<Trip> listOfTrips = new ArrayList<Trip>(); // Will return this in the end.
@@ -58,13 +57,12 @@ public class TripDatabaseController {
 			// We pass rs.get methods with name of column in the database. Lots of lines, but makes it easier to modify later.
 			while(rs.next())
 			{
-				Trip trip = new Trip();
 				int id = rs.getInt("tripId");
-				String name = trip.setName(rs.getString("tripName"));
-				trip.setCategory(rs.getString("tripCategory"));
-				trip.setSeatsAvailable(rs.getInt("tripSeatsAvailable"));
-				trip.setDescription(rs.getString("tripDescription"));
-				trip.setPrice(rs.getInt("tripPrice"));
+				String name = rs.getString("tripName");
+				String cat = rs.getString("tripCategory");
+				int seats = rs.getInt("tripSeatsAvailable");
+				String desc = rs.getString("tripDescription");
+				int price = rs.getInt("tripPrice");
 				
 				listOfTrips.add(trip);
 			}
@@ -83,13 +81,13 @@ public class TripDatabaseController {
 		}
 		return listOfTrips;
 	}
-	
 
-	public ArrayList<Review> getTripReviews(int tripID) {
+
+	public ArrayList<Review> getTripReviews(String name) {
 		// this needs to be implemented!
 		return new ArrayList<Review>();
 	}
-	
+
 
 	/*
 	 * Needed to translate TripSearchCriteria into sql code for the getTripsByParameter function.
@@ -105,7 +103,7 @@ public class TripDatabaseController {
 	{
 		TripDatabaseController tdbd = new TripDatabaseController();
 
-		ArrayList<Trip> trips = tdbd.getTripsByParameter(null);
+		ArrayList<Trip> trips = tdbd.getTripsByCriteria(null);
 		for (Trip trip : trips)
 		{
 			System.out.println(trip);
