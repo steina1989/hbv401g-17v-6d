@@ -15,17 +15,17 @@ public class Trip {
 	private String category;
 	private ArrayList<Guide> guides;
 	private String placeOfDeparture;
+	private String placeOfArrival;
 	private int duration; // minutes
 	
 	
-	public Trip(String name, int id, Date dateOfDeparture, Date dateOfReturn, Location location, int price,
+	public Trip(String name, int id, Date dateOfDeparture, Date dateOfReturn, int price,
 			String description, int seatsAvailable, String category, ArrayList<Guide> guides) {
 		super();
 		this.name = name;
 		this.id = id;
 		this.dateOfDeparture = dateOfDeparture;
 		this.dateOfReturn = dateOfReturn;
-		this.location = location;
 		this.price = price;
 		this.description = description;
 		this.seatsAvailable = seatsAvailable;
