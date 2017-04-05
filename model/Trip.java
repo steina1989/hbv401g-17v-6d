@@ -8,13 +8,14 @@ public class Trip {
 	private int id;
 	private Date dateOfDeparture;
 	private Date dateOfReturn;
-	private Location location;
 	private int price;
 	private String description;
 	private int seatsAvailable;
+	private int seatsLeft;
 	private String category;
 	private ArrayList<Guide> guides;
-	
+	private String placeOfDeparture;
+	private int duration; // minutes
 	
 	
 	public Trip(String name, int id, Date dateOfDeparture, Date dateOfReturn, Location location, int price,
@@ -45,12 +46,7 @@ public class Trip {
 		this.id = id;
 	}
 
-	public Location getLocation() {
-		return location;
-	}
-	public void setLocation(Location location) {
-		this.location = location;
-	}
+
 	public int getPrice() {
 		return price;
 	}
@@ -102,6 +98,54 @@ public class Trip {
 	@Override
 	public String toString(){
 		return "Name: "+ this.name + " Id: " + this.id;
+	}
+
+
+
+	public int getSeatsLeft() {
+		return seatsLeft;
+	}
+
+
+
+	public void setSeatsLeft(int seatsLeft) {
+		this.seatsLeft = seatsLeft;
+	}
+
+
+
+	public String getPlaceOfDeparture() {
+		return placeOfDeparture;
+	}
+
+
+
+	public void setPlaceOfDeparture(String placeOfDeparture) {
+		this.placeOfDeparture = placeOfDeparture;
+	}
+
+
+
+	public String getPlaceOfArrival() {
+		return placeOfArrival;
+	}
+
+
+
+	public void setPlaceOfArrival(String placeOfArrival) {
+		this.placeOfArrival = placeOfArrival;
+	}
+
+
+
+	public int getDuration() {
+		return duration;
+	}
+
+
+
+	public void setDuration(int duration) {
+		this.duration = duration;
 	}
 
 	

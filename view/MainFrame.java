@@ -32,6 +32,7 @@ public class MainFrame extends JFrame {
 			public void run() {
 				try {
 					MainFrame frame = new MainFrame();
+//Prufa fyrir JónasTripInfoFrame frame = new TripInfoFrame();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
