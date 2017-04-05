@@ -44,8 +44,9 @@ public class SearchEngineTest {
 		this.searchResults = new ArrayList<Trip>();
 		
 		// create an example trip
-		Date exampleDate = this.criteria.getDateLow(); // we just need any Date
-		this.trip = new Trip("Golden Circle", 3, exampleDate, new Location(), 1500,
+		Date exampleDate1 = this.criteria.getDateLow(); // we just need any Date
+		Date exampleDate2 = this.criteria.getDateHigh(); // we just need any Date
+		this.trip = new Trip("Golden Circle", 3, exampleDate1, exampleDate2, new Location(), 1500,
 				"https://www.youtube.com/watch?v=WNmCm4oyrkY", 25, "Safari", new ArrayList<Guide>());
 		
 		this.tripReviews = new ArrayList<Review>();

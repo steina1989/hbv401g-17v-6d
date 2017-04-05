@@ -30,12 +30,15 @@ public class TripDatabaseControllerMockupHallgrimur extends TripDatabaseControll
 			e.printStackTrace();
 		}
 		
+		//(String name, int id, Date dateOfDeparture, Date dateOfReturn, Location location, int price,
+		//		String description, int seatsAvailable, String category, ArrayList<Guide> guides)
+		
 	  // create mockup trips
-		Trip trip1 = new Trip("Golden Circle", 3, exampleDate1, 10, new Location(), 1500,
+		Trip trip1 = new Trip("Golden Circle", 3, exampleDate1, exampleDate3, new Location(), 1500,
 				"All the birds!", 25, "Safari", new ArrayList<Guide>());
-		Trip trip2 = new Trip("South Coast", 1, exampleDate2, 10, new Location(), 1500,
+		Trip trip2 = new Trip("South Coast", 1, exampleDate2, exampleDate3, new Location(), 1500,
 				"https://www.youtube.com/watch?v=WNmCm4oyrkY", 25, "Safari", new ArrayList<Guide>());
-		Trip trip3 = new Trip("Snæfellsnes", 1, exampleDate3, 10, new Location(), 1500,
+		Trip trip3 = new Trip("Snæfellsnes", 1, exampleDate3, exampleDate3, new Location(), 1500,
 				"YOLO", 30, "Skiing", new ArrayList<Guide>());
 		
 		ArrayList<Trip> tripResults = new ArrayList<>(Arrays.asList(trip1, trip2,  trip3));

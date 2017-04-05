@@ -17,9 +17,20 @@ public class Trip {
 	
 	
 	
-	public Trip(){}
-	
-	
+	public Trip(String name, int id, Date dateOfDeparture, Date dateOfReturn, Location location, int price,
+			String description, int seatsAvailable, String category, ArrayList<Guide> guides) {
+		super();
+		this.name = name;
+		this.id = id;
+		this.dateOfDeparture = dateOfDeparture;
+		this.dateOfReturn = dateOfReturn;
+		this.location = location;
+		this.price = price;
+		this.description = description;
+		this.seatsAvailable = seatsAvailable;
+		this.category = category;
+		this.guides = guides;
+	}
 	
 	public String getName() {
 		return name;

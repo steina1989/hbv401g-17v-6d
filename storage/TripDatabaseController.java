@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+
+import model.Review;
 import model.Trip;
 import model.TripSearchCriteria;
 
@@ -42,7 +44,7 @@ public class TripDatabaseController {
 	 * 8[tripCategory] Text);
 	 */
 	
-	public ArrayList<Trip> getTripsByParameter(TripSearchCriteria criteria) throws SQLException{
+	public ArrayList<Trip> getTripsByCriteria(TripSearchCriteria criteria) throws SQLException{
 
 		ArrayList<Trip> listOfTrips = new ArrayList<Trip>(); // Will return this in the end.
 		stmt = null;
@@ -80,6 +82,12 @@ public class TripDatabaseController {
 			if(conn != null) conn.close();
 		}
 		return listOfTrips;
+	}
+	
+
+	public ArrayList<Review> getTripReviews(int tripID) {
+		// this needs to be implemented!
+		return new ArrayList<Review>();
 	}
 	
 
