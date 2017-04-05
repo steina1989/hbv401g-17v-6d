@@ -8,7 +8,6 @@ public class Trip {
 	private int id;
 	private Date dateOfDeparture;
 	private Date dateOfReturn;
-	private int numberOfReviews;
 	private Location location;
 	private int price;
 	private String description;
@@ -35,12 +34,6 @@ public class Trip {
 		this.id = id;
 	}
 
-	public int getNumberOfReviews() {
-		return numberOfReviews;
-	}
-	public void setReviews(int numberOfReviews) {
-		this.numberOfReviews = numberOfReviews;
-	}
 	public Location getLocation() {
 		return location;
 	}
@@ -94,9 +87,6 @@ public class Trip {
 		this.dateOfReturn = dateOfReturn;
 	}
 
-	public void setNumberOfReviews(int numberOfReviews) {
-		this.numberOfReviews = numberOfReviews;
-	}
 
 	@Override
 	public String toString(){

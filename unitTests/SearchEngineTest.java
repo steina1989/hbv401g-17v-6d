@@ -45,7 +45,7 @@ public class SearchEngineTest {
 		
 		// create an example trip
 		Date exampleDate = this.criteria.getDateLow(); // we just need any Date
-		this.trip = new Trip("Golden Circle", 3, exampleDate, 10, new Location(), 1500,
+		this.trip = new Trip("Golden Circle", 3, exampleDate, new Location(), 1500,
 				"https://www.youtube.com/watch?v=WNmCm4oyrkY", 25, "Safari", new ArrayList<Guide>());
 		
 		this.tripReviews = new ArrayList<Review>();
@@ -56,6 +56,8 @@ public class SearchEngineTest {
 		this.tripSearchEngine = null;
 		this.criteria = null;
 		this.searchResults = null;
+		this.tripReviews = null;
+		this.trip = null;
 	}
 	
 	// search(criteria)
@@ -112,6 +114,7 @@ public class SearchEngineTest {
 	// (the list will contain every trip in the database)
 	@Test
 	public void searchReturnsListIfNoCriterias() {
+		this.criteria = new TripSearchCriteria(); //Criteras are empty.
 		this.searchResults = this.tripSearchEngine.search(this.criteria);
 		assertTrue(this.searchResults instanceof ArrayList<?>);
 	}

@@ -65,6 +65,7 @@ public class TripControllerTestHallgrimur {
 		assertEquals(0, this.searchResults.size());
 	}
 
+	
 	@Test
 	public void searchReturnsEmptyList() {
 		TripDatabaseControllerMockupEmpty tripDatabaseController = new TripDatabaseControllerMockupEmpty();
