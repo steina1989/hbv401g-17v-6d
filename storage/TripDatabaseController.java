@@ -24,7 +24,7 @@ public class TripDatabaseController {
 	 */
 	private void connect() throws ClassNotFoundException, SQLException
 	{
-		File resourcesDirectory = new File("src/storage");
+		File resourcesDirectory = new File("src/resources");
 		DB_URL = "jdbc:sqlite:" + resourcesDirectory.getAbsolutePath() + "\\TripDatabase.db";
 		Class.forName("org.sqlite.JDBC");
 		conn = DriverManager.getConnection(DB_URL);
@@ -64,7 +64,7 @@ public class TripDatabaseController {
 				String desc = rs.getString("tripDescription");
 				int price = rs.getInt("tripPrice");
 				
-				listOfTrips.add(trip);
+				listOfTrips.add(null);
 			}
 
 		}
