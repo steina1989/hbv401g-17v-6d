@@ -1,49 +1,81 @@
 package model;
 
-import java.awt.image.BufferedImage;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import javax.imageio.ImageIO;
 
 public class Guide {
 	private String name;
-	private int age;
-	private String gender;
-	private String email;
-	private String cellphone;
-	private BufferedImage image;
+	private String description;
+	private Image img;
+	private URL url;
+
+
+
+	public Guide(String name, String description, URL url)  {
+		super();
+		this.name = name;
+		this.description = description;
+		this.url = url;
+	}
+
+	public void getImage() throws MalformedURLException, IOException
+	{
+
+		try 
+		{
+			img = ImageIO.read(url);
+			//If unsuccessful: Get default photo.
+		} catch (IOException e) {
+			e.printStackTrace();
+			img = ImageIO.read(new File("src/resources/na.jpg").toURI().toURL());
+		}
+
+	}
 
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getAge() {
-		return age;
+
+	public String getDescription() {
+		return description;
 	}
-	public void setAge(int age) {
-		this.age = age;
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
-	public String getGender() {
-		return gender;
+
+	public Image getImg() {
+		return img;
 	}
-	public void setGender(String gender) {
-		this.gender = gender;
+
+	public void setImg(Image img) {
+		this.img = img;
 	}
-	public String getEmail() {
-		return email;
+
+	public URL getUrl() {
+		return url;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+
+	public void setUrl(URL url) {
+		this.url = url;
 	}
-	public String getCellphone() {
-		return cellphone;
-	}
-	public void setCellphone(String cellphone) {
-		this.cellphone = cellphone;
-	}
-	public BufferedImage getImage() {
-		return image;
-	}
-	public void setImage(BufferedImage image) {
-		this.image = image;
-	}
+	
+	
+	
+
 }
+
+
+
+
+
+
+

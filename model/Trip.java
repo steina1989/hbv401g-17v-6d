@@ -13,14 +13,14 @@ public class Trip {
 	private int seatsAvailable;
 	private int seatsLeft;
 	private String category;
-	private ArrayList<Guide> guides;
+	private Guide guide;
 	private String placeOfDeparture;
 	private String placeOfArrival;
 	private int duration; // minutes
 	
 	
 	public Trip(String name, int id, Date dateOfDeparture, Date dateOfReturn, int price,
-			String description, int seatsAvailable, String category, ArrayList<Guide> guides) {
+			String description, int seatsAvailable, int seatsLeft, String category, Guide guide) {
 		super();
 		this.name = name;
 		this.id = id;
@@ -29,8 +29,9 @@ public class Trip {
 		this.price = price;
 		this.description = description;
 		this.seatsAvailable = seatsAvailable;
+		this.seatsLeft = seatsLeft;
 		this.category = category;
-		this.guides = guides;
+		this.guide = guide;
 	}
 	
 	public String getName() {
@@ -71,11 +72,11 @@ public class Trip {
 	public void setCategory(String category) {
 		this.category = category;
 	}
-	public ArrayList<Guide> getGuides() {
-		return guides;
+	public Guide getGuide() {
+		return guide;
 	}
-	public void setGuides(ArrayList<Guide> guides) {
-		this.guides = guides;
+	public void setGuides(Guide guide) {
+		this.guide = guide;
 	}	
 	
 	public Date getDateOfDeparture() {
