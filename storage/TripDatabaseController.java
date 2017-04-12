@@ -14,6 +14,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
@@ -30,7 +31,7 @@ public class TripDatabaseController {
 	private Statement stmt;
 	private ResultSet rs;
 
-	private SimpleDateFormat df = new SimpleDateFormat("dd/mm/yyyy hh:mm:ss a");
+	public SimpleDateFormat df = new SimpleDateFormat("mm/dd/yyyy hh:mm:ss a");
 	
 	/*
 	 * Connects to database. 
@@ -50,6 +51,8 @@ public class TripDatabaseController {
 	 *  
 	 * [Guides] ([guideId] Integer, [guideName] Text, [guideDescription] Text, [guideProfileURL] Text);
 	 * [Reviews] ([tripName] Text, [reviewText] Text, [stars] Integer);
+	 * 
+	 * It contains 20 trips with departure ranging from 19 april 2017 - 6 july 2017. (1492645755-1499378496) seconds from epoch.
 	 */
 
 	public ArrayList<Trip> getTripsByCriteria(TripSearchCriteria criteria) throws SQLException{
@@ -59,7 +62,7 @@ public class TripDatabaseController {
 		try{
 			connect();
 			stmt = conn.createStatement();
-			String sqlinput = "SELECT * FROM Trips NATURAL JOIN Guides;"; // To be replaced by generateSQL(criteria)
+			String sqlinput = generateSQL(criteria); // To be replaced by generateSQL(criteria)
 			rs = stmt.executeQuery(sqlinput); // Send in completed SQL query.
 
 			// Extract data from result set
@@ -73,9 +76,10 @@ public class TripDatabaseController {
 				int seatsav = rs.getInt("seatsAvailable");
 				String desc = rs.getString("tripDescription");
 				int price = rs.getInt("tripPrice");
-				Date dateOfDeparture = df.parse(rs.getString("dateOfDeparture"));
-				Date dateOfReturn = df.parse(rs.getString("dateOfReturn"));
-			
+				Date dateOfDeparture = new Date(rs.getLong("dateOfDeparture")*1000);
+
+				Date dateOfReturn = new Date(rs.getLong("dateOfReturn")*1000);
+			  
 				//Get guide information. ID is only used to Join tables.
 				String guideName = rs.getString("guideName");
 				String guideDescr = rs.getString("guideDescription");
@@ -112,41 +116,37 @@ public class TripDatabaseController {
 	/*
 	 * Needed to translate TripSearchCriteria into sql code for the getTripsByParameter function.
 	 */
-	private String generateSQL(TripSearchCriteria criteria)
+	public String generateSQL(TripSearchCriteria criteria)
 	{
-		return null;
+		//Assuming that DateLow is never empty or null
+		String sql = 	"SELECT * FROM Trips NATURAL JOIN Guides WHERE dateOfDeparture BETWEEN "
+				+ criteria.getDateLow().getTime()/1000
+				+ " AND "
+				+ criteria.getDateHigh().getTime()/1000;
+		
+		sql +=";";
+		System.out.println("Output from generateSQL() = " + sql);
+		
+		return sql;
 	}
 
 
 	// Just for testing
-	public static void main(String[] args) throws ClassNotFoundException, SQLException
+	public static void main(String[] args) throws ClassNotFoundException, SQLException, ParseException
 	{
 		TripDatabaseController tdbd = new TripDatabaseController();
+		TripSearchCriteria tsc = new TripSearchCriteria();
+		tsc.setDateLow(new Date(1492645755000L));
+		tsc.setDateHigh(new Date(Long.MAX_VALUE));
+		
+		ArrayList<Trip> trips = tdbd.getTripsByCriteria(tsc);
 
-		ArrayList<Trip> trips = tdbd.getTripsByCriteria(null);
 		for (Trip trip : trips)
 		{
-			System.out.println(trip);
+			System.out.print(trip+" ");
+			System.out.println(trip.getDateOfDeparture().toString());
 		}
-		Guide gd = trips.get(0).getGuide();
-		JFrame frame = new JFrame();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//application will be closed when you close frame
-		frame.setSize(800,600);
-		frame.setLocation(200,200);
-		JLabel label = new JLabel();
-		frame.getContentPane().add(label);
-		try {
-			gd.getImage();
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		frame.setVisible(true);
-    label.setIcon(new ImageIcon(gd.getImg()));
-    
+
 	}
 
 }	//end
