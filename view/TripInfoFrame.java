@@ -74,11 +74,8 @@ public class TripInfoFrame extends JFrame {
         ArrayList<String> x = new ArrayList<>(Arrays.asList("Þórður", "Sigga"));
         String guides = seperateGuides(x);
 		
-        //review = new Review()
-		//location = new Location() 
+
 		
-		// guides = new Guides();
-		//duration = new Duration();
 		
 		// The frame itself and buttons
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	

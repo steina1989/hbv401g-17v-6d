@@ -19,6 +19,7 @@ public class MainFrame extends JFrame {
 	//private JPanel viewBookingsPanel;
 	//private JFrame tripInfoFrame;
 	//private JPanel checkoutPanel;
+	private FilterPanel filterPanel;
 	private JButton enterBookingPanelButton;
 
 	// This is the JPanel that contains everything in MainFrame
@@ -32,7 +33,8 @@ public class MainFrame extends JFrame {
 			public void run() {
 				try {
 					MainFrame frame = new MainFrame();
-//Prufa fyrir JónasTripInfoFrame frame = new TripInfoFrame();
+//TripInfoFrame frame = new TripInfoFrame();
+					//FilterPanel frame = new FilterPanel();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -46,7 +48,7 @@ public class MainFrame extends JFrame {
 	 */
 	public MainFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 676, 537);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -54,8 +56,13 @@ public class MainFrame extends JFrame {
 		
 		listOfTripsPanel = new ListOfTripsPanel();
 		listOfTripsPanel.setBackground(Color.DARK_GRAY);
-		listOfTripsPanel.setBounds(10, 11, 136, 240);
+		listOfTripsPanel.setBounds(15, 11, 136, 178);
 		contentPane.add(listOfTripsPanel);
+		
+		filterPanel = new FilterPanel();
+		filterPanel.setBackground(Color.WHITE);
+		filterPanel.setBounds(0, 200, 559, 279);
+		contentPane.add(filterPanel);
 		
 		JPanel viewBookingsPanel = new JPanel(); // TODO: when ViewBookingsPanel has been added to view folder change line to viewBookingsPanel = new ViewBookingsPanel();
 		viewBookingsPanel.setBackground(Color.BLUE);
@@ -70,9 +77,10 @@ public class MainFrame extends JFrame {
 		enterBookingPanelButton = new JButton("Enter booking");
 		enterBookingPanelButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				// Opna checkout panel
 			}
 		});
-		enterBookingPanelButton.setBounds(288, 228, 136, 23);
+		enterBookingPanelButton.setBounds(358, 116, 136, 23);
 		contentPane.add(enterBookingPanelButton);
 	}
 
