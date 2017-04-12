@@ -150,7 +150,7 @@ public class TripDatabaseController {
 
 		for (Trip trip : trips)
 		{
-			System.out.println(trip+" ");
+			System.out.println(trip);
 		}
 
 	}
