@@ -12,8 +12,20 @@ public class TripSearchCriteria {
   private Date dateHigh;
   private int priceLow;
   private int priceHigh;
+  private String category;
  
   public TripSearchCriteria() {}
+
+  
+  
+  
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
 
 	public String getName() {
 		return name;

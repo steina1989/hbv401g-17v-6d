@@ -28,10 +28,17 @@ public class TripDatabaseController {
 
 	private String DB_URL;
 	private Connection conn;
-	private Statement stmt;
+	private PreparedStatement stmt;
 	private ResultSet rs;
 
 	public SimpleDateFormat df = new SimpleDateFormat("mm/dd/yyyy hh:mm:ss a");
+	
+	private String sql = 	
+			"SELECT * FROM Trips NATURAL JOIN Guides "
+			+ "WHERE tripName LIKE ? "
+			+ "AND dateOfDeparture BETWEEN ? AND ? "
+			+ "AND tripPrice BETWEEN ? AND ? "
+			+ "AND tripCategory LIKE ? ";
 	
 	/*
 	 * Connects to database. 
@@ -46,13 +53,11 @@ public class TripDatabaseController {
 
 	/*
 	 * The schema for our database is (at the moment):
-	 * [Trips] ([tripId] Integer, [tripName] Text, [dateOfDeparture] Text, [dateOfReturn] Text, [tripPrice] Integer,
-	 * [tripDescription] Text, [seatsAvailable] Integer, [seatsLeft] Integer, [tripCategory] Text, [guideId] Integer);
-	 *  
-	 * [Guides] ([guideId] Integer, [guideName] Text, [guideDescription] Text, [guideProfileURL] Text);
-	 * [Reviews] ([tripName] Text, [reviewText] Text, [stars] Integer);
+	 *CREATE TABLE [Trips] ([tripId] Integer, [tripName] Text, [dateOfDeparture] Integer, [dateOfReturn] Integer, [tripPrice] Integer, [tripDescription] Text, [seatsAvailable] Integer, [seatsLeft] Integer, [tripCategory] Text, [guideId] Integer);
+	 *CREATE TABLE [Guides] ([guideId] Integer, [guideName] Text, [guideDescription] Text, [guideProfileURL] Text);
+	 *CREATE TABLE [Reviews] ([tripName] Text, [reviewText] Text, [stars] Text);
 	 * 
-	 * It contains 20 trips with departure ranging from 19 april 2017 - 6 july 2017. (1492645755-1499378496) seconds from epoch.
+	 * It contains 20 trips with departure ranging from 19 april 2017 - 6 july 2017. (1492645755-1499378496 seconds from epoch.)
 	 */
 
 	public ArrayList<Trip> getTripsByCriteria(TripSearchCriteria criteria) throws SQLException{
@@ -61,10 +66,9 @@ public class TripDatabaseController {
 		stmt = null;
 		try{
 			connect();
-			stmt = conn.createStatement();
-			String sqlinput = generateSQL(criteria); // To be replaced by generateSQL(criteria)
-			rs = stmt.executeQuery(sqlinput); // Send in completed SQL query.
-
+			stmt = conn.prepareStatement(sql);
+			generateSecureStatement(criteria); //Stops sql injections!
+			rs = stmt.executeQuery(); // Send in completed secure SQL query.
 			// Extract data from result set
 			// We pass rs.get methods with name of column in the database. Lots of lines, but makes it easier to modify later.
 			while(rs.next())
@@ -77,9 +81,8 @@ public class TripDatabaseController {
 				String desc = rs.getString("tripDescription");
 				int price = rs.getInt("tripPrice");
 				Date dateOfDeparture = new Date(rs.getLong("dateOfDeparture")*1000);
-
 				Date dateOfReturn = new Date(rs.getLong("dateOfReturn")*1000);
-			  
+				
 				//Get guide information. ID is only used to Join tables.
 				String guideName = rs.getString("guideName");
 				String guideDescr = rs.getString("guideDescription");
@@ -114,20 +117,20 @@ public class TripDatabaseController {
 
 
 	/*
-	 * Needed to translate TripSearchCriteria into sql code for the getTripsByParameter function.
+	 * This function takes care to reject sql injections. 
 	 */
-	public String generateSQL(TripSearchCriteria criteria)
+	private void generateSecureStatement(TripSearchCriteria criteria) throws SQLException
 	{
-		//Assuming that DateLow is never empty or null
-		String sql = 	"SELECT * FROM Trips NATURAL JOIN Guides WHERE dateOfDeparture BETWEEN "
-				+ criteria.getDateLow().getTime()/1000
-				+ " AND "
-				+ criteria.getDateHigh().getTime()/1000;
-		
-		sql +=";";
-		System.out.println("Output from generateSQL() = " + sql);
-		
-		return sql;
+		//Name. Padded with % so I can deal with the empty string and some valid criteria in one line.
+		stmt.setString(1, "%" +criteria.getName()+ "%");
+		//Dates
+		stmt.setLong(2, criteria.getDateLow().getTime()/1000);
+		stmt.setLong(3, criteria.getDateHigh().getTime()/1000);;
+		//Prices
+		stmt.setInt(4, criteria.getPriceLow());
+		stmt.setInt(5, criteria.getPriceHigh());
+		//Category
+		stmt.setString(6, "%" +criteria.getCategory()+ "%");
 	}
 
 
@@ -136,15 +139,18 @@ public class TripDatabaseController {
 	{
 		TripDatabaseController tdbd = new TripDatabaseController();
 		TripSearchCriteria tsc = new TripSearchCriteria();
-		tsc.setDateLow(new Date(1492645755000L));
+		tsc.setDateLow(new Date(0L));
 		tsc.setDateHigh(new Date(Long.MAX_VALUE));
+		tsc.setPriceLow(0);
+		tsc.setPriceHigh(1000000);
+		tsc.setName("");
+		tsc.setCategory("Road trip");
 		
 		ArrayList<Trip> trips = tdbd.getTripsByCriteria(tsc);
 
 		for (Trip trip : trips)
 		{
-			System.out.print(trip+" ");
-			System.out.println(trip.getDateOfDeparture().toString());
+			System.out.println(trip+" ");
 		}
 
 	}
