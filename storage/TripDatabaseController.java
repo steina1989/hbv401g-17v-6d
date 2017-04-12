@@ -23,7 +23,6 @@ import model.Review;
 import model.Trip;
 import model.TripSearchCriteria;
 
-
 public class TripDatabaseController {
 
 	private String DB_URL;
@@ -31,15 +30,7 @@ public class TripDatabaseController {
 	private PreparedStatement stmt;
 	private ResultSet rs;
 
-	public SimpleDateFormat df = new SimpleDateFormat("mm/dd/yyyy hh:mm:ss a");
-	
-	private String sql = 	
-			"SELECT * FROM Trips NATURAL JOIN Guides "
-			+ "WHERE tripName LIKE ? "
-			+ "AND dateOfDeparture BETWEEN ? AND ? "
-			+ "AND tripPrice BETWEEN ? AND ? "
-			+ "AND tripCategory LIKE ? ";
-	
+
 	/*
 	 * Connects to database. 
 	 */
@@ -58,16 +49,23 @@ public class TripDatabaseController {
 	 *CREATE TABLE [Reviews] ([tripName] Text, [reviewText] Text, [stars] Text);
 	 * 
 	 * It contains 20 trips with departure ranging from 19 april 2017 - 6 july 2017. (1492645755-1499378496 seconds from epoch.)
+	 * Note: java.util.Date stores dates in milliseconds, the database stores data in seconds, this is why sometimes you will see /1000 or *1000.
 	 */
 
 	public ArrayList<Trip> getTripsByCriteria(TripSearchCriteria criteria) throws SQLException{
 
+		String sql = 	
+				"SELECT * FROM Trips NATURAL JOIN Guides "
+						+ "WHERE tripName LIKE ? "
+						+ "AND dateOfDeparture BETWEEN ? AND ? "
+						+ "AND tripPrice BETWEEN ? AND ? "
+						+ "AND tripCategory LIKE ? ";
 		ArrayList<Trip> listOfTrips = new ArrayList<Trip>(); // Will return this in the end.
 		stmt = null;
 		try{
 			connect();
 			stmt = conn.prepareStatement(sql);
-			generateSecureStatement(criteria); //Stops sql injections!
+			generateSecureStatement(criteria); 
 			rs = stmt.executeQuery(); // Send in completed secure SQL query.
 			// Extract data from result set
 			// We pass rs.get methods with name of column in the database. Lots of lines, but makes it easier to modify later.
@@ -82,7 +80,7 @@ public class TripDatabaseController {
 				int price = rs.getInt("tripPrice");
 				Date dateOfDeparture = new Date(rs.getLong("dateOfDeparture")*1000);
 				Date dateOfReturn = new Date(rs.getLong("dateOfReturn")*1000);
-				
+
 				//Get guide information. ID is only used to Join tables.
 				String guideName = rs.getString("guideName");
 				String guideDescr = rs.getString("guideDescription");
@@ -93,6 +91,7 @@ public class TripDatabaseController {
 				Trip trip = new Trip(name,id,dateOfDeparture,dateOfReturn,price,desc,seatsav,seatsleft,cat,guide);
 				listOfTrips.add(trip);
 			}
+
 
 		}
 		//Handle errors for JDBC
@@ -110,18 +109,43 @@ public class TripDatabaseController {
 	}
 
 
-	public ArrayList<Review> getTripReviews(String name) {
-		// this needs to be implemented!
+	public ArrayList<Review> getTripReviews(String name) throws SQLException {
+		String sql = "SELECT * FROM Reviews WHERE tripname = ?";
+		ArrayList<Review> listOfReviews = new ArrayList<Review>();
+		try{
+			connect();
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(0, name);
+			rs = stmt.executeQuery(); 
+			while(rs.next())
+			{
+				Review review = new Review(rs.getString("reviewText"),rs.getInt("stars"));
+				listOfReviews.add(review);
+			}
+
+		}
+
+		//Handle errors for JDBC
+		catch(SQLException se) {se.printStackTrace();}
+		//Handle errors for Class.forName
+		catch(Exception e){e.printStackTrace();}
+
+
+		finally{
+			if(rs != null) rs.close();
+			if(stmt != null) stmt.close();
+			if(conn != null) conn.close();
+		}
 		return new ArrayList<Review>();
 	}
 
 
 	/*
-	 * This function takes care to reject sql injections. 
+	 * Takes care to strip input of malicious injections.
 	 */
 	private void generateSecureStatement(TripSearchCriteria criteria) throws SQLException
 	{
-		//Name. Padded with % so I can deal with the empty string and some valid criteria in one line.
+		//Name. Padded with % so I can deal with the empty string and some other valid criteria in a single line.
 		stmt.setString(1, "%" +criteria.getName()+ "%");
 		//Dates
 		stmt.setLong(2, criteria.getDateLow().getTime()/1000);
@@ -145,13 +169,9 @@ public class TripDatabaseController {
 		tsc.setPriceHigh(1000000);
 		tsc.setName("");
 		tsc.setCategory("Road trip");
-		
-		ArrayList<Trip> trips = tdbd.getTripsByCriteria(tsc);
 
-		for (Trip trip : trips)
-		{
-			System.out.println(trip);
-		}
+		ArrayList<Trip> trips = tdbd.getTripsByCriteria(tsc);
+		for (Trip trip : trips) System.out.println(trip);
 
 	}
 

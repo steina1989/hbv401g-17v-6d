@@ -14,7 +14,17 @@ public class TripSearchCriteria {
   private int priceHigh;
   private String category;
  
-  public TripSearchCriteria() {}
+  /*
+   * The constructor forces instances to take valid state upon creation.
+   */
+  public TripSearchCriteria() {
+  	this.name = "";
+  	this.dateLow = new Date(); //lowDate is current time (a timestamp basically)
+  	this.dateHigh = new Date(Long.MAX_VALUE);
+  	this.priceLow = 0;
+  	this.priceHigh = Integer.MAX_VALUE;
+  	this.category = "";
+  }
 
   
   

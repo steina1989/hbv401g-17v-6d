@@ -39,6 +39,6 @@ public class ListOfTripsPanel extends JPanel {
 	}
 	
 	public static void main(String[] args){
-		System.out.println("hahahah");
+		
 	}
 }

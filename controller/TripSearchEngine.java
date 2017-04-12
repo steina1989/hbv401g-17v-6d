@@ -40,8 +40,7 @@ public class TripSearchEngine implements TripSearchEngineInterface {
 		
 		// Return an empty list if trip is null
 		if (trip == null) return new ArrayList<Review>();
-		
-		return this.tripDatabaseController.getTripReviews(trip.getId());
+		return this.tripDatabaseController.getTripReviews(trip.getName());
 	}
 
 	@Override
