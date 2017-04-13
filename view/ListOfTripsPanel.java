@@ -1,39 +1,35 @@
 package view;
 
+import model.Trip;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.DefaultListModel;
-import javax.swing.JList;
+import java.util.ArrayList;
+import javax.swing.BoxLayout;
+import javax.swing.JScrollPane;
 
 public class ListOfTripsPanel extends JPanel {
-	
-	private JList tripList;
-	private DefaultListModel<String> tripNames;
 
 	/**
 	 * Create the panel.
 	 */
-	public ListOfTripsPanel() {
-		setLayout(null);
+	public ListOfTripsPanel(ArrayList<Trip> trips) {
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
-		tripNames = new DefaultListModel<String>();
-		this.addTripInformationToModel();
+		TripItem tripItem = new TripItem((Trip) null);
+		add(tripItem);
 		
-		JList list = new JList();
-		list.setBounds(0, 0, 209, 300);
-		list.setModel(tripNames);
-		add(list);
-	}
-	
-	private void addTripInformationToModel() {
-		this.tripNames.addElement();
-		this.tripNames.addElement());
+		TripItem tripItem_1 = new TripItem((Trip) null);
+		add(tripItem_1);
+		
+		TripItem tripItem_2 = new TripItem((Trip) null);
+		add(tripItem_2);
+		
+		TripItem tripItem_3 = new TripItem((Trip) null);
+		add(tripItem_3);
+
+	//	for (Trip trip : trips){
+	//		this.add(new TripItem(trip));
+	//	}
 
 	}
-	
 
-	
-	public static void main(String[] args){
-		
-	}
 }
