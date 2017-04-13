@@ -8,7 +8,6 @@ import javax.swing.JList;
 public class ListOfTripsPanel extends JPanel {
 	
 	private JList tripList;
-	private FilterPanel filterPanel;
 	private DefaultListModel<String> tripNames;
 
 	/**
@@ -18,7 +17,7 @@ public class ListOfTripsPanel extends JPanel {
 		setLayout(null);
 		
 		tripNames = new DefaultListModel<String>();
-		this.addExampleTripNames();
+		this.addTripInformationToModel();
 		
 		JList list = new JList();
 		list.setBounds(0, 0, 209, 300);
@@ -26,17 +25,13 @@ public class ListOfTripsPanel extends JPanel {
 		add(list);
 	}
 	
-	private void addExampleTripNames() {
-		this.tripNames.addElement("TripName1");
-		this.tripNames.addElement("TripName2");
-		this.tripNames.addElement("TripName3");
-		this.tripNames.addElement("TripName4");
-		this.tripNames.addElement("TripName5");
+	private void addTripInformationToModel() {
+		this.tripNames.addElement();
+		this.tripNames.addElement());
+
 	}
 	
-	public FilterPanel getFilterPanel(){
-		return filterPanel;
-	}
+
 	
 	public static void main(String[] args){
 		

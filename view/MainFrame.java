@@ -10,6 +10,7 @@ import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JScrollPane;
 
 public class MainFrame extends JFrame {
 	
@@ -48,21 +49,24 @@ public class MainFrame extends JFrame {
 	 */
 	public MainFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 676, 537);
+		setBounds(100, 100, 769, 594);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		listOfTripsPanel = new ListOfTripsPanel();
-		listOfTripsPanel.setBackground(Color.DARK_GRAY);
-		listOfTripsPanel.setBounds(15, 11, 136, 178);
-		contentPane.add(listOfTripsPanel);
-		
 		filterPanel = new FilterPanel();
 		filterPanel.setBackground(Color.WHITE);
-		filterPanel.setBounds(0, 200, 559, 279);
+		filterPanel.setBounds(0, 200, 371, 279);
 		contentPane.add(filterPanel);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 11, 136, 178);
+		contentPane.add(scrollPane);
+		
+		listOfTripsPanel = new ListOfTripsPanel();
+		scrollPane.setViewportView(listOfTripsPanel);
+		listOfTripsPanel.setBackground(Color.DARK_GRAY);
 		
 		JPanel viewBookingsPanel = new JPanel(); // TODO: when ViewBookingsPanel has been added to view folder change line to viewBookingsPanel = new ViewBookingsPanel();
 		viewBookingsPanel.setBackground(Color.BLUE);
@@ -91,7 +95,4 @@ public class MainFrame extends JFrame {
 	public JPanel getFilterPanel(){
 		return filterPanel;
 	}
-	
-	
-	
 }
