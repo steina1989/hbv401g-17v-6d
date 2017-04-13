@@ -4,14 +4,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class TripSearchCriteria {
-	
-	private SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-DD HH:MM");
+
 	
   private String name;
   private Date dateLow;
   private Date dateHigh;
-  private int priceLow;
-  private int priceHigh;
+  private Integer priceLow;
+  private Integer priceHigh;
   private String category;
  
   /*
@@ -27,8 +26,20 @@ public class TripSearchCriteria {
   }
 
   
-  
-  
+	public TripSearchCriteria(String name, Date dateLow, Date dateHigh, Integer priceLow, Integer priceHigh, String category) {
+		super();
+		this.name = name;
+		this.dateLow = dateLow;
+		this.dateHigh = dateHigh;
+		this.priceLow = priceLow;
+		this.priceHigh = priceHigh;
+		this.category = category;
+	}
+
+
+
+
+
 	public String getCategory() {
 		return category;
 	}

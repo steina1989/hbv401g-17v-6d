@@ -18,7 +18,6 @@ public interface TripSearchEngineInterface {
 	 
   // Returns a list of trips based on criteria
   // see tripSearchEngine.Criteria class
-  // criteria attributes that are null are ignored.
   public ArrayList<Trip> search(TripSearchCriteria criteria);
  
   // Returns a list of reviews that are associated with trip.

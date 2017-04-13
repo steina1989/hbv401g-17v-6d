@@ -21,6 +21,9 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
+import model.TripSearchCriteria;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -234,6 +237,13 @@ public class FilterPanel extends JPanel {
 
 	}
 	
+	
+	
+	
+	//Criteria object contains supported filters only
+	public TripSearchCriteria getCriteria(){
+		return new TripSearchCriteria(name,dateLow,dateHigh,priceLow,priceHigh,category);
+	}
 
 	public Date getDateLow() {
 		return dateLow;
@@ -310,4 +320,6 @@ public class FilterPanel extends JPanel {
 	public void setDurationHigh(Integer durationHigh) {
 		this.durationHigh = durationHigh;
 	}
+	
+	
 }

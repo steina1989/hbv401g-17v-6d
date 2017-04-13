@@ -88,6 +88,10 @@ public class MainFrame extends JFrame {
 		return listOfTripsPanel;
 	}
 	
+	public JPanel getFilterPanel(){
+		return filterPanel;
+	}
+	
 	
 	
 }
