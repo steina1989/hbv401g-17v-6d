@@ -17,10 +17,12 @@ public class Trip {
 	private String placeOfDeparture;
 	private String placeOfArrival;
 	private int duration; // minutes
+	private int meanRating;
+	private int noReviews;
 	
 	
 	public Trip(String name, int id, Date dateOfDeparture, Date dateOfReturn, int price,
-			String description, int seatsAvailable, int seatsLeft, String category, Guide guide) {
+			String description, int seatsAvailable, int seatsLeft, String category, Guide guide, int meanRating, int noReviews) {
 		super();
 		this.name = name;
 		this.id = id;
@@ -32,8 +34,36 @@ public class Trip {
 		this.seatsLeft = seatsLeft;
 		this.category = category;
 		this.guide = guide;
+		this.meanRating = meanRating;
+		this.noReviews = noReviews;
 	}
 	
+	
+	
+	public int getMeanRating() {
+		return meanRating;
+	}
+
+
+
+	public void setMeanRating(int meanRating) {
+		this.meanRating = meanRating;
+	}
+
+
+
+	public int getNoReviews() {
+		return noReviews;
+	}
+
+
+
+	public void setNoReviews(int noReviews) {
+		this.noReviews = noReviews;
+	}
+
+
+
 	public String getName() {
 		return name;
 	}

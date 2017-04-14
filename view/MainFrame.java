@@ -2,18 +2,24 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import controller.TripController;
-
 import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
+import javax.swing.UIManager;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
+import java.awt.Component;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class MainFrame extends JFrame {
 	
@@ -28,6 +34,11 @@ public class MainFrame extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		try {
+			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -48,6 +59,20 @@ public class MainFrame extends JFrame {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1138, 650);
+		
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		
+		JMenu mnFile = new JMenu("About this project");
+		mnFile.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				JOptionPane.showMessageDialog(null, "Creators:\n "
+						+ "Hallgrimur David Egilsson\nJonas Gudmundsson\nOlafur Konrad  Albertsson\nSteina Dogg Vigfusdottir\n\n"
+						+ "All icons designed by Madebyoliver from Flaticon");
+			}
+		});
+		menuBar.add(mnFile);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -71,23 +96,35 @@ public class MainFrame extends JFrame {
 		});
 		enterBookingPanelButton.setBounds(786, 564, 136, 23);
 		contentPane.add(enterBookingPanelButton);
-		
-		
 		tripcontroller = new TripController(this);
-		
 		viewTripsPanel = new ViewTripsPanel(tripcontroller);
-		viewTripsPanel.setBounds(38, 23, 991, 417);
+		viewTripsPanel.setBounds(10, 23, 1019, 417);
 		contentPane.add(viewTripsPanel);
 		
-		
-		
+		//This needs to be here (as opposed to in the constructor of the viewTripsPanel itself), 
+		//because renderTrips can only run after Constructor of viewTripsPanel has been completed.
+		//To show trips based on the default criteria:
+		viewTripsPanel.renderTrips();
 	}
 
 	public ViewTripsPanel getViewTripsPanel() {
 		return viewTripsPanel;
 	}
-	
-	
-
-
+	private static void addPopup(Component component, final JPopupMenu popup) {
+		component.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			public void mouseReleased(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			private void showMenu(MouseEvent e) {
+				popup.show(e.getComponent(), e.getX(), e.getY());
+			}
+		});
+	}
 }

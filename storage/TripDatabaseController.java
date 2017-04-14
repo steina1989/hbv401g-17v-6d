@@ -76,6 +76,8 @@ public class TripDatabaseController {
 				int price = rs.getInt("tripPrice");
 				Date dateOfDeparture = new Date(rs.getLong("dateOfDeparture")*1000);
 				Date dateOfReturn = new Date(rs.getLong("dateOfReturn")*1000);
+				int noReviews = rs.getInt("noReviews");
+				float meanRating = rs.getFloat("meanRating");
 
 				//Get guide information. ID is only used to Join tables.
 				String guideName = rs.getString("guideName");
@@ -84,7 +86,7 @@ public class TripDatabaseController {
 
 				//Create Guide and Trip
 				Guide guide = new Guide(guideName,guideDescr,guideProfileUrl);
-				Trip trip = new Trip(name,id,dateOfDeparture,dateOfReturn,price,desc,seatsav,seatsleft,cat,guide);
+				Trip trip = new Trip(name,id,dateOfDeparture,dateOfReturn,price,desc,seatsav,seatsleft,cat,guide,Math.round(meanRating),noReviews);
 				listOfTrips.add(trip);
 			}
 

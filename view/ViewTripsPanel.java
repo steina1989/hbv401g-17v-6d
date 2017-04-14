@@ -31,6 +31,7 @@ public class ViewTripsPanel extends JPanel {
 	private ListOfTripsPanel listOfTripsPanel;
 	private TripController tripController;
 	private JButton btnSearch;
+	private JScrollPane scrollPane;
 
 	/**
 	 * Create the panel.
@@ -42,13 +43,15 @@ public class ViewTripsPanel extends JPanel {
 		listOfTripsPanel = new ListOfTripsPanel();
 		
 		filterPanel = new FilterPanel();
-		filterPanel.setBounds(10, 11, 180, 363);
+		filterPanel.setBounds(10, 11, 246, 363);
 		add(filterPanel);
 				
-		JScrollPane scrollPane = new JScrollPane();
+		scrollPane = new JScrollPane();
+		scrollPane.setAutoscrolls(false);
+		scrollPane.getVerticalScrollBar().setUnitIncrement(16);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane.setBounds(200, 11, 765, 363);
+		scrollPane.setBounds(266, 11, 699, 363);
 		add(scrollPane);
 		scrollPane.setViewportView(listOfTripsPanel); 
 		
@@ -56,17 +59,21 @@ public class ViewTripsPanel extends JPanel {
 		btnSearch.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//Reset the ListOfTripspanel (else old trips will stay there)
-				listOfTripsPanel = new ListOfTripsPanel();
-				tripController.searchClicked();
-				listOfTripsPanel.populateList(tripController.getListOfTrips());
-				scrollPane.setViewportView(listOfTripsPanel);
+				renderTrips();
 			}
 		});
-		btnSearch.setBounds(61, 385, 89, 23);
+		btnSearch.setBounds(61, 384, 89, 23);
 		add(btnSearch);
 	}
 
+	public void renderTrips()
+	{
+		//Reset the ListOfTripspanel (else old trips will stay there)
+		listOfTripsPanel = new ListOfTripsPanel();
+		tripController.searchClicked();
+		listOfTripsPanel.populateList(tripController.getListOfTrips());
+		scrollPane.setViewportView(listOfTripsPanel);
+	}
 
 	
 	public static void main(String[] args){
