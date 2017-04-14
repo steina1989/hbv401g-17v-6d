@@ -5,22 +5,15 @@ import java.awt.Dimension;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
-
 import javax.swing.SpringLayout;
-
 import model.Trip;
-
 import java.awt.Font;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import javax.swing.SwingConstants;
 import javax.swing.JTextPane;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.border.LineBorder;
 
 public class TripItem extends JPanel {
 	
@@ -91,7 +84,8 @@ public class TripItem extends JPanel {
 		excerptFromDescription.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		excerptFromDescription.setEditable(false);
 		excerptFromDescription.setOpaque(false);
-		excerptFromDescription.setText("First x characters of trip description following a few dots in seducing gray.......");
+		String excerpt = trip.getDescription().substring(0,50);
+		excerptFromDescription.setText(excerpt+"......");
 		add(excerptFromDescription);
 	}
 
