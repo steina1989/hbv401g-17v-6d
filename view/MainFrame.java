@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import controller.TripController;
+
 import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -14,13 +17,12 @@ import javax.swing.JScrollPane;
 
 public class MainFrame extends JFrame {
 	
-	// TODO: uncomment when classes have been added to view folder
-	//private BookingController bookingController;
-	private ViewTripsPanel viewTripsPanel;
 	private JButton enterBookingPanelButton;
-
 	// This is the JPanel that contains everything in MainFrame
 	private JPanel contentPane;
+	
+	private TripController tripcontroller;
+	private ViewTripsPanel viewTripsPanel;
 
 	/**
 	 * Launch the application.
@@ -30,8 +32,7 @@ public class MainFrame extends JFrame {
 			public void run() {
 				try {
 					MainFrame frame = new MainFrame();
-//TripInfoFrame frame = new TripInfoFrame();
-					//FilterPanel frame = new FilterPanel();
+
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -44,6 +45,7 @@ public class MainFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public MainFrame() {
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1138, 650);
 		contentPane = new JPanel();
@@ -53,12 +55,12 @@ public class MainFrame extends JFrame {
 		
 		JPanel viewBookingsPanel = new JPanel(); // TODO: when ViewBookingsPanel has been added to view folder change line to viewBookingsPanel = new ViewBookingsPanel();
 		viewBookingsPanel.setBackground(Color.BLUE);
-		viewBookingsPanel.setBounds(319, 494, 153, 50);
+		viewBookingsPanel.setBounds(623, 537, 153, 50);
 		contentPane.add(viewBookingsPanel);
 		
 		JPanel checkoutPanel = new JPanel(); // TODO: when CheckoutPanel has been added to view folder change line to checkoutPanel = new CheckoutPanel;
 		checkoutPanel.setBackground(Color.MAGENTA);
-		checkoutPanel.setBounds(156, 493, 153, 51);
+		checkoutPanel.setBounds(462, 537, 153, 51);
 		contentPane.add(checkoutPanel);
 		
 		enterBookingPanelButton = new JButton("Enter booking");
@@ -67,18 +69,25 @@ public class MainFrame extends JFrame {
 				// Opna checkout panel
 			}
 		});
-		enterBookingPanelButton.setBounds(146, 451, 136, 23);
+		enterBookingPanelButton.setBounds(786, 564, 136, 23);
 		contentPane.add(enterBookingPanelButton);
 		
-		viewTripsPanel = new ViewTripsPanel();
-		viewTripsPanel.setBounds(10, 11, 984, 383);
+		
+		tripcontroller = new TripController(this);
+		
+		viewTripsPanel = new ViewTripsPanel(tripcontroller);
+		viewTripsPanel.setBounds(38, 23, 991, 417);
 		contentPane.add(viewTripsPanel);
-		viewTripsPanel.setBackground(Color.DARK_GRAY);
+		
+		
+		
 	}
 
-	public JPanel getListOfTripsPanel() {
+	public ViewTripsPanel getViewTripsPanel() {
 		return viewTripsPanel;
 	}
 	
+	
+
 
 }

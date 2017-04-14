@@ -27,9 +27,12 @@ import model.TripSearchCriteria;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class FilterPanel extends JPanel {
-
+	
+	private TripSearchCriteria criteria;
 	private Date dateLow;
 	private Date dateHigh;
 	private Integer priceLow = 0;
@@ -118,73 +121,60 @@ public class FilterPanel extends JPanel {
 		jPlaceOfDeparture = new JTextField();
 		jPlaceOfDeparture.setText("Where are you traveling from?");
 		jPlaceOfDeparture.setColumns(10);
-		
-		JButton btnFilter = new JButton("Filter");
-		btnFilter.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-				
-				System.out.println(jDurationLow.getText());
-				jDateLow.getText();
-				jDateHigh.getText();
-				
-			}
-		});
+
+
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(28)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnFilter)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
 						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(lblNoGuests)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(jNoGuests))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(lblPlaceOfDeparture)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(jPlaceOfDeparture))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(lblDuration)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(jDurationLow, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblMin)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblBetween_2)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(jDurationHigh, 0, 0, Short.MAX_VALUE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(lblNameOfTrip)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(jNameTrip))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(lblCategory)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(jCategory))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblDates)
+								.addComponent(lblPrices))
+							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(jPriceLow, 0, 0, Short.MAX_VALUE)
+								.addComponent(jDateLow, GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(lblNoGuests)
+									.addComponent(lblBetween)
 									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(jNoGuests))
+									.addComponent(jDateHigh, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(lblPlaceOfDeparture)
+									.addComponent(lblBetween_1)
 									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(jPlaceOfDeparture))
-								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(lblDuration)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(jDurationLow, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(lblMin)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(lblBetween_2)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(jDurationHigh, 0, 0, Short.MAX_VALUE))
-								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(lblNameOfTrip)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(jNameTrip))
-								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(lblCategory)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(jCategory))
-								.addGroup(groupLayout.createSequentialGroup()
-									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addComponent(lblDates)
-										.addComponent(lblPrices))
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-										.addComponent(jPriceLow, 0, 0, Short.MAX_VALUE)
-										.addComponent(jDateLow, GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE))
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addGroup(groupLayout.createSequentialGroup()
-											.addComponent(lblBetween)
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(jDateHigh, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-										.addGroup(groupLayout.createSequentialGroup()
-											.addComponent(lblBetween_1)
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(jPriceHigh, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))))
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(lblMin_1)))
+									.addComponent(jPriceHigh, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(lblMin_1)
 					.addContainerGap(150, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
@@ -227,9 +217,7 @@ public class FilterPanel extends JPanel {
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblPlaceOfDeparture)
 						.addComponent(jPlaceOfDeparture, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(47)
-					.addComponent(btnFilter)
-					.addContainerGap(104, Short.MAX_VALUE))
+					.addContainerGap(177, Short.MAX_VALUE))
 		);
 		setLayout(groupLayout);
 
@@ -240,7 +228,7 @@ public class FilterPanel extends JPanel {
 	
 	//Criteria object contains supported filters only
 	public TripSearchCriteria getCriteria(){
-		return new TripSearchCriteria(name,dateLow,dateHigh,priceLow,priceHigh,category);
+		return new TripSearchCriteria();
 	}
 
 	public Date getDateLow() {

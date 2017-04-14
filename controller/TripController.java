@@ -2,6 +2,8 @@ package controller;
 
 import view.FilterPanel;
 import view.MainFrame;
+import view.ViewTripsPanel;
+
 import java.util.ArrayList;
 import model.Review;
 import model.Trip;
@@ -27,7 +29,7 @@ public class TripController {
 	
 	public void searchClicked()
 	{
-		FilterPanel fp = (FilterPanel) mainFrame.getFilterPanel();
+		FilterPanel fp = mainFrame.getViewTripsPanel().getFilterPanel();
 		listOfTrips = tripSearchEngine.search(fp.getCriteria());
 	}
 	
