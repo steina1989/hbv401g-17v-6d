@@ -1,28 +1,24 @@
 package storage;
 import java.io.File;
-import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.*;
 import java.util.Date;
-
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
 import model.Guide;
 import model.Review;
 import model.Trip;
 import model.TripSearchCriteria;
 
+/*
+ * To do:
+ * Add method: getDistinctCategories to populate the dropdown category thing in the GUI.
+ * Add a column in TripDatabase.db that contains the mean of stars given by reviews.
+ * Add method: getNumberOfReviews.
+ */
 public class TripDatabaseController {
 
 	private String DB_URL;

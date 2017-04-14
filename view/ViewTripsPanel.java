@@ -18,8 +18,14 @@ import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/*
+ * This panel encapsulates FilterPanel and ListOfTripsPanel
+ * To do: 
+ * 1. Stop the automatic scrolling down when ListOfTrips is populated
+ * 2. Add buttons to enable user to filter the list.
+ */
+
 public class ViewTripsPanel extends JPanel {
-	
 
 	private FilterPanel filterPanel;
 	private ListOfTripsPanel listOfTripsPanel;

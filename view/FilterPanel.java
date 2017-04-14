@@ -226,7 +226,7 @@ public class FilterPanel extends JPanel {
 	
 	
 	
-	//Criteria object contains supported filters only
+	//Criteria object contains supported filters only right now during testing of the GUI.
 	public TripSearchCriteria getCriteria(){
 		return new TripSearchCriteria();
 	}

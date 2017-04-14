@@ -15,6 +15,15 @@ import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/*
+ * This class is a Trip visualizer module based on JPanel. Each instance of this class will be a "list"-item in the ListOfTripsPanel.
+ * To do :
+ * Add event listener on "See more" to load a new TripInfoFrame.
+ * Maybe add some more details like DateOfDeparture.
+ * Find picture for each category.
+ * 
+ */
+
 public class TripItem extends JPanel {
 	
 	
@@ -22,7 +31,7 @@ public class TripItem extends JPanel {
 	
 	public TripItem(Trip trip) {
 		setBorder(null);
-		setPreferredSize(new Dimension(600, 100));
+		setPreferredSize(new Dimension(600, 100)); 
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -50,7 +59,7 @@ public class TripItem extends JPanel {
 		springLayout.putConstraint(SpringLayout.WEST, nameLabel, 16, SpringLayout.EAST, categoryPicture);
 		springLayout.putConstraint(SpringLayout.NORTH, categoryPicture, 10, SpringLayout.NORTH, this);
 		springLayout.putConstraint(SpringLayout.WEST, categoryPicture, 10, SpringLayout.WEST, this);
-		categoryPicture.setIcon(new ImageIcon(TripItem.class.getResource("/resources/categories/hiking.png")));
+		categoryPicture.setIcon(new ImageIcon(TripItem.class.getResource("/resources/categories/activity.png")));
 		add(categoryPicture);
 		
 		JLabel lblShortTripDescription = new JLabel("");
