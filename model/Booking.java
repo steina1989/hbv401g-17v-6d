@@ -3,19 +3,20 @@ import java.util.Date;
 
 public class Booking {
 
-	private Buyer buyer;
+	private String buyer;
 	private int bookingId;
-	private Trip trip;
+	private int trip;
 	private int numberOfGuests;
 	private Date timeOfBooking;
 	private String comment;
+	private int PhoneOfBuyer;
 	
 	
 
-	public Buyer getBuyer() {
+	public String getBuyer() {
 		return buyer;
 	}
-	public void setBuyer(Buyer buyer) {
+	public void setBuyer(String buyer) {
 		this.buyer = buyer;
 	}
 	public int getBookingId() {
@@ -24,10 +25,10 @@ public class Booking {
 	public void setBookingId(int bookingId) {
 		this.bookingId = bookingId;
 	}
-	public Trip getTrip() {
+	public int getTrip() {
 		return trip;
 	}
-	public void setTrip(Trip trip) {
+	public void setTrip(int trip) {
 		this.trip = trip;
 	}
 	public int getNumberOfGuests() {

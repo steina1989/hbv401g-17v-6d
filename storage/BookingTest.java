@@ -1,22 +1,18 @@
 package storage;
 
 import java.io.File;
-import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.*;
 import java.util.Date;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import model.Guide;
 import model.Review;
 import model.Trip;
-import model.TripSearchCriteria;// vantar að laga þetta fyrir booking
+import model.BookingSearchCriteria;
 
 public class BookingTest {
 
@@ -52,27 +48,23 @@ private void getUserBookingsGSS(BookingSearchCriteria criteria) throws SQLExcept
 	stmt.setInt(1,criteria.getBookingId());
 }
 
-private void cancelBookingGSS(TripSearchCriteria criteria) throws SQLException
+private void cancelBookingGSS(BookingSearchCriteria criteria) throws SQLException
 {
 	//Name. Padded with % so I can deal with the empty string and some valid criteria in one line.
 	stmt.setInt(1,criteria.getBookingId());
-
 }
-
-
-private void setUserBookingsGSS(TripSearchCriteria criteria) throws SQLException
+private void setUserBookingsGSS(BookingSearchCriteria criteria) throws SQLException
 {			
 	//Name. Padded with % so I can deal with the empty string and some valid criteria in one line.
 	stmt.setInt(1,criteria.getBookingId());
 	//Dates
-	stmt.setInt(2, criteria.getTripId());
-	stmt.setInt(3, criteria.getNumberOfSeats());;
+	stmt.setInt(2, criteria.getTrip());
+	stmt.setInt(3, criteria.getNumberOfGuests());;
 	//Prices
-	stmt.setString(4,"%" + criteria.getNameOfBuyer()+ "%" );
-	stmt.setsetInt(5, criteria.getPhoneOfBuyer());
+	stmt.setString(4,"%" + criteria.getBuyer()+ "%" );
+	stmt.setInt(5, criteria.getPhoneOfBuyer());
 	//Category
 	stmt.setString(6, "%" +criteria.getEmailOfBuyer()+ "%");
-
 }
 //----------------------->  Generate Secure SQL - End
 
@@ -88,7 +80,7 @@ public ArrayList<Trip> getUserBookingsCriteria(BookingSearchCriteria criteria) t
 			try{
 				connect();
 				stmt = conn.prepareStatement(getUserBookingsSQL);
-				generateSecureStatement(criteria); //Stops sql injections!
+				getUserBookingsGSS(criteria); //Stops sql injections!
 				rs = stmt.executeQuery(); // Send in completed secure SQL query.
 				// Extract data from result set
 				// We pass rs.get methods with name of column in the database. Lots of lines, but makes it easier to modify later.
@@ -101,7 +93,7 @@ public ArrayList<Trip> getUserBookingsCriteria(BookingSearchCriteria criteria) t
 					int Phone= rs.getInt("PhoneOfBuyer");
 					String Email = rs.getString("EmailOfBuyer");
 					
-					Trip trip = new Trip(name,Tid,NumSeats,name,Phone,Email);
+					Trip trip = new Trip(Bid,Tid,NumSeats,name,Phone,Email);
 					listOfTrips.add(trip);
 				}
 				
@@ -117,32 +109,19 @@ public ArrayList<Trip> getUserBookingsCriteria(BookingSearchCriteria criteria) t
 			}
 			return listOfTrips;
 		}
-public void setUserBookingsCriteria(UserBookingsCriteria criteria) throws SQLException{
+public void setUserBookingsCriteria(BookingSearchCriteria criteria) throws SQLException{
 
 	String setUserBookingsSQL = "INSERT INTO Bookings(BookingId,TripId,NumberOfSeats,NameOfBuyer,PhoneOfBuyer,EmailOfBuyer) VALUES ( " 
 			+ "? ," + "? ," + "? ," + "? ," + "? ," + "? ;";
-	
-			ArrayList<Trip> listOfTrips = new ArrayList<Trip>(); // Will return this in the end.
 			stmt = null;
 			try{
 				connect();
 				stmt = conn.prepareStatement(setUserBookingsSQL);
-				generateSecureStatement(criteria); //Stops sql injections!
+				setUserBookingsGSS(criteria); //Stops sql injections!
 				rs = stmt.executeQuery(); // Send in completed secure SQL query.
 				// Extract data from result set
 				// We pass rs.get methods with name of column in the database. Lots of lines, but makes it easier to modify later.
-				while(rs.next())
-				{
-					int Bid = rs.setInt("BookingId");
-					int Tid = rs.setInt("tripId");
-					int NumSeats = rs.setInt("NumberOfSeats");
-					String name = rs.setString("NameOfBuyer");
-					int Phone= rs.setInt("PhoneOfBuyer");
-					String Email = rs.setString("EmailOfBuyer");
-					
-					Trip trip = new Trip(name,Tid,NumSeats,name,Phone,Email);
-					listOfTrips.add(trip);
-				}
+				
 				
 			}
 			//Handle errors for JDBC
@@ -157,7 +136,7 @@ public void setUserBookingsCriteria(UserBookingsCriteria criteria) throws SQLExc
 			
 		}
 
-public void cancelBookingCriteria(UserBookingsCriteria criteria) throws SQLException{
+public void cancelBookingCriteria(BookingSearchCriteria criteria) throws SQLException{
 
 	String cancelBookingSQL = 	
 			"DELETE FROM Bookings " + 
@@ -167,14 +146,11 @@ public void cancelBookingCriteria(UserBookingsCriteria criteria) throws SQLExcep
 			try{
 				connect();
 				stmt = conn.prepareStatement(getUserBookingsSQL);
-				generateSecureStatement(criteria); //Stops sql injections!
+				cancelBookingGSS(criteria); //Stops sql injections!
 				rs = stmt.executeQuery(); // Send in completed secure SQL query.
 				// Extract data from result set
 				// We pass rs.get methods with name of column in the database. Lots of lines, but makes it easier to modify later.
-				while(rs.next())
-				{
-					int Bid = rs.getInt("BookingId");
-				}
+				
 			}
 			//Handle errors for JDBC
 			catch(SQLException se) {se.printStackTrace();}
@@ -192,9 +168,9 @@ public static void main(String[] args) throws ClassNotFoundException, SQLExcepti
 	BookingTest tdbd = new BookingTest();
 	BookingSearchCriteria tsc = new BookingSearchCriteria();
 	tsc.setBookingId(0);
-	tsc.settripId(0);
-	tsc.setNumberOfSeats(0);
-	tsc.setNameOfBuyer("Road trip");
+	tsc.setTrip(0);
+	tsc.setNumberOfGuests(0);
+	tsc.setBuyer("");
 	tsc.setPhoneOfBuyer(0);
 	tsc.setEmailOfBuyer("");
 
