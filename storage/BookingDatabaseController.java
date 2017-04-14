@@ -79,7 +79,7 @@ public class BookingDatabaseController {
 
 	// JDBC driver
 			static final String JDBC_DRIVER = "org.sqlite.JDBC";
-			static final String DB_URL = "jdbc:sqlite:" + resourcesDirectory.getAbsolutePath() + "\\TripDatabase.db";
+			
 
 		public void cancelBooking(String [] DeleteOrder){ // --------------->! CALNCEL BOOKING (cancelBooking)
 			// DeleteOrder[0] = The booking id to be deleted
