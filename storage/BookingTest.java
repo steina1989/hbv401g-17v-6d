@@ -18,25 +18,125 @@ import model.Review;
 import model.Trip;
 import model.TripSearchCriteria;
 
-/*
-+ BookingDatabaseController() : void
-+ getUserBookings( userInfo : Object ) : ResultSet
-+ setUserBookings( booking : Booking ) : void
-+ cancelBooking( bookingID : String ) : void
-*/
-/*
-ATH ++++ WHAT STILL NEEDS TO BE FIXED +++++ ATH
-- insert and delete both work but still error reports
-- still dealing with the inability to get the view result to work properly
-*/
-
-public class BookingDatabaseController {
+public class BookingTest {
 
 	private String DB_URL;
 	private Connection conn;
 	private PreparedStatement stmt;
 	private ResultSet rs;
+
+	private String getUserBookingsSQL = 	
+			"SELECT * FROM Bokkings NATURAL JOIN Guides "
+			+ "WHERE BookingId == ? ;";
 	
+	private String cancelBookingSQL = 	
+			"DELETE FROM Bookings " + 
+			"WHERE BookingId ==  ? ;";
+			
+		private String cancelBookingViewCurrentTripNumSeats = 
+				"SELECT * FROM Trips NATURAL JOIN Guides "
+				+"WHERE TripId == ? ;" ;
+		
+		private String cancelBookingCorrectNumSeats = 
+				"INSERT INTO Bookings(TripSeatsAvailable) VALUE( ?" + ");"; 
+		
+	private String setUserBookingsSQL = "INSERT INTO Bookings(BookingId,TripId,NumberOfSeats,NameOfBuyer,PhoneOfBuyer,EmailOfBuyer) VALUES ( " 
+				+ "? ," + "? ," + "? ," + "? ," + "? ," + "? ;";
+		
+private void connect() throws ClassNotFoundException, SQLException
+		{
+			File resourcesDirectory = new File("src/resources");
+			DB_URL = "jdbc:sqlite:" + resourcesDirectory.getAbsolutePath() + "\\TripDatabase.db";
+			Class.forName("org.sqlite.JDBC");
+			conn = DriverManager.getConnection(DB_URL);
+		}
+
+private void getUserBookingsGSS(TripSearchCriteria criteria) throws SQLException
+{
+	//Name. Padded with % so I can deal with the empty string and some valid criteria in one line.
+	stmt.setString(1, "%" +criteria.BookingId()+ "%");
+}
+
+private void cancelBookingGSS(TripSearchCriteria criteria) throws SQLException
+{
+	//Name. Padded with % so I can deal with the empty string and some valid criteria in one line.
+	stmt.setString(1, "%" +criteria.BookingId()+ "%");
+
+}
+private void cancelBookingViewCurrentTripNumSeatsGSS(TripSearchCriteria criteria) throws SQLException
+{
+	//Name. Padded with % so I can deal with the empty string and some valid criteria in one line.
+	stmt.setString(1, "%" +criteria.TripId()+ "%");
+}
+private void cancelBookingViewCurrentTripNumSeatsGSS(TripSearchCriteria criteria) throws SQLException
+{
+	//Name. Padded with % so I can deal with the empty string and some valid criteria in one line.
+	stmt.setString(1, "%" +criteria.TripId()+ "%");
+	//Dates
+	stmt.setLong(2, criteria.getDateLow().getTime()/1000);
+	stmt.setLong(3, criteria.getDateHigh().getTime()/1000);;
+	//Prices
+	stmt.setInt(4, criteria.getPriceLow());
+	stmt.setInt(5, criteria.getPriceHigh());
+	//Category
+	stmt.setString(6, "%" +criteria.getCategory()+ "%");
+}
+
+
+public ArrayList<Trip> getTripsByCriteria(TripSearchCriteria criteria) throws SQLException{
+
+			ArrayList<Trip> listOfTrips = new ArrayList<Trip>(); // Will return this in the end.
+			stmt = null;
+			try{
+				connect();
+				stmt = conn.prepareStatement(getUserBookingsSQL);
+				generateSecureStatement(criteria); //Stops sql injections!
+				rs = stmt.executeQuery(); // Send in completed secure SQL query.
+				// Extract data from result set
+				// We pass rs.get methods with name of column in the database. Lots of lines, but makes it easier to modify later.
+				while(rs.next())
+				{
+					int id = rs.getInt("tripId");
+					String name = rs.getString("tripName");
+					String cat = rs.getString("tripCategory");
+					int seatsleft = rs.getInt("SeatsAvailable");
+					int seatsav = rs.getInt("seatsAvailable");
+					String desc = rs.getString("tripDescription");
+					int price = rs.getInt("tripPrice");
+					Date dateOfDeparture = new Date(rs.getLong("dateOfDeparture")*1000);
+					Date dateOfReturn = new Date(rs.getLong("dateOfReturn")*1000);
+					
+					//Get guide information. ID is only used to Join tables.
+					String guideName = rs.getString("guideName");
+					String guideDescr = rs.getString("guideDescription");
+					URL guideProfileUrl = new URL(rs.getString("guideProfileURL"));
+
+					//Create Guide and Trip
+					Guide guide = new Guide(guideName,guideDescr,guideProfileUrl);
+					Trip trip = new Trip(name,id,dateOfDeparture,dateOfReturn,price,desc,seatsav,seatsleft,cat,guide);
+					listOfTrips.add(trip);
+				}
+
+			}
+			//Handle errors for JDBC
+			catch(SQLException se) {se.printStackTrace();}
+			//Handle errors for Class.forName
+			catch(Exception e){e.printStackTrace();}
+
+
+			finally{
+				if(rs != null) rs.close();
+				if(stmt != null) stmt.close();
+				if(conn != null) conn.close();
+			}
+			return listOfTrips;
+		}
+
+	
+	
+	
+	
+			
 	
 	public static void main(String [] args){
 // Main will be used only for testing other parts of the class
@@ -79,9 +179,9 @@ public class BookingDatabaseController {
 
 	// JDBC driver
 			static final String JDBC_DRIVER = "org.sqlite.JDBC";
-			static final String DB_URL = "jdbc:sqlite:" + resourcesDirectory.getAbsolutePath() + "\\TripDatabase.db";
+			static final String DB_URL = "jdbc:sqlite:C:\\Users\\ÓlafurKonráð\\workspace\\Daytrip\\src\\storage\\DayTrips.sqlite";
 
-		public void cancelBooking(String [] DeleteOrder){ // --------------->! CALNCEL BOOKING (cancelBooking)
+public void cancelBooking(String [] DeleteOrder){ // --------------->! CALNCEL BOOKING (cancelBooking)
 			// DeleteOrder[0] = The booking id to be deleted
 			// DeleteOrder[1] = the trip id of the trip to be removed from booking
 			// DeleteOrder[2] = the booked seats to be returned
@@ -138,7 +238,7 @@ public class BookingDatabaseController {
 
 					}
 		}
-		public void setUserBookings(String [] BookingOrders){
+public void setUserBookings(String [] BookingOrders){
 			Connection conn = null;
 			Statement stmt = null;
 			try{
@@ -201,7 +301,7 @@ public class BookingDatabaseController {
 
 		}
 
-		public String [] getUserBookings(String [] BookingView){ // -------------------> VIEW USER BOOKINGS
+public String [] getUserBookings(String [] BookingView){ // -------------------> VIEW USER BOOKINGS
 			Connection conn = null;
 			Statement stmt = null;
 			 String BookingInfoArray [];
@@ -252,7 +352,8 @@ public class BookingDatabaseController {
 				 int j=0;
 				 while(rs2.next()){
 					 //Retrieve by column name
-					 String BookId = rs2.getString("BookingId");
+					 int BookId = rs2.getInt("BookingId");
+
 					 String TripId = rs2.getString("TripId");
 					 String SeatsBooked = rs2.getString("NumberOfSeats");
 					 String Name = rs2.getString("NameOfBuyer");
