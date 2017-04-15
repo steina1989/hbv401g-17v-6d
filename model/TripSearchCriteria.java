@@ -36,6 +36,8 @@ public class TripSearchCriteria {
 	public void setNoOfSeats(Integer noOfSeats) {
 		this.noOfSeats = noOfSeats;
 	}
+	
+	
 
 
 	public TripSearchCriteria(String name, Date dateLow, Date dateHigh, Integer priceLow, Integer priceHigh, String category, Integer noOfSeats) {
