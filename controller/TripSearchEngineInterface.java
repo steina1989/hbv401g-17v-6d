@@ -11,7 +11,6 @@ public interface TripSearchEngineInterface {
 	// Attribute defines an
 	// attribute to sort by
 	public enum Attribute {
-		NAME,
 		DATE,
 		PRICE;
 	}

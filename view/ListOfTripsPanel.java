@@ -36,5 +36,10 @@ public class ListOfTripsPanel extends JPanel {
 		System.out.println();
 
 	}
+	
+	public void clearTrips() {
+		this.removeAll();
+		this.revalidate();
+	}
 
 }

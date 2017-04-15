@@ -105,7 +105,7 @@ public class MainFrame extends JFrame {
 		//This needs to be here (as opposed to in the constructor of the viewTripsPanel itself), 
 		//because renderTrips can only run after Constructor of viewTripsPanel has been completed.
 		//To show trips based on the default criteria:
-		viewTripsPanel.renderTrips();
+		tripcontroller.searchClicked();
 	}
 
 	public ViewTripsPanel getViewTripsPanel() {

@@ -5,9 +5,13 @@ import javax.swing.ButtonGroup;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import controller.TripController;
+import model.Trip;
+
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+
 import javax.swing.JRadioButton;
 import javax.swing.JLabel;
 
@@ -54,7 +58,7 @@ public class ViewTripsPanel extends JPanel {
 		btnSearch.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				renderTrips();
+				tripController.searchClicked();
 			}
 		});
 		btnSearch.setBounds(61, 414, 89, 23);
@@ -99,13 +103,12 @@ public class ViewTripsPanel extends JPanel {
 		
 	}
 
-	public void renderTrips()
+	public void renderTrips(ArrayList<Trip> tripsToRender)
 	{
 		//Reset the ListOfTripspanel (else old trips will stay there)
-		listOfTripsPanel = new ListOfTripsPanel();
-		tripController.searchClicked();
+		listOfTripsPanel.clearTrips();
 		listOfTripsPanel.populateList(tripController.getListOfTrips());
-		scrollPane.setViewportView(listOfTripsPanel);
+		//scrollPane.setViewportView(listOfTripsPanel);
 	}
 
 	

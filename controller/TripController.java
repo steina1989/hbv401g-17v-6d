@@ -30,7 +30,8 @@ public class TripController {
 	public void searchClicked()
 	{
 		FilterPanel fp = mainFrame.getViewTripsPanel().getFilterPanel();
-		listOfTrips = tripSearchEngine.search(fp.getCriteria());
+		this.listOfTrips = tripSearchEngine.search(fp.getCriteria());
+    this.mainFrame.getViewTripsPanel().renderTrips(listOfTrips);
 	}
 	
 	//Reviews need to be fetched separately when a user selects a trip to examine it in detail (in TripInfoFrame)
@@ -40,8 +41,7 @@ public class TripController {
 	 
 	public ArrayList<Trip> sortingRequested(ArrayList<Trip> trips, String attribute, boolean ascending)
 	{
-		if (attribute=="name") return tripSearchEngine.sortBy(TripSearchEngine.Attribute.NAME, trips, ascending);
-		else if (attribute=="date") return tripSearchEngine.sortBy(TripSearchEngine.Attribute.DATE, trips, ascending);
+		if (attribute=="date") return tripSearchEngine.sortBy(TripSearchEngine.Attribute.DATE, trips, ascending);
 		else if (attribute=="price") return tripSearchEngine.sortBy(TripSearchEngine.Attribute.PRICE, trips, ascending);
 		else throw new IllegalArgumentException("Attribute needs to be 'name', 'date', or 'price'");
 	}
