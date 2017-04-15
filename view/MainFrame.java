@@ -26,7 +26,6 @@ public class MainFrame extends JFrame {
 	private JButton enterBookingPanelButton;
 	// This is the JPanel that contains everything in MainFrame
 	private JPanel contentPane;
-	
 	private TripController tripcontroller;
 	private ViewTripsPanel viewTripsPanel;
 
@@ -42,8 +41,10 @@ public class MainFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					
 					MainFrame frame = new MainFrame();
-
+					//Centers the frame, no sure its works across all platforms
+					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -56,7 +57,7 @@ public class MainFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public MainFrame() {
-		
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1138, 650);
 		
@@ -66,10 +67,10 @@ public class MainFrame extends JFrame {
 		JMenu mnFile = new JMenu("About this project");
 		mnFile.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
-				JOptionPane.showMessageDialog(null, "Creators:\n "
+			public void mousePressed(MouseEvent e) {
+				JOptionPane.showMessageDialog(null, "Creators:\n"
 						+ "Hallgrimur David Egilsson\nJonas Gudmundsson\nOlafur Konrad  Albertsson\nSteina Dogg Vigfusdottir\n\n"
-						+ "All icons designed by Madebyoliver from Flaticon");
+						+ "All icons designed by Madebyoliver from Flaticon.");
 			}
 		});
 		menuBar.add(mnFile);

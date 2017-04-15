@@ -154,7 +154,7 @@ public class FilterPanel extends JPanel {
 		add(datePickerTo,gbc_datePickTo);
 
 		
-		JLabel lblPriceMax = new JLabel("Price from 0 ISK to 50.000 ISK");
+		JLabel lblPriceMax = new JLabel("Price from 0 ISK to 50,000 ISK");
 		GridBagConstraints gbc_lblPriceMax = new GridBagConstraints();
 		gbc_lblPriceMax.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblPriceMax.gridwidth = 2;
