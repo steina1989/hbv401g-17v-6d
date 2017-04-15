@@ -52,7 +52,7 @@ public class FilterPanel extends JPanel {
 	private Date dateLow;
 	private Date dateHigh;
 	private Integer priceLow = 0;
-	private Integer priceHigh = Integer.MAX_VALUE;
+	private Integer priceHigh = 50000;
 	private String category = "";
 	private String name = "";
 	private Integer noGuests = 0;
@@ -148,7 +148,6 @@ public class FilterPanel extends JPanel {
 
 		add(datePickerFrom,gbc_datePickFrom);
 
-		
 		GridBagConstraints gbc_datePickTo = new GridBagConstraints();
 		gbc_datePickTo.gridwidth = 2;
 		gbc_datePickTo.fill =  GridBagConstraints.HORIZONTAL;
@@ -223,11 +222,11 @@ public class FilterPanel extends JPanel {
 		name = jNameTrip.getText();
 		dateLow = (Date) datePickerFrom.getModel().getValue();
 		dateHigh = (Date) datePickerTo.getModel().getValue();
-		priceHigh = 
 		priceLow = 0;
 		category = (String) categoryCombo.getSelectedItem();
 		if (category == "All Categories") category = "";
-		return new TripSearchCriteria(name,dateLow,dateHigh,priceLow,priceHigh,category,noGuests);
+		criteria = new TripSearchCriteria(name,dateLow,dateHigh,priceLow,priceHigh,category,noGuests);
+		return criteria;
 				}
 
 	public Date getDateLow() {

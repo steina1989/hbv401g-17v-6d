@@ -99,7 +99,7 @@ public class MainFrame extends JFrame {
 		contentPane.add(enterBookingPanelButton);
 		tripcontroller = new TripController(this);
 		viewTripsPanel = new ViewTripsPanel(tripcontroller);
-		viewTripsPanel.setBounds(10, 23, 1019, 417);
+		viewTripsPanel.setBounds(10, 23, 1019, 454);
 		contentPane.add(viewTripsPanel);
 		
 		//This needs to be here (as opposed to in the constructor of the viewTripsPanel itself), 

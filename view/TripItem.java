@@ -16,6 +16,8 @@ import javax.swing.JTextPane;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.SimpleDateFormat;
+
 import javax.swing.JTextArea;
 
 /*
@@ -30,10 +32,11 @@ public class TripItem extends JPanel {
 	
 	
 	Color defaultColor;
+	Dimension preferredSize = new Dimension(560,100);
 	
 	public TripItem(Trip trip) {
 		setBorder(null);
-		setPreferredSize(new Dimension(561, 100)); 
+		setPreferredSize(preferredSize); 
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -111,5 +114,18 @@ public class TripItem extends JPanel {
 		springLayout.putConstraint(SpringLayout.WEST, categoryLabel, 0, SpringLayout.WEST, categoryPicture);
 		categoryLabel.setFont(new Font("Arial", Font.BOLD, 11));
 		add(categoryLabel);
+		
+		
+		SimpleDateFormat df = new SimpleDateFormat("EEE, d MMM yyyy HH:mm");
+		JLabel lblNewLabel = new JLabel(df.format(trip.getDateOfDeparture()));
+		springLayout.putConstraint(SpringLayout.WEST, lblNewLabel, 0, SpringLayout.WEST, nameLabel);
+		springLayout.putConstraint(SpringLayout.SOUTH, lblNewLabel, 0, SpringLayout.SOUTH, this);
+		add(lblNewLabel);
+		
+
+	}
+	
+	public Dimension getSize(){
+		return this.getPreferredSize();
 	}
 }

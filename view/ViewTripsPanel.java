@@ -1,22 +1,16 @@
 package view;
 
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
-
-import model.Trip;
-
-import java.util.ArrayList;
-
-import javax.swing.DefaultListModel;
-import javax.swing.JList;
+import javax.swing.ButtonGroup;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
-
 import controller.TripController;
-import controller.TripSearchEngine;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JRadioButton;
+import javax.swing.JLabel;
+
 
 /*
  * This panel encapsulates FilterPanel and ListOfTripsPanel
@@ -32,6 +26,8 @@ public class ViewTripsPanel extends JPanel {
 	private TripController tripController;
 	private JButton btnSearch;
 	private JScrollPane scrollPane;
+	private JRadioButton rdbtnPrice;
+	private JLabel lblSortBy;
 
 	/**
 	 * Create the panel.
@@ -43,7 +39,7 @@ public class ViewTripsPanel extends JPanel {
 		listOfTripsPanel = new ListOfTripsPanel();
 		
 		filterPanel = new FilterPanel();
-		filterPanel.setBounds(10, 24, 246, 363);
+		filterPanel.setBounds(10, 40, 246, 363);
 		add(filterPanel);
 				
 		scrollPane = new JScrollPane();
@@ -51,7 +47,7 @@ public class ViewTripsPanel extends JPanel {
 		scrollPane.getVerticalScrollBar().setUnitIncrement(16);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane.setBounds(269, 24, 699, 363);
+		scrollPane.setBounds(266, 40, 699, 363);
 		add(scrollPane);
 		scrollPane.setViewportView(listOfTripsPanel); 
 		btnSearch = new JButton("Search");
@@ -61,8 +57,46 @@ public class ViewTripsPanel extends JPanel {
 				renderTrips();
 			}
 		});
-		btnSearch.setBounds(61, 398, 89, 23);
+		btnSearch.setBounds(61, 414, 89, 23);
 		add(btnSearch);
+		
+		JRadioButton rdbtnDate = new JRadioButton("Date");
+		rdbtnDate.setSelected(true);
+		rdbtnDate.setBounds(308, 10, 49, 23);
+		add(rdbtnDate);
+		
+		rdbtnPrice = new JRadioButton("Price");
+		rdbtnPrice.setBounds(359, 10, 49, 23);
+		add(rdbtnPrice);
+		
+		ButtonGroup sortByGroup = new ButtonGroup();
+		sortByGroup.add(rdbtnDate);
+		sortByGroup.add(rdbtnPrice);
+		
+		lblSortBy = new JLabel("Sort by:");
+		lblSortBy.setBounds(266, 15, 46, 14);
+		add(lblSortBy);
+		
+		JLabel lblInOrder = new JLabel("In order:");
+		lblInOrder.setBounds(419, 14, 46, 14);
+		add(lblInOrder);
+		
+		JRadioButton rdbtnAscending = new JRadioButton("Ascending");
+		rdbtnAscending.setBounds(468, 10, 75, 23);
+		add(rdbtnAscending);
+		
+		JRadioButton rdbtnDescending = new JRadioButton("Descending");
+		rdbtnDescending.setBounds(545, 10, 109, 23);
+		add(rdbtnDescending);
+		
+		ButtonGroup sortByAscGroup = new ButtonGroup();
+		sortByAscGroup.add(rdbtnAscending );
+		sortByAscGroup.add(rdbtnDescending);
+		
+	}
+	
+	public void filterChanged(){
+		
 	}
 
 	public void renderTrips()

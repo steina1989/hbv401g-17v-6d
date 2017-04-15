@@ -128,7 +128,7 @@ public class Trip {
 
 	@Override
 	public String toString(){
-		return "Name: "+ this.name + " Id: " + this.id;
+		return "Name: "+ this.name + " Id: "+this.id;
 	}
 
 
