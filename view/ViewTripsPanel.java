@@ -58,7 +58,7 @@ public class ViewTripsPanel extends JPanel {
 		btnSearch = new JButton("Search");
 		btnSearch.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mousePressed(MouseEvent e) {
 				renderTrips();
 			}
 		});

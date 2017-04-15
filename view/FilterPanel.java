@@ -3,6 +3,7 @@ package view;
 import javax.swing.JPanel;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Properties;
 
@@ -59,6 +60,10 @@ public class FilterPanel extends JPanel {
 	private Integer durationLow = 0;
 	private Integer durationHigh = Integer.MAX_VALUE;
 	private JTextField jNameTrip;
+	private JComboBox categoryCombo;
+	
+	private JDatePickerImpl datePickerTo;
+	private JDatePickerImpl datePickerFrom;
 	
 	/**
 	 * Create the panel.
@@ -104,7 +109,7 @@ public class FilterPanel extends JPanel {
 		gbc_lblCategory.gridy = 2;
 		add(lblCategory, gbc_lblCategory);
 		
-		JComboBox categoryCombo = new JComboBox();
+		categoryCombo = new JComboBox();
 		categoryCombo.setModel(new DefaultComboBoxModel(new String[] {"All Categories", "Cruise", "Hiking", "Road Trip", "Snorkeling"}));
 		GridBagConstraints gbc_categoryCombo = new GridBagConstraints();
 		gbc_categoryCombo.fill = GridBagConstraints.HORIZONTAL;
@@ -136,8 +141,11 @@ public class FilterPanel extends JPanel {
 		p.put("text.month", "Month");
 		p.put("text.year", "Year");
 		JDatePanelImpl datePanelFrom = new JDatePanelImpl(model, p);
-		JDatePickerImpl datePickerFrom = new JDatePickerImpl(datePanelFrom,new DateLabelFormatter());
-		datePickerFrom.getJFormattedTextField().setText("From");
+		datePickerFrom = new JDatePickerImpl(datePanelFrom,new DateLabelFormatter());
+		Calendar currentDate = Calendar.getInstance();
+		model.setSelected(true);
+		model.setDate(currentDate.get(Calendar.YEAR), currentDate.get(Calendar.MONTH), currentDate.get(Calendar.DAY_OF_MONTH));
+
 		add(datePickerFrom,gbc_datePickFrom);
 
 		
@@ -149,9 +157,11 @@ public class FilterPanel extends JPanel {
 		gbc_datePickTo.gridy = 5;
 		UtilDateModel model2 = new UtilDateModel();
 		JDatePanelImpl datePanelTo = new JDatePanelImpl(model2, p);
-		JDatePickerImpl datePickerTo = new JDatePickerImpl(datePanelTo,new DateLabelFormatter());
-		datePickerTo.getJFormattedTextField().setText("To");
+		datePickerTo = new JDatePickerImpl(datePanelTo,new DateLabelFormatter());
 		add(datePickerTo,gbc_datePickTo);
+		//Add one year to see trips into the future.
+		model2.setDate(currentDate.get(Calendar.YEAR)+1, currentDate.get(Calendar.MONTH), currentDate.get(Calendar.DAY_OF_MONTH));
+		model2.setSelected(true);
 
 		
 		JLabel lblPriceMax = new JLabel("Price from 0 ISK to 50,000 ISK");
@@ -170,8 +180,8 @@ public class FilterPanel extends JPanel {
 		slider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				JSlider source = (JSlider)e.getSource();
-				int isk = ((int)source.getValue());
-				lblPriceMax.setText(String.format("Price from 0 ISK to %,d ISK",isk));
+				priceHigh = ((int)source.getValue());
+				lblPriceMax.setText(String.format("Price from 0 ISK to %,d ISK",priceHigh));
 			}
 		}
 				);
@@ -205,9 +215,7 @@ public class FilterPanel extends JPanel {
 		gbc_spinner.gridy = 9;
 		add(spinner, gbc_spinner);
 		
-		
-		
-
+		criteria = getCriteria();
 
 	}
 	
@@ -216,8 +224,14 @@ public class FilterPanel extends JPanel {
 	
 	//Criteria object contains supported filters only right now during testing of the GUI.
 	public TripSearchCriteria getCriteria(){
-		return new TripSearchCriteria();
-	}
+		name = jNameTrip.getText();
+		dateLow = (Date) datePickerFrom.getModel().getValue();
+		dateHigh = (Date) datePickerTo.getModel().getValue();
+		priceLow = 0;
+		category = (String) categoryCombo.getSelectedItem();
+		if (category == "All Categories") category = "";
+		return new TripSearchCriteria(name,dateLow,dateHigh,priceLow,priceHigh,category,noGuests);
+				}
 
 	public Date getDateLow() {
 		return dateLow;

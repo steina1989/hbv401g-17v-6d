@@ -12,6 +12,7 @@ public class TripSearchCriteria {
   private Integer priceLow;
   private Integer priceHigh;
   private String category;
+  private Integer noOfSeats;
  
   /*
    * The constructor forces instances to take valid state upon creation.
@@ -23,10 +24,21 @@ public class TripSearchCriteria {
   	this.priceLow = 0;
   	this.priceHigh = Integer.MAX_VALUE;
   	this.category = "";
+  	this.noOfSeats = 1;
   }
 
   
-	public TripSearchCriteria(String name, Date dateLow, Date dateHigh, Integer priceLow, Integer priceHigh, String category) {
+	public Integer getNoOfSeats() {
+		return noOfSeats;
+	}
+
+
+	public void setNoOfSeats(Integer noOfSeats) {
+		this.noOfSeats = noOfSeats;
+	}
+
+
+	public TripSearchCriteria(String name, Date dateLow, Date dateHigh, Integer priceLow, Integer priceHigh, String category, Integer noOfSeats) {
 		super();
 		this.name = name;
 		this.dateLow = dateLow;
@@ -34,6 +46,7 @@ public class TripSearchCriteria {
 		this.priceLow = priceLow;
 		this.priceHigh = priceHigh;
 		this.category = category;
+		this.noOfSeats = noOfSeats;
 	}
 
 

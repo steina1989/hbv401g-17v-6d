@@ -55,7 +55,8 @@ public class TripDatabaseController {
 						+ "WHERE tripName LIKE ? "
 						+ "AND dateOfDeparture BETWEEN ? AND ? "
 						+ "AND tripPrice BETWEEN ? AND ? "
-						+ "AND tripCategory LIKE ? ";
+						+ "AND tripCategory LIKE ? "
+						+ "AND seatsLeft >= ?";
 		ArrayList<Trip> listOfTrips = new ArrayList<Trip>(); // Will return this in the end.
 		stmt = null;
 		try{
@@ -153,6 +154,7 @@ public class TripDatabaseController {
 		stmt.setInt(5, criteria.getPriceHigh());
 		//Category
 		stmt.setString(6, "%" +criteria.getCategory()+ "%");
+		stmt.setString(7, Integer.toString(criteria.getNoOfSeats()));
 	}
 
 
