@@ -8,7 +8,6 @@ public class BookingSearchCriteria {
 	private int bookingId;
 	private int trip;
 	private int numberOfGuests;
-	private String comment;
 	private int phoneOfBuyer;
 	private String emailOfBuyer;
 	
@@ -16,7 +15,6 @@ public class BookingSearchCriteria {
 	  	this.bookingId = 0;
 	  	this.trip = 0; //lowDate is current time (a timestamp basically)
 	  	this.numberOfGuests = 0;
-	  	this.comment = "";
 	  	this.phoneOfBuyer = 8768788;
 	  	this.emailOfBuyer = "";
 	  }
@@ -25,7 +23,6 @@ public class BookingSearchCriteria {
 		this.bookingId = bookingId;
 		this.trip = trip;
 		this.numberOfGuests = numberOfGuests;
-		this.comment = comment;
 		this.emailOfBuyer = emailOfBuyer;
 	}
 	
@@ -66,12 +63,6 @@ public class BookingSearchCriteria {
 	}
 	public void setNumberOfGuests(int numberOfGuests) {
 		this.numberOfGuests = numberOfGuests;
-	}
-	public String getComment() {
-		return comment;
-	}
-	public void setComment(String comment) {
-		this.comment = comment;
 	}
 	
 	

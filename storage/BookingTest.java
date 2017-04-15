@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import model.Guide;
 import model.Review;
 import model.Trip;
+import model.Booking;
 import model.BookingSearchCriteria;
 
 public class BookingTest {
@@ -21,18 +22,7 @@ public class BookingTest {
 	private PreparedStatement stmt;
 	private ResultSet rs;
 
-	private String getUserBookingsSQL = 	
-			"SELECT * FROM Bokkings "
-			+ "WHERE BookingId == ? ;";
 	
-	private String cancelBookingSQL = 	
-			"DELETE FROM Bookings " + 
-			"WHERE BookingId ==  ? ;";
-					
-    private String setUserBookingsSQL = 
-    		"INSERT INTO Bookings(BookingId,TripId,NumberOfSeats,NameOfBuyer,PhoneOfBuyer,EmailOfBuyer) VALUES ( " 
-				+ "? ," + "? ," + "? ," + "? ," + "? ," + "? ;";
-		
 private void connect() throws ClassNotFoundException, SQLException
 		{
 			File resourcesDirectory = new File("src/resources");
@@ -174,7 +164,7 @@ public static void main(String[] args) throws ClassNotFoundException, SQLExcepti
 	tsc.setPhoneOfBuyer(0);
 	tsc.setEmailOfBuyer("");
 
-	ArrayList<Trip> trips = tdbd.getUserBookingsCriteria(tsc);
+	ArrayList<Booking> trips = tdbd.getUserBookingsCriteria(tsc);
 	
 
 }

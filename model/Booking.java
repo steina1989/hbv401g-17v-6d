@@ -1,5 +1,5 @@
 package model;
-import java.util.Date;
+
 
 public class Booking {
 
@@ -7,12 +7,32 @@ public class Booking {
 	private int bookingId;
 	private int trip;
 	private int numberOfGuests;
-	private Date timeOfBooking;
-	private String comment;
-	private int PhoneOfBuyer;
+	private int phoneOfBuyer;
+	private String emailOfBuyer;
+	
+	public Booking(Integer bookingId, Integer trip, Integer numberOfGuests, String comment, Integer phoneOfBuyer, String emailOfBuyer) {
+		super();
+		this.bookingId = bookingId;
+		this.trip = trip;
+		this.numberOfGuests = numberOfGuests;
+		this.phoneOfBuyer = phoneOfBuyer;
+		this.emailOfBuyer = emailOfBuyer;
+	}
 	
 	
-
+	public String getEmailOfBuyer() {
+		return emailOfBuyer;
+	}
+	public void setEmailOfBuyer(String emailOfBuyer) {
+		this.emailOfBuyer = emailOfBuyer;
+	}
+	public int getPhoneOfBuyer() {
+		return phoneOfBuyer;
+	}
+	public void setPhoneOfBuyer(int phoneOfBuyer) {
+		this.phoneOfBuyer = phoneOfBuyer;
+	}
+	
 	public String getBuyer() {
 		return buyer;
 	}
@@ -37,18 +57,7 @@ public class Booking {
 	public void setNumberOfGuests(int numberOfGuests) {
 		this.numberOfGuests = numberOfGuests;
 	}
-	public Date getTimeOfBooking() {
-		return timeOfBooking;
-	}
-	public void setTimeOfBooking(Date timeOfBooking) {
-		this.timeOfBooking = timeOfBooking;
-	}
-	public String getComment() {
-		return comment;
-	}
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
+
 	
 	
 	
