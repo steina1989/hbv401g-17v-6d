@@ -54,7 +54,6 @@ public class ViewTripsPanel extends JPanel {
 		scrollPane.setBounds(269, 24, 699, 363);
 		add(scrollPane);
 		scrollPane.setViewportView(listOfTripsPanel); 
-		
 		btnSearch = new JButton("Search");
 		btnSearch.addMouseListener(new MouseAdapter() {
 			@Override

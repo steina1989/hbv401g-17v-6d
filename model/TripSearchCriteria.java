@@ -49,9 +49,8 @@ public class TripSearchCriteria {
 		this.noOfSeats = noOfSeats;
 	}
 
-
-
-
+	
+	
 
 	public String getCategory() {
 		return category;

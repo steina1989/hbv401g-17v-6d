@@ -214,19 +214,15 @@ public class FilterPanel extends JPanel {
 		gbc_spinner.gridx = 0;
 		gbc_spinner.gridy = 9;
 		add(spinner, gbc_spinner);
-		
-		criteria = getCriteria();
-
 	}
-	
-	
-	
+		
 	
 	//Criteria object contains supported filters only right now during testing of the GUI.
 	public TripSearchCriteria getCriteria(){
 		name = jNameTrip.getText();
 		dateLow = (Date) datePickerFrom.getModel().getValue();
 		dateHigh = (Date) datePickerTo.getModel().getValue();
+		priceHigh = 
 		priceLow = 0;
 		category = (String) categoryCombo.getSelectedItem();
 		if (category == "All Categories") category = "";
