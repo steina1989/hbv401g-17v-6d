@@ -59,13 +59,13 @@ private void setUserBookingsGSS(BookingSearchCriteria criteria) throws SQLExcept
 //----------------------->  Generate Secure SQL - End
 
 
-public ArrayList<Trip> getUserBookingsCriteria(BookingSearchCriteria criteria) throws SQLException{
+public ArrayList<Booking> getUserBookingsCriteria(BookingSearchCriteria criteria) throws SQLException{
 
 	String getUserBookingsSQL = 	
 			"SELECT * FROM Bokkings "
 			+ "WHERE BookingId == ? ;";
 	
-			ArrayList<Trip> listOfTrips = new ArrayList<Trip>(); // Will return this in the end.
+			ArrayList<Booking> Bookings = new ArrayList<Booking>(); // Will return this in the end.
 			stmt = null;
 			try{
 				connect();
@@ -83,8 +83,8 @@ public ArrayList<Trip> getUserBookingsCriteria(BookingSearchCriteria criteria) t
 					int Phone= rs.getInt("PhoneOfBuyer");
 					String Email = rs.getString("EmailOfBuyer");
 					
-					Trip trip = new Trip(Bid,Tid,NumSeats,name,Phone,Email);
-					listOfTrips.add(trip);
+					Booking bookings = new Booking(Bid,Tid,NumSeats,name,Phone,Email);
+					Bookings.add(bookings);
 				}
 				
 			}
@@ -97,7 +97,7 @@ public ArrayList<Trip> getUserBookingsCriteria(BookingSearchCriteria criteria) t
 				if(stmt != null) stmt.close();
 				if(conn != null) conn.close();
 			}
-			return listOfTrips;
+			return Bookings;
 		}
 public void setUserBookingsCriteria(BookingSearchCriteria criteria) throws SQLException{
 
@@ -135,7 +135,7 @@ public void cancelBookingCriteria(BookingSearchCriteria criteria) throws SQLExce
 			stmt = null;
 			try{
 				connect();
-				stmt = conn.prepareStatement(getUserBookingsSQL);
+				stmt = conn.prepareStatement(cancelBookingSQL);
 				cancelBookingGSS(criteria); //Stops sql injections!
 				rs = stmt.executeQuery(); // Send in completed secure SQL query.
 				// Extract data from result set
