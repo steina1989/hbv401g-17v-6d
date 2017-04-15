@@ -2,6 +2,7 @@ package unitTests;
 
 import static org.junit.Assert.*;
 
+import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -14,11 +15,9 @@ import org.junit.Test;
 
 import controller.TripSearchEngine;
 import model.Guide;
-import model.Location;
 import model.Review;
 import model.Trip;
 import model.TripSearchCriteria;
-import storage.TripDatabaseControllerMockupEmpty;
 
 public class SearchEngineTest {
 	
@@ -46,8 +45,8 @@ public class SearchEngineTest {
 		// create an example trip
 		Date exampleDate1 = this.criteria.getDateLow(); // we just need any Date
 		Date exampleDate2 = this.criteria.getDateHigh(); // we just need any Date
-		this.trip = new Trip("Golden Circle", 3, exampleDate1, exampleDate2, new Location(), 1500,
-				"https://www.youtube.com/watch?v=WNmCm4oyrkY", 25, "Safari", new ArrayList<Guide>());
+		this.trip = new Trip("Golden Circle", 3, exampleDate1, exampleDate2, 1500,
+				"https://www.youtube.com/watch?v=WNmCm4oyrkY", 25, 18, "Safari", new Guide("jón", "stóri", new URL("jon.stori.is")), 3, 5);
 		
 		this.tripReviews = new ArrayList<Review>();
 	}
@@ -168,6 +167,11 @@ public class SearchEngineTest {
 	public void sortByAscendingReturnsDescendingSortedList() {
 		// this test needs to be implemented!
 		throw new java.lang.UnsupportedOperationException("Not supported yet.");
+	}
+	
+	@Test
+	public void searchReturnsSortedTripList() {
+		
 	}
 	
 	// 
