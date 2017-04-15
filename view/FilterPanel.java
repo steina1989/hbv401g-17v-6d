@@ -218,6 +218,7 @@ public class FilterPanel extends JPanel {
 		
 	
 	//Criteria object contains supported filters only right now during testing of the GUI.
+	//BLA
 	public TripSearchCriteria getCriteria(){
 		name = jNameTrip.getText();
 		dateLow = (Date) datePickerFrom.getModel().getValue();
