@@ -61,6 +61,7 @@ public class FilterPanel extends JPanel {
 	private Integer durationHigh = Integer.MAX_VALUE;
 	private JTextField jNameTrip;
 	private JComboBox categoryCombo;
+	private JSlider slider;
 	
 	private JDatePickerImpl datePickerTo;
 	private JDatePickerImpl datePickerFrom;
@@ -171,7 +172,8 @@ public class FilterPanel extends JPanel {
 		gbc_lblPriceMax.gridy = 6;
 		add(lblPriceMax, gbc_lblPriceMax);
 		
-		JSlider slider = new JSlider(JSlider.HORIZONTAL,0,50000,50000);
+		
+		slider = new JSlider(JSlider.HORIZONTAL,0,50000,50000);
 		slider.setMajorTickSpacing(10000);
 		//slider.setMinorTickSpacing(100);
 		slider.setPaintTicks(true);
@@ -219,6 +221,7 @@ public class FilterPanel extends JPanel {
 		name = jNameTrip.getText();
 		dateLow = (Date) datePickerFrom.getModel().getValue();
 		dateHigh = (Date) datePickerTo.getModel().getValue();
+		priceHigh = slider.getValue();
 		priceLow = 0;
 		category = (String) categoryCombo.getSelectedItem();
 		if (category == "All Categories") category = "";

@@ -39,7 +39,6 @@ public class ViewTripsPanel extends JPanel {
 	private JRadioButton rdbtnAscending;
 	private JRadioButton rdbtnDescending;
 	private JLabel lblSortBy;
-	private JRadioButton rdbtnDate;
 
 	/**
 	 * Create the panel.
