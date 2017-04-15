@@ -8,9 +8,13 @@ import controller.TripController;
 import model.Trip;
 
 import javax.swing.JButton;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.swing.JRadioButton;
 import javax.swing.JLabel;
@@ -31,6 +35,9 @@ public class ViewTripsPanel extends JPanel {
 	private JButton btnSearch;
 	private JScrollPane scrollPane;
 	private JRadioButton rdbtnPrice;
+	private JRadioButton rdbtnDate;
+	private JRadioButton rdbtnAscending;
+	private JRadioButton rdbtnDescending;
 	private JLabel lblSortBy;
 	private JRadioButton rdbtnDate;
 
@@ -69,10 +76,22 @@ public class ViewTripsPanel extends JPanel {
 		rdbtnDate.setSelected(true);
 		rdbtnDate.setBounds(308, 10, 49, 23);
 		add(rdbtnDate);
+		rdbtnDate.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				tripController.sortClicked();
+			}
+		});
 		
 		rdbtnPrice = new JRadioButton("Price");
 		rdbtnPrice.setBounds(359, 10, 49, 23);
 		add(rdbtnPrice);
+		rdbtnPrice.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				tripController.sortClicked();
+			}
+		});
 		
 		ButtonGroup sortByGroup = new ButtonGroup();
 		sortByGroup.add(rdbtnDate);
@@ -86,17 +105,36 @@ public class ViewTripsPanel extends JPanel {
 		lblInOrder.setBounds(419, 14, 46, 14);
 		add(lblInOrder);
 		
-		JRadioButton rdbtnAscending = new JRadioButton("Ascending");
+		rdbtnAscending = new JRadioButton("Ascending");
 		rdbtnAscending.setBounds(468, 10, 75, 23);
+		rdbtnAscending.setSelected(true);
 		add(rdbtnAscending);
+		rdbtnAscending.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				tripController.sortClicked();
+			}
+		});
 		
-		JRadioButton rdbtnDescending = new JRadioButton("Descending");
+		rdbtnDescending = new JRadioButton("Descending");
 		rdbtnDescending.setBounds(545, 10, 109, 23);
 		add(rdbtnDescending);
+		rdbtnDescending.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				tripController.sortClicked();
+			}
+		});
 		
 		ButtonGroup sortByAscGroup = new ButtonGroup();
 		sortByAscGroup.add(rdbtnAscending );
 		sortByAscGroup.add(rdbtnDescending);
+		//sortByAscGroup.addMouseListener(new MouseAdapter() {
+		//	@Override
+		//	public void mousePressed(MouseEvent e) {
+		//		tripController.searchClicked();
+		//	}
+		//});
 		
 	}
 	
@@ -121,5 +159,24 @@ public class ViewTripsPanel extends JPanel {
 
 	public FilterPanel getFilterPanel() {
 		return filterPanel;
+	}
+	
+	public String getAttributeToSortBy() {
+		if (rdbtnPrice.isSelected()) return "Price";
+		else if (rdbtnDate.isSelected()) return "Date";
+		return "";
+	}
+	
+	public Boolean getSortingDirection() {
+		if (rdbtnAscending.isSelected()) return true;
+		else return false;
+	}
+	
+	public ArrayList<JRadioButton> getSortingAttributeRadioButtons() {
+		return new ArrayList<>(Arrays.asList(rdbtnPrice, rdbtnDate));
+	}
+	
+	public ArrayList<JRadioButton> getSortingDirectionRadioButtons() {
+		return new ArrayList<>(Arrays.asList(rdbtnAscending, rdbtnDescending));
 	}
 }
