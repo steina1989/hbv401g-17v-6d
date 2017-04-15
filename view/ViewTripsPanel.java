@@ -43,7 +43,7 @@ public class ViewTripsPanel extends JPanel {
 		listOfTripsPanel = new ListOfTripsPanel();
 		
 		filterPanel = new FilterPanel();
-		filterPanel.setBounds(10, 11, 246, 363);
+		filterPanel.setBounds(10, 24, 246, 363);
 		add(filterPanel);
 				
 		scrollPane = new JScrollPane();
@@ -51,7 +51,7 @@ public class ViewTripsPanel extends JPanel {
 		scrollPane.getVerticalScrollBar().setUnitIncrement(16);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane.setBounds(266, 11, 699, 363);
+		scrollPane.setBounds(269, 24, 699, 363);
 		add(scrollPane);
 		scrollPane.setViewportView(listOfTripsPanel); 
 		
@@ -62,7 +62,7 @@ public class ViewTripsPanel extends JPanel {
 				renderTrips();
 			}
 		});
-		btnSearch.setBounds(61, 384, 89, 23);
+		btnSearch.setBounds(61, 398, 89, 23);
 		add(btnSearch);
 	}
 

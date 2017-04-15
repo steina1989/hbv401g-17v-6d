@@ -40,6 +40,10 @@ import java.awt.FlowLayout;
 import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
 
 public class FilterPanel extends JPanel {
 	
@@ -65,9 +69,9 @@ public class FilterPanel extends JPanel {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.setConstraints(this, c);
 		gridBagLayout.columnWidths = new int[]{241, 127, 32, 32, 102, 0};
-		gridBagLayout.rowHeights = new int[]{14, 0, 0, 20, 20, 0, 0, 0, 0, 0};
+		gridBagLayout.rowHeights = new int[]{14, 0, 0, 20, 20, 0, 0, 0, 0, 0, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 		JLabel lblNameOfTrip = new JLabel("Search by name of trip:");
@@ -103,14 +107,16 @@ public class FilterPanel extends JPanel {
 		JComboBox categoryCombo = new JComboBox();
 		categoryCombo.setModel(new DefaultComboBoxModel(new String[] {"All Categories", "Cruise", "Hiking", "Road Trip", "Snorkeling"}));
 		GridBagConstraints gbc_categoryCombo = new GridBagConstraints();
+		gbc_categoryCombo.fill = GridBagConstraints.HORIZONTAL;
 		gbc_categoryCombo.anchor = GridBagConstraints.NORTHWEST;
 		gbc_categoryCombo.insets = new Insets(0, 0, 5, 5);
 		gbc_categoryCombo.gridx = 1;
 		gbc_categoryCombo.gridy = 2;
 		add(categoryCombo, gbc_categoryCombo);
 		
-		JLabel lblDates = new JLabel("Between  dates:");
+		JLabel lblDates = new JLabel("When will you be travelling?");
 		GridBagConstraints gbc_lblDates = new GridBagConstraints();
+		gbc_lblDates.gridwidth = 2;
 		gbc_lblDates.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblDates.insets = new Insets(0, 0, 5, 5);
 		gbc_lblDates.gridx = 0;
@@ -143,36 +149,61 @@ public class FilterPanel extends JPanel {
 		gbc_datePickTo.gridy = 5;
 		UtilDateModel model2 = new UtilDateModel();
 		JDatePanelImpl datePanelTo = new JDatePanelImpl(model2, p);
-		JDatePickerImpl datePickerTo = new JDatePickerImpl(datePanelFrom,new DateLabelFormatter());
+		JDatePickerImpl datePickerTo = new JDatePickerImpl(datePanelTo,new DateLabelFormatter());
 		datePickerTo.getJFormattedTextField().setText("To");
 		add(datePickerTo,gbc_datePickTo);
+
 		
+		JLabel lblPriceMax = new JLabel("Price from 0 ISK to 50.000 ISK");
+		GridBagConstraints gbc_lblPriceMax = new GridBagConstraints();
+		gbc_lblPriceMax.fill = GridBagConstraints.HORIZONTAL;
+		gbc_lblPriceMax.gridwidth = 2;
+		gbc_lblPriceMax.insets = new Insets(0, 0, 5, 5);
+		gbc_lblPriceMax.gridx = 0;
+		gbc_lblPriceMax.gridy = 6;
+		add(lblPriceMax, gbc_lblPriceMax);
 		
-		JLabel lblPrices = new JLabel("Price range:");
-		GridBagConstraints gbc_lblPrices = new GridBagConstraints();
-		gbc_lblPrices.fill = GridBagConstraints.HORIZONTAL;
-		gbc_lblPrices.insets = new Insets(0, 0, 5, 5);
-		gbc_lblPrices.gridx = 0;
-		gbc_lblPrices.gridy = 6;
-		add(lblPrices, gbc_lblPrices);
+		JSlider slider = new JSlider(JSlider.HORIZONTAL,0,50000,50000);
+		slider.setMajorTickSpacing(10000);
+		//slider.setMinorTickSpacing(100);
+		slider.setPaintTicks(true);
+		slider.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				JSlider source = (JSlider)e.getSource();
+				int isk = ((int)source.getValue());
+				lblPriceMax.setText(String.format("Price from 0 ISK to %,d ISK",isk));
+			}
+		}
+				);
 		
-		JSlider slider = new JSlider();
-		slider.setValue(10000);
-		slider.setMaximum(50000);
+
+
 		GridBagConstraints gbc_slider = new GridBagConstraints();
+		gbc_slider.fill = GridBagConstraints.HORIZONTAL;
 		gbc_slider.gridwidth = 2;
 		gbc_slider.insets = new Insets(0, 0, 5, 5);
 		gbc_slider.gridx = 0;
 		gbc_slider.gridy = 7;
 		add(slider, gbc_slider);
 		
-		JLabel lblNoGuests = new JLabel("no. Guests:");
+		JLabel lblNoGuests = new JLabel("How many tickets do you need?");
 		GridBagConstraints gbc_lblNoGuests = new GridBagConstraints();
+		gbc_lblNoGuests.gridwidth = 2;
 		gbc_lblNoGuests.fill = GridBagConstraints.HORIZONTAL;
-		gbc_lblNoGuests.insets = new Insets(0, 0, 0, 5);
+		gbc_lblNoGuests.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNoGuests.gridx = 0;
 		gbc_lblNoGuests.gridy = 8;
 		add(lblNoGuests, gbc_lblNoGuests);
+		
+		JSpinner spinner = new JSpinner();
+		spinner.setModel(new SpinnerNumberModel(1, 1, 10, 1));
+		GridBagConstraints gbc_spinner = new GridBagConstraints();
+		gbc_spinner.fill = GridBagConstraints.HORIZONTAL;
+		gbc_spinner.anchor = GridBagConstraints.LINE_START;
+		gbc_spinner.insets = new Insets(0, 0, 0, 5);
+		gbc_spinner.gridx = 0;
+		gbc_spinner.gridy = 9;
+		add(spinner, gbc_spinner);
 		
 		
 		
