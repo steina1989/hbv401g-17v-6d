@@ -161,7 +161,6 @@ public class FilterPanel extends JPanel {
 		//Add one year to see trips into the future.
 		model2.setDate(currentDate.get(Calendar.YEAR)+1, currentDate.get(Calendar.MONTH), currentDate.get(Calendar.DAY_OF_MONTH));
 		model2.setSelected(true);
-
 		
 		JLabel lblPriceMax = new JLabel("Price from 0 ISK to 50,000 ISK");
 		GridBagConstraints gbc_lblPriceMax = new GridBagConstraints();
@@ -185,8 +184,6 @@ public class FilterPanel extends JPanel {
 		}
 				);
 		
-
-
 		GridBagConstraints gbc_slider = new GridBagConstraints();
 		gbc_slider.fill = GridBagConstraints.HORIZONTAL;
 		gbc_slider.gridwidth = 2;

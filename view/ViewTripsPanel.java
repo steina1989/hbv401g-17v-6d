@@ -32,6 +32,7 @@ public class ViewTripsPanel extends JPanel {
 	private JScrollPane scrollPane;
 	private JRadioButton rdbtnPrice;
 	private JLabel lblSortBy;
+	private JRadioButton rdbtnDate;
 
 	/**
 	 * Create the panel.
@@ -64,7 +65,7 @@ public class ViewTripsPanel extends JPanel {
 		btnSearch.setBounds(61, 414, 89, 23);
 		add(btnSearch);
 		
-		JRadioButton rdbtnDate = new JRadioButton("Date");
+		rdbtnDate = new JRadioButton("Date");
 		rdbtnDate.setSelected(true);
 		rdbtnDate.setBounds(308, 10, 49, 23);
 		add(rdbtnDate);

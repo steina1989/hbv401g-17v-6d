@@ -77,6 +77,14 @@ public class TripItem extends JPanel {
 		add(lblShortTripDescription);
 		
 		JButton btnSeeMore = new JButton("See more");
+		btnSeeMore.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				TripInfoFrame frame = new TripInfoFrame(trip);
+				frame.setLocationRelativeTo(null);
+				frame.setVisible(true);
+			}
+		});
 		springLayout.putConstraint(SpringLayout.SOUTH, btnSeeMore, -10, SpringLayout.SOUTH, this);
 		springLayout.putConstraint(SpringLayout.EAST, btnSeeMore, -10, SpringLayout.EAST, this);
 		add(btnSeeMore);
