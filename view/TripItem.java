@@ -125,10 +125,13 @@ public class TripItem extends JPanel {
 		
 		
 		SimpleDateFormat df = new SimpleDateFormat("EEE, d MMM yyyy HH:mm");
-		JLabel lblNewLabel = new JLabel(df.format(trip.getDateOfDeparture()));
-		springLayout.putConstraint(SpringLayout.WEST, lblNewLabel, 0, SpringLayout.WEST, nameLabel);
-		springLayout.putConstraint(SpringLayout.SOUTH, lblNewLabel, 0, SpringLayout.SOUTH, this);
-		add(lblNewLabel);
+		Integer price = trip.getPrice();
+		String date = df.format(trip.getDateOfDeparture());
+		JLabel lblDateAndPrice = new JLabel(date+"   Price:"+ String.format("%,d ISK",price));
+
+		springLayout.putConstraint(SpringLayout.WEST, lblDateAndPrice, 0, SpringLayout.WEST, nameLabel);
+		springLayout.putConstraint(SpringLayout.SOUTH, lblDateAndPrice, 0, SpringLayout.SOUTH, this);
+		add(lblDateAndPrice);
 		
 
 	}

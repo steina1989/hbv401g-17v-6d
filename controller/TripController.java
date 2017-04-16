@@ -100,7 +100,7 @@ public class TripController {
 	{
 		if (attribute=="Date") return tripSearchEngine.sortBy(TripSearchEngine.Attribute.DATE, trips, ascending);
 		else if (attribute=="Price") return tripSearchEngine.sortBy(TripSearchEngine.Attribute.PRICE, trips, ascending);
-		else throw new IllegalArgumentException("Attribute needs to be 'name', 'date', or 'price'");
+		else throw new IllegalArgumentException("Attribute needs to be 'date', or 'price'");
 	}
 	
 	private void renderTrips() {

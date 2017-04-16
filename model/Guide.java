@@ -15,26 +15,14 @@ public class Guide {
 
 
 
-	public Guide(String name, String description, URL url)  {
+	public Guide(String name, String description)  {
 		super();
 		this.name = name;
 		this.description = description;
-		this.url = url;
 	}
 
-	public void getImage() throws MalformedURLException, IOException
-	{
 
-		try 
-		{
-			img = ImageIO.read(url);
-			//If unsuccessful: Get default photo.
-		} catch (IOException e) {
-			e.printStackTrace();
-			img = ImageIO.read(new File("src/resources/na.jpg").toURI().toURL());
-		}
-
-	}
+	
 
 	public String getName() {
 		return name;

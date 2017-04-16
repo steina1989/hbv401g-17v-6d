@@ -71,7 +71,7 @@ public class TripDatabaseController {
 				int id = rs.getInt("tripId");
 				String name = rs.getString("tripName");
 				String cat = rs.getString("tripCategory");
-				int seatsleft = rs.getInt("SeatsAvailable");
+				int seatsleft = rs.getInt("SeatsLeft");
 				int seatsav = rs.getInt("seatsAvailable");
 				String desc = rs.getString("tripDescription");
 				int price = rs.getInt("tripPrice");
@@ -83,10 +83,9 @@ public class TripDatabaseController {
 				//Get guide information. ID is only used to Join tables.
 				String guideName = rs.getString("guideName");
 				String guideDescr = rs.getString("guideDescription");
-				URL guideProfileUrl = new URL(rs.getString("guideProfileURL"));
 
 				//Create Guide and Trip
-				Guide guide = new Guide(guideName,guideDescr,guideProfileUrl);
+				Guide guide = new Guide(guideName,guideDescr);
 				Trip trip = new Trip(name,id,dateOfDeparture,dateOfReturn,price,desc,seatsav,seatsleft,cat,guide,Math.round(meanRating),noReviews);
 				listOfTrips.add(trip);
 			}
