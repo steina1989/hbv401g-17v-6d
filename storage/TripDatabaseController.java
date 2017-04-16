@@ -32,8 +32,7 @@ public class TripDatabaseController {
 	 */
 	private void connect() throws ClassNotFoundException, SQLException
 	{
-		File resourcesDirectory = new File("src/resources");
-		DB_URL = "jdbc:sqlite:" + resourcesDirectory.getAbsolutePath() + "\\TripDatabase.db";
+		DB_URL = "jdbc:sqlite::resource:resources\\TripDatabase.db";
 		Class.forName("org.sqlite.JDBC");
 		conn = DriverManager.getConnection(DB_URL);
 	}
