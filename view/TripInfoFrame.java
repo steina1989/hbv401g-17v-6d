@@ -111,11 +111,6 @@ public class TripInfoFrame extends JFrame {
 		springLayout.putConstraint(SpringLayout.SOUTH, date1, 0, SpringLayout.SOUTH, categoryPicture);
 		springLayout.putConstraint(SpringLayout.EAST, date1, -21, SpringLayout.EAST, date2);
 		header.add(date1);
-		
-		JButton btnAddToCart = new JButton("Add to cart");
-		springLayout.putConstraint(SpringLayout.SOUTH, btnAddToCart, 0, SpringLayout.SOUTH, categoryPicture);
-		springLayout.putConstraint(SpringLayout.EAST, btnAddToCart, 0, SpringLayout.EAST, lblPrice);
-		header.add(btnAddToCart);
 
 		JPanel panel = new JPanel();
 		panel.setBounds(10, 102, 530, 342);
@@ -162,6 +157,12 @@ public class TripInfoFrame extends JFrame {
 
 		JLabel guideDesc = new JLabel(guide.getDescription());
 		panel.add(guideDesc);
+		panel.add(Box.createRigidArea(space));
+		
+		JButton btnAddToCart = new JButton("Add to cart");
+		panel.add(btnAddToCart);
+		springLayout.putConstraint(SpringLayout.NORTH, btnAddToCart, -4, SpringLayout.NORTH, date2);
+		springLayout.putConstraint(SpringLayout.EAST, btnAddToCart, -5, SpringLayout.WEST, lblPrice);
 
 
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);	
