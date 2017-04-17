@@ -53,12 +53,7 @@ public class BookingDatabaseController {
 			stmt = conn.prepareStatement(sql);
 			rs = stmt.executeQuery();
 			int highestBookingId = rs.getInt("bookingId");
-			rs.close();
-			stmt.close();
-			conn.close();
-			System.out.println("Biggest bookingID: "+ highestBookingId);
-			
-			connect();
+
 			sql = "INSERT INTO Bookings"
 					+ " VALUES (?,?,?,?,?,?)";
 			stmt = conn.prepareStatement(sql);
@@ -68,16 +63,7 @@ public class BookingDatabaseController {
 			stmt.setString(4,booking.getNameOfBuyer());
 			stmt.setInt(5, booking.getPhoneOfBuyer());
 			stmt.setString(6, booking.getEmailOfBuyer());
-			System.out.println("Execute update skilar: "+stmt.executeUpdate());
-			
-			conn.close();
-			stmt.close();
-			rs.close();
-			connect();
-			stmt = conn.prepareStatement("SELECT COUNT(*) AS Fjoldi FROM Bookings");
-			rs = stmt.executeQuery();
-			System.out.println("Count(*) frá Bookings: "+rs.getInt("Fjoldi"));
-			
+			stmt.executeUpdate();
 
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -89,7 +75,6 @@ public class BookingDatabaseController {
 			if(stmt != null) stmt.close();
 			if(conn != null) conn.close();
 		}
-
 
 	}
 	//----------------------->  Generate Secure SQL - End
