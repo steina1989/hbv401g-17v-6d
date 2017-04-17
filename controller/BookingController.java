@@ -29,7 +29,7 @@ public class BookingController {
 		}
 	}
 
-	public void enterCheckoutPanelClicked() {
+	public void enterViewBookingsPanelClicked() {
 		mainFrame.openCheckOutPanel(this.cart);
 	}
 	
@@ -67,19 +67,19 @@ public class BookingController {
 	}
 	
 	private void refreshTripsInCartJList() {
-		this.mainFrame.getCheckoutPanel().setTrips(this.cart);
+		this.mainFrame.getViewBookingsPanel().setTrips(this.cart);
 	}
 	
 	private void refreshCancelTripButton() {
 		if (this.getSelectedTripIndex() >= 0) {
-			this.mainFrame.getCheckoutPanel().getCancelTripButton().setEnabled(true);
+			this.mainFrame.getViewBookingsPanel().getCheckoutPanel().getCancelTripButton().setEnabled(true);
 		} else {
-			this.mainFrame.getCheckoutPanel().getCancelTripButton().setEnabled(false);
+			this.mainFrame.getViewBookingsPanel().getCheckoutPanel().getCancelTripButton().setEnabled(false);
 		}
 	}
 	
 	private int getSelectedTripIndex() {
-		CheckoutPanel checkoutPanel = this.mainFrame.getCheckoutPanel();
+		CheckoutPanel checkoutPanel = this.mainFrame.getViewBookingsPanel().getCheckoutPanel();
 		return checkoutPanel.getTripsInCartJList().getSelectedIndex();
 	}
 }

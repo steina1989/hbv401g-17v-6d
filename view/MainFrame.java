@@ -33,7 +33,7 @@ import javax.swing.JLabel;
 
 public class MainFrame extends JFrame {
 	
-	private JButton enterCheckoutPanelButton;
+	private JButton enterViewBookingsPanelButton;
 	private JButton enterViewTripsPanelButton;
 	
 	private JLabel cartLabel;
@@ -42,7 +42,8 @@ public class MainFrame extends JFrame {
 	private TripController tripController;
 	private BookingController bookingController;
 	private ViewTripsPanel viewTripsPanel;
-	private CheckoutPanel checkoutPanel;
+	private ViewBookingsPanel viewBookingsPanel;
+	private JButton cancelOldBookingButton;
 
 	/**
 	 * Launch the application.
@@ -96,28 +97,29 @@ public class MainFrame extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JPanel viewBookingsPanel = new JPanel(); // TODO: when ViewBookingsPanel has been added to view folder change line to viewBookingsPanel = new ViewBookingsPanel();
-		viewBookingsPanel.setBackground(Color.BLUE);
-		viewBookingsPanel.setBounds(448, 537, 153, 50);
+		viewBookingsPanel = new ViewBookingsPanel(this.bookingController);
+		viewBookingsPanel.setBackground(Color.LIGHT_GRAY);
+		viewBookingsPanel.setBounds(15, 15, 1029, 500);
+		viewBookingsPanel.setVisible(false);
 		contentPane.add(viewBookingsPanel);
 		
-		checkoutPanel = new CheckoutPanel(this.bookingController);
-		checkoutPanel.setBackground(Color.LIGHT_GRAY);
-		checkoutPanel.setBounds(10, 23, 1019, 454);
-		checkoutPanel.setVisible(false);
-		contentPane.add(checkoutPanel);
+		//checkoutPanel = new CheckoutPanel(this.bookingController);
+		//checkoutPanel.setBackground(Color.LIGHT_GRAY);
+		//checkoutPanel.setBounds(10, 23, 463, 454);
+		//checkoutPanel.setVisible(false);
+		//contentPane.add(checkoutPanel);
 		
-		enterCheckoutPanelButton = new JButton("Checkout");
-		enterCheckoutPanelButton.addMouseListener(new MouseAdapter() {
+		enterViewBookingsPanelButton = new JButton("Checkout");
+		enterViewBookingsPanelButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				if (!((JButton)e.getSource()).isEnabled()) return; // abort if button is not enabled
 				System.out.println("Opening checkout panel");
-				bookingController.enterCheckoutPanelClicked();
+				bookingController.enterViewBookingsPanelClicked();
 			}
 		});
-		enterCheckoutPanelButton.setBounds(757, 564, 136, 23);
-		contentPane.add(enterCheckoutPanelButton);
+		enterViewBookingsPanelButton.setBounds(757, 564, 136, 23);
+		contentPane.add(enterViewBookingsPanelButton);
 		viewTripsPanel = new ViewTripsPanel(tripController, bookingController);
 		viewTripsPanel.setBounds(10, 23, 1019, 454);
 		contentPane.add(viewTripsPanel);
@@ -131,6 +133,10 @@ public class MainFrame extends JFrame {
 		enterViewTripsPanelButton.setBounds(903, 564, 126, 23);
 		contentPane.add(enterViewTripsPanelButton);
 		enterViewTripsPanelButton.setEnabled(false);
+		
+		cancelOldBookingButton = new JButton("Cancel old booking");
+		cancelOldBookingButton.setBounds(10, 564, 121, 23);
+		contentPane.add(cancelOldBookingButton);
 		enterViewTripsPanelButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -154,24 +160,24 @@ public class MainFrame extends JFrame {
 		return this.viewTripsPanel;
 	}
 	
-	public CheckoutPanel getCheckoutPanel() {
-		return this.checkoutPanel;
+	public ViewBookingsPanel getViewBookingsPanel() {
+		return this.viewBookingsPanel;
 	}
 	
 	public void openCheckOutPanel(ArrayList<Trip> tripsFromCart){
-		checkoutPanel.setTrips(tripsFromCart);
+		viewBookingsPanel.setTrips(tripsFromCart);
 		viewTripsPanel.setVisible(false);
-		checkoutPanel.setVisible(true);
-		enterCheckoutPanelButton.setEnabled(false);
+		viewBookingsPanel.setVisible(true);
+		enterViewBookingsPanelButton.setEnabled(false);
 		enterViewTripsPanelButton.setEnabled(true);
 	}
 	
 	public void openViewTripsPanel(ArrayList<Trip> listOfTrips) {
 		viewTripsPanel.setListOfTrips(listOfTrips);
-		checkoutPanel.setVisible(false);
+		viewBookingsPanel.setVisible(false);
 		viewTripsPanel.setVisible(true);
 		enterViewTripsPanelButton.setEnabled(false);
-		enterCheckoutPanelButton.setEnabled(true);
+		enterViewBookingsPanelButton.setEnabled(true);
 	}
 	
 	public void setCartLabelText(int numTripsInCart) {
