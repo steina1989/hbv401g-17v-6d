@@ -8,6 +8,8 @@ import javax.swing.border.EmptyBorder;
 
 import controller.BookingController;
 import controller.TripController;
+import model.Trip;
+
 import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -22,6 +24,8 @@ import javax.swing.JPopupMenu;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+
 import javax.swing.JLabel;
 
 public class MainFrame extends JFrame {
@@ -131,11 +135,7 @@ public class MainFrame extends JFrame {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				System.out.println("Opening View Trips panel");
-				checkoutPanel.setVisible(false);
-				viewTripsPanel.setVisible(true);
 
-				enterViewTripsPanelButton.setEnabled(false);
-				enterCheckoutPanelButton.setEnabled(true);
 			}
 		});
 		
@@ -148,6 +148,18 @@ public class MainFrame extends JFrame {
 	public ViewTripsPanel getViewTripsPanel() {
 		return viewTripsPanel;
 	}
+	
+
+	public void openCheckOutPanel(ArrayList<Trip> tripsFromCart){
+		
+		checkoutPanel.setTrips(tripsFromCart);
+		checkoutPanel.setVisible(true);
+		viewTripsPanel.setVisible(false);
+		enterViewTripsPanelButton.setEnabled(false);
+		enterCheckoutPanelButton.setEnabled(true);
+
+	}
+	
 	
 	public void setCartLabelText(int numTripsInCart) {
 		this.cartLabel.setText("Trips in cart: " + numTripsInCart);

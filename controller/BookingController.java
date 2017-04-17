@@ -31,6 +31,11 @@ public class BookingController {
 		this.mainFrame.setCartLabelText(this.cart.size());
 	}
 
+	public void enterCheckoutPanelClicked() {
+		mainFrame.openCheckOutPanel(this.cart);
+		
+		
+	}
 
 
 }
