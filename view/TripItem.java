@@ -26,13 +26,13 @@ import model.Trip;
 
 public class TripItem extends JPanel {
 	
-	TripController tripController;
-	BookingController bookingController;
+	private final TripController tripController;
+	private final BookingController bookingController;
 	
 	Color defaultColor;
 	Dimension preferredSize = new Dimension(560,100);
 	
-	public TripItem(final Trip trip, final TripController tripController, BookingController bookingController) {
+	public TripItem(final Trip trip, final TripController tripController, final BookingController bookingController) {
 		this.tripController = tripController;
 		this.bookingController = bookingController;
 		

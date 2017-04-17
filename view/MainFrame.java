@@ -143,7 +143,7 @@ public class MainFrame extends JFrame {
 	}
 	
 	public void openTripInfoFrame(Trip trip, ArrayList<Review> reviews) {
-		TripInfoFrame frame = new TripInfoFrame(trip, reviews);
+		TripInfoFrame frame = new TripInfoFrame(trip, reviews, this.bookingController);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 	}

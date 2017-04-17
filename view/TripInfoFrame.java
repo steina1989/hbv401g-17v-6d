@@ -30,10 +30,9 @@ import javax.swing.ScrollPaneConstants;
 
 public class TripInfoFrame extends JFrame {
 
-	private TripController tripController;
-	private BookingController bookingController;
+	private final BookingController bookingController;
 	
-	private Trip trip;
+	private final Trip trip;
 	private JPanel contentPane;
 	private ArrayList<Review> reviews;
 
@@ -45,8 +44,7 @@ public class TripInfoFrame extends JFrame {
 	/**
 	 * Create the frame.g
 	 */
-	public TripInfoFrame(Trip trip, ArrayList<Review> reviews) {
-		this.tripController = tripController;
+	public TripInfoFrame(final Trip trip, ArrayList<Review> reviews, final BookingController bookingController) {
 		this.bookingController = bookingController;
 		this.trip = trip;
 
@@ -175,22 +173,30 @@ public class TripInfoFrame extends JFrame {
 		panel.add(lblGuide);
 		panel.add(Box.createRigidArea(space));
 		
-				JLabel guideDesc = new JLabel(guide.getDescription());
-				panel.add(guideDesc);
-				panel.add(Box.createRigidArea(space));
-				
-				JButton btnAddToCart = new JButton("Add to cart");
-				btnAddToCart.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mousePressed(MouseEvent e) {
-						bookingController.addToCartClicked(trip);
-					}
-				});
-				panel.add(btnAddToCart);
-				springLayout.putConstraint(SpringLayout.NORTH, btnAddToCart, -4, SpringLayout.NORTH, date2);
-				springLayout.putConstraint(SpringLayout.EAST, btnAddToCart, -5, SpringLayout.WEST, lblPrice);
+		JLabel guideDesc = new JLabel(guide.getDescription());
+		panel.add(guideDesc);
+		panel.add(Box.createRigidArea(space));
 		
-
+		JButton btnAddToCart = new JButton("Add to cart");
+		btnAddToCart.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				System.out.println(trip);
+				System.out.println(bookingController);
+				bookingController.addToCartClicked(trip);
+			}
+		});
+		panel.add(btnAddToCart);
+		springLayout.putConstraint(SpringLayout.NORTH, btnAddToCart, -4, SpringLayout.NORTH, date2);
+		springLayout.putConstraint(SpringLayout.EAST, btnAddToCart, -5, SpringLayout.WEST, lblPrice);
+		
+		/*
+		for (Review review : reviews) {
+			JLabel lblReviewDescription = new JLabel("<html>"+ "Review from: " + review.getAuthor() + "<br></br>" + "Stars: " + review.getStars() + "<br></br>" + review.getText() + "</html>");
+			panel.add(lblReviewDescription);
+			panel.add(Box.createRigidArea(space));
+		}
+		*/
 		
 		/*
 		btnSearch = new JButton("Search");
