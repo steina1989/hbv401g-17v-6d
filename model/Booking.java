@@ -5,16 +5,15 @@ public class Booking {
 
 	private String buyer;
 	private int bookingId;
-	private int trip;
+	private int tripId;
 	private String nameOfBuyer;
 	private int numberOfGuests;
 	private int phoneOfBuyer;
 	private String emailOfBuyer;
 	
-	public Booking(Integer bookingId, Integer trip, Integer numberOfGuests, String nameOfBuyer, Integer phoneOfBuyer, String emailOfBuyer) {
+	public Booking(Integer tripId, Integer numberOfGuests, String nameOfBuyer, Integer phoneOfBuyer, String emailOfBuyer) {
 		super();
-		this.bookingId = bookingId;
-		this.trip = trip;
+		this.tripId = tripId;
 		this.numberOfGuests = numberOfGuests;
 		this.nameOfBuyer = nameOfBuyer;
 		this.phoneOfBuyer = phoneOfBuyer;
@@ -53,11 +52,11 @@ public class Booking {
 	public void setBookingId(int bookingId) {
 		this.bookingId = bookingId;
 	}
-	public int getTrip() {
-		return trip;
+	public int getTripId() {
+		return tripId;
 	}
-	public void setTrip(int trip) {
-		this.trip = trip;
+	public void setTripId(int trip) {
+		this.tripId = trip;
 	}
 	public int getNumberOfGuests() {
 		return numberOfGuests;

@@ -26,7 +26,6 @@ public class TripDatabaseController {
 	private PreparedStatement stmt;
 	private ResultSet rs;
 
-
 	/*
 	 * Connects to database. 
 	 */
