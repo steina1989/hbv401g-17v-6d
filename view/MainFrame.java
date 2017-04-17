@@ -20,10 +20,12 @@ import javax.swing.JPopupMenu;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JLabel;
 
 public class MainFrame extends JFrame {
 	
 	private JButton enterBookingPanelButton;
+	private JLabel cartLabel;
 	// This is the JPanel that contains everything in MainFrame
 	private JPanel contentPane;
 	private TripController tripcontroller;
@@ -102,6 +104,10 @@ public class MainFrame extends JFrame {
 		viewTripsPanel.setBounds(10, 23, 1019, 454);
 		contentPane.add(viewTripsPanel);
 		
+		cartLabel = new JLabel("Trips in cart: 0");
+		cartLabel.setBounds(786, 549, 136, 14);
+		contentPane.add(cartLabel);
+		
 		//This needs to be here (as opposed to in the constructor of the viewTripsPanel itself), 
 		//because renderTrips can only run after Constructor of viewTripsPanel has been completed.
 		//To show trips based on the default criteria:
@@ -111,6 +117,11 @@ public class MainFrame extends JFrame {
 	public ViewTripsPanel getViewTripsPanel() {
 		return viewTripsPanel;
 	}
+	
+	public void setCartLabelText(int numTripsInCart) {
+		this.cartLabel.setText("Trips in cart: " + numTripsInCart);
+	}
+	
 	private static void addPopup(Component component, final JPopupMenu popup) {
 		component.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {

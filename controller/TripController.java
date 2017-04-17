@@ -52,6 +52,7 @@ public class TripController {
 	public void addToCartClicked(Trip trip) {
 		System.out.println("Adding trip to cart: " + trip);
 		this.cart.add(trip);
+		renderTripsInCart();
 	}
 	
 	private void searchByFilterPanelCriteria() {
@@ -83,6 +84,11 @@ public class TripController {
 	
 	private void renderTrips() {
     this.mainFrame.getViewTripsPanel().renderTrips(listOfTrips);
+	}
+	
+	
+	private void renderTripsInCart() {
+		this.mainFrame.setCartLabelText(this.cart.size());
 	}
 	
 	private void printTripsInCart() {
