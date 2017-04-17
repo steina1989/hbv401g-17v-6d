@@ -31,6 +31,8 @@ public class CheckoutPanel extends JPanel {
 	public CheckoutPanel(BookingController bookingController) {
 		this.bookingController = bookingController;
 		
+		this.listModel = new DefaultListModel<Trip>();
+		
 		setLayout(null);
 		
 		bookingInfoPanel = new JPanel();
