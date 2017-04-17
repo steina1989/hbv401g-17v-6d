@@ -26,7 +26,9 @@ import javax.swing.JLabel;
 
 public class MainFrame extends JFrame {
 	
-	private JButton enterBookingPanelButton;
+	private JButton enterCheckoutPanelButton;
+	private JButton enterViewTripsPanelButton;
+	
 	private JLabel cartLabel;
 	// This is the JPanel that contains everything in MainFrame
 	private JPanel contentPane;
@@ -89,30 +91,53 @@ public class MainFrame extends JFrame {
 		
 		JPanel viewBookingsPanel = new JPanel(); // TODO: when ViewBookingsPanel has been added to view folder change line to viewBookingsPanel = new ViewBookingsPanel();
 		viewBookingsPanel.setBackground(Color.BLUE);
-		viewBookingsPanel.setBounds(623, 537, 153, 50);
+		viewBookingsPanel.setBounds(448, 537, 153, 50);
 		contentPane.add(viewBookingsPanel);
 		
 		checkoutPanel = new CheckoutPanel(this.bookingController);
 		checkoutPanel.setBackground(Color.MAGENTA);
-		checkoutPanel.setBounds(85, 505, 944, 23);
+		checkoutPanel.setBounds(10, 23, 1019, 454);
+		checkoutPanel.setVisible(false);
 		contentPane.add(checkoutPanel);
 		
-		enterBookingPanelButton = new JButton("Enter booking");
-		enterBookingPanelButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				// Opna checkout panel
+		enterCheckoutPanelButton = new JButton("Checkout");
+		enterCheckoutPanelButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				System.out.println("Opening checkout panel");
+				viewTripsPanel.setVisible(false);
+				checkoutPanel.setVisible(true);
 				
+				enterCheckoutPanelButton.setEnabled(false);
+				enterViewTripsPanelButton.setEnabled(true);
 			}
 		});
-		enterBookingPanelButton.setBounds(786, 564, 136, 23);
-		contentPane.add(enterBookingPanelButton);
+		enterCheckoutPanelButton.setBounds(757, 564, 136, 23);
+		contentPane.add(enterCheckoutPanelButton);
 		viewTripsPanel = new ViewTripsPanel(tripcontroller);
 		viewTripsPanel.setBounds(10, 23, 1019, 454);
 		contentPane.add(viewTripsPanel);
 		
 		cartLabel = new JLabel("Trips in cart: 0");
-		cartLabel.setBounds(786, 549, 136, 14);
+		cartLabel.setBounds(747, 549, 136, 14);
 		contentPane.add(cartLabel);
+
+		
+		enterViewTripsPanelButton = new JButton("Browse trips");
+		enterViewTripsPanelButton.setBounds(903, 564, 126, 23);
+		contentPane.add(enterViewTripsPanelButton);
+		enterViewTripsPanelButton.setEnabled(false);
+		enterViewTripsPanelButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				System.out.println("Opening View Trips panel");
+				checkoutPanel.setVisible(false);
+				viewTripsPanel.setVisible(true);
+
+				enterViewTripsPanelButton.setEnabled(false);
+				enterCheckoutPanelButton.setEnabled(true);
+			}
+		});
 		
 		//This needs to be here (as opposed to in the constructor of the viewTripsPanel itself), 
 		//because renderTrips can only run after Constructor of viewTripsPanel has been completed.
