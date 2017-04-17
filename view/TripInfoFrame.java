@@ -38,7 +38,7 @@ public class TripInfoFrame extends JFrame {
 
 
 	/**
-	 * Create the frame.
+	 * Create the frame.g
 	 */
 	public TripInfoFrame(Trip trip, TripController tripController) {
 		
