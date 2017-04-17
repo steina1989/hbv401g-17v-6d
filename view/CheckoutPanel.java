@@ -22,8 +22,8 @@ public class CheckoutPanel extends JPanel {
 	private JButton addBookingButton;
 	private JButton cancelBookingButton;
 	private ArrayList<Trip> tripsInCart;
-	private JList jListorder;
-	private DefaultListModel<Trip> listModel;
+	private DefaultListModel<String> listModel;
+	private JList tripsInCartJList;
 
 	/**
 	 * Create the panel.
@@ -31,7 +31,7 @@ public class CheckoutPanel extends JPanel {
 	public CheckoutPanel(BookingController bookingController) {
 		this.bookingController = bookingController;
 		
-		this.listModel = new DefaultListModel<Trip>();
+		this.listModel = new DefaultListModel<String>();
 		
 		setLayout(null);
 		
@@ -39,12 +39,11 @@ public class CheckoutPanel extends JPanel {
 		bookingInfoPanel.setBackground(Color.GRAY);
 		bookingInfoPanel.setBounds(21, 26, 204, 249);
 		add(bookingInfoPanel);
+		bookingInfoPanel.setLayout(null);
 		
-		jListorder = new JList();
-		bookingInfoPanel.add(jListorder);
-		jListorder.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-		jListorder.setLayoutOrientation(JList.HORIZONTAL_WRAP);
-		jListorder.setVisibleRowCount(-1);
+		tripsInCartJList = new JList(listModel);
+		tripsInCartJList.setBounds(0, 0, 204, 249);
+		bookingInfoPanel.add(tripsInCartJList);
 		
 		addBookingButton = new JButton("Confirm booking");
 		addBookingButton.setBounds(253, 226, 174, 23);
@@ -68,16 +67,12 @@ public class CheckoutPanel extends JPanel {
 	
 	private void populateJList(ArrayList<Trip> trips){
 		for (Trip trip : trips){
-			listModel.addElement(trip);
+			listModel.addElement(trip.getName() + ", ID: " + trip.getId());
 		}
-		bookingInfoPanel.add(jListorder);
-		
+		//bookingInfoPanel.add(jListorder);
 	}
 	
 	private void calculateTotalPrice(){
 		
 	}
-	
-
-	
 }

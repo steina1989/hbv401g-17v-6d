@@ -21,9 +21,11 @@ public class BookingController {
 
 
 	public void addToCartClicked(Trip trip) {
-		System.out.println("Adding trip to cart: " + trip);
-		this.cart.add(trip);
-		renderTripsInCart();
+		if (!tripExistsInCart(trip)) {
+			System.out.println("Adding trip to cart: " + trip);
+			this.cart.add(trip);
+			renderTripsInCart();
+		}
 	}
 
 	private void renderTripsInCart() 
@@ -35,5 +37,12 @@ public class BookingController {
 		mainFrame.openCheckOutPanel(this.cart);
 	}
 
-
+	private boolean tripExistsInCart(Trip candidate) {
+		for (Trip trip : this.cart) {
+			if (trip.getId() == candidate.getId()) {
+				return true;
+			}
+		}
+		return false;
+	}
 }
