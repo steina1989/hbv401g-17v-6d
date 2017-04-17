@@ -190,11 +190,7 @@ public class TripInfoFrame extends JFrame {
 				springLayout.putConstraint(SpringLayout.NORTH, btnAddToCart, -4, SpringLayout.NORTH, date2);
 				springLayout.putConstraint(SpringLayout.EAST, btnAddToCart, -5, SpringLayout.WEST, lblPrice);
 		
-		for (Review review : reviews) {
-			JLabel lblReviewDescription = new JLabel("<html>"+ "Review from: " + review.getAuthor() + "<br></br>" + "Stars: " + review.getStars() + "<br></br>" + review.getText() + "</html>");
-			panel.add(lblReviewDescription);
-			panel.add(Box.createRigidArea(space));
-		}
+
 		
 		/*
 		btnSearch = new JButton("Search");

@@ -40,7 +40,6 @@ public class TripDatabaseController {
 	 * The schema for our database is (at the moment):
 	 *CREATE TABLE [Trips] ([tripId] Integer, [tripName] Text, [dateOfDeparture] Integer, [dateOfReturn] Integer, [tripPrice] Integer, [tripDescription] Text, [seatsAvailable] Integer, [seatsLeft] Integer, [tripCategory] Text, [guideId] Integer);
 	 *CREATE TABLE [Guides] ([guideId] Integer, [guideName] Text, [guideDescription] Text, [guideProfileURL] Text);
-	 *CREATE TABLE [Reviews] ([tripName] Text, [reviewText] Text, [stars] Text);
 	 * 
 	 * It contains 20 trips with departure ranging from 19 april 2017 - 6 july 2017. (1492645755-1499378496 seconds from epoch.)
 	 * Note: java.util.Date stores dates in milliseconds, the database stores data in seconds, this is why sometimes you will see /1000 or *1000.
@@ -115,7 +114,7 @@ public class TripDatabaseController {
 			rs = stmt.executeQuery(); 
 			while(rs.next())
 			{
-				Review review = new Review(rs.getString("reviewText"),rs.getInt("stars"));
+				Review review = new Review(rs.getString("reviewHeader"),rs.getString("reviewText"),rs.getInt("stars"));
 				listOfReviews.add(review);
 			}
 
@@ -132,7 +131,7 @@ public class TripDatabaseController {
 			if(stmt != null) stmt.close();
 			if(conn != null) conn.close();
 		}
-		return new ArrayList<Review>();
+		return listOfReviews;
 	}
 
 

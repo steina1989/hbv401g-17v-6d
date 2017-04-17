@@ -1,27 +1,20 @@
 package view;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.SpringLayout;
-
-import controller.BookingController;
-import controller.TripController;
-import model.Trip;
 import java.awt.Font;
-import java.awt.Image;
-
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JTextPane;
-import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
-
-import javax.swing.JTextArea;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SpringLayout;
+import controller.BookingController;
+import controller.TripController;
+import model.Trip;
 
 /*
  * This class is a Trip visualizer module based on JPanel. Each instance of this class will be a "list"-item in the ListOfTripsPanel.
