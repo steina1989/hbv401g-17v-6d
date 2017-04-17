@@ -16,24 +16,25 @@ import javax.swing.BoxLayout;
 
 public class ListOfTripsPanel extends JPanel {
 	
+	private TripController tripController;
 	private BookingController bookingController;
 	
 
 	/**
 	 * Create the panel.
 	 */
-	public ListOfTripsPanel(BookingController bookingController) {
+	public ListOfTripsPanel(TripController tripController, BookingController bookingController) {
+		this.tripController = tripController;
 		this.bookingController = bookingController;
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 	}
 	
 	public void populateList(ArrayList<Trip> trips)
 	{
-
 		//System.out.println("Latest search:");
 		for (Trip trip : trips)
 		{
-			TripItem tripItem = new TripItem(trip, bookingController);
+			TripItem tripItem = new TripItem(trip, this.tripController, this.bookingController);
 			this.add(tripItem);
 			//System.out.println(trip);
 		}

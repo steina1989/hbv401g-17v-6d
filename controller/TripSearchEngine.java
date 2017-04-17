@@ -21,7 +21,6 @@ public class TripSearchEngine implements TripSearchEngineInterface {
 
 	public TripSearchEngine() {
 		this.tripDatabaseController = new TripDatabaseController();
-
 	}
 
 	@Override

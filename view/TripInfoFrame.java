@@ -24,14 +24,18 @@ import model.Review;
 import model.Trip;
 import java.awt.Component;
 import javax.swing.JButton;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 
 
 public class TripInfoFrame extends JFrame {
 
+	private TripController tripController;
+	private BookingController bookingController;
+	
 	private Trip trip;
 	private JPanel contentPane;
 	private ArrayList<Review> reviews;
-	private BookingController bookingController;
 
 	/**
 	 * Launch the application.
@@ -41,8 +45,8 @@ public class TripInfoFrame extends JFrame {
 	/**
 	 * Create the frame.g
 	 */
-	public TripInfoFrame(Trip trip, BookingController bookingController) {
-		
+	public TripInfoFrame(Trip trip, ArrayList<Review> reviews) {
+		this.tripController = tripController;
 		this.bookingController = bookingController;
 		this.trip = trip;
 
@@ -98,7 +102,6 @@ public class TripInfoFrame extends JFrame {
 		categoryLabel.setFont(new Font("Arial", Font.BOLD, 11));
 		header.add(categoryLabel);
 
-
 		header.setBounds(10, 11, 530, 80);
 		contentPane.add(header);
 
@@ -120,10 +123,14 @@ public class TripInfoFrame extends JFrame {
 		springLayout.putConstraint(SpringLayout.SOUTH, date1, 0, SpringLayout.SOUTH, categoryPicture);
 		springLayout.putConstraint(SpringLayout.EAST, date1, -21, SpringLayout.EAST, date2);
 		header.add(date1);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane.setBounds(10, 102, 530, 434);
+		contentPane.add(scrollPane);
 
 		JPanel panel = new JPanel();
-		panel.setBounds(10, 102, 530, 342);
-		contentPane.add(panel);
+		scrollPane.setViewportView(panel);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
 		JLabel lblNewLabel = new JLabel("Full description");
@@ -135,10 +142,16 @@ public class TripInfoFrame extends JFrame {
 		panel.add(lblFullDescription);
 		panel.add(Box.createRigidArea(space));
 
+		
 		JLabel lblNewLabel_2 = new JLabel("Reviews");
 		panel.add(lblNewLabel_2);
 		lblNewLabel_2.setFont(sectionFont);
 		panel.add(Box.createRigidArea(space));
+		
+		//System.out.println("here is the list of reviews:");
+		//for (Review review : reviews) {
+		//	System.out.println(review);
+		//}
 
 
 		//Uncomment when Reviews has been added in constructor.
@@ -156,28 +169,32 @@ public class TripInfoFrame extends JFrame {
 		lbl.setFont(new Font("Arial", Font.BOLD, 16));
 		panel.add(lbl);
 		panel.add(Box.createRigidArea(space));
-
-
 		Guide guide = trip.getGuide();
-		JLabel lblGuide = new JLabel("Your guide: "+guide.getName());
+		JLabel lblGuide = new JLabel("Your guide: " + guide.getName());
 		lblGuide.setFont(new Font("Arial", Font.BOLD, 16));
 		panel.add(lblGuide);
 		panel.add(Box.createRigidArea(space));
-
-		JLabel guideDesc = new JLabel(guide.getDescription());
-		panel.add(guideDesc);
-		panel.add(Box.createRigidArea(space));
 		
-		JButton btnAddToCart = new JButton("Add to cart");
-		btnAddToCart.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				bookingController.addToCartClicked(trip);
-			}
-		});
-		panel.add(btnAddToCart);
-		springLayout.putConstraint(SpringLayout.NORTH, btnAddToCart, -4, SpringLayout.NORTH, date2);
-		springLayout.putConstraint(SpringLayout.EAST, btnAddToCart, -5, SpringLayout.WEST, lblPrice);
+				JLabel guideDesc = new JLabel(guide.getDescription());
+				panel.add(guideDesc);
+				panel.add(Box.createRigidArea(space));
+				
+				JButton btnAddToCart = new JButton("Add to cart");
+				btnAddToCart.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mousePressed(MouseEvent e) {
+						bookingController.addToCartClicked(trip);
+					}
+				});
+				panel.add(btnAddToCart);
+				springLayout.putConstraint(SpringLayout.NORTH, btnAddToCart, -4, SpringLayout.NORTH, date2);
+				springLayout.putConstraint(SpringLayout.EAST, btnAddToCart, -5, SpringLayout.WEST, lblPrice);
+		
+		for (Review review : reviews) {
+			JLabel lblReviewDescription = new JLabel("<html>"+ "Review from: " + review.getAuthor() + "<br></br>" + "Stars: " + review.getStars() + "<br></br>" + review.getText() + "</html>");
+			panel.add(lblReviewDescription);
+			panel.add(Box.createRigidArea(space));
+		}
 		
 		/*
 		btnSearch = new JButton("Search");

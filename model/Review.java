@@ -14,6 +14,9 @@ public class Review {
 		
 	}
 
+	public String getAuthor() {
+		return author;
+	}
 	public String getText() {
 		return text;
 	}
@@ -25,5 +28,11 @@ public class Review {
 	}
 	public void setStars(int stars) {
 		this.stars = stars;
+	}
+
+
+	@Override
+	public String toString(){
+		return "Review: "+ this.text + "\n    Stars: " + this.stars;
 	}
 }

@@ -8,6 +8,9 @@ import javax.swing.border.EmptyBorder;
 
 import controller.BookingController;
 import controller.TripController;
+import model.Review;
+import model.Trip;
+
 import model.Trip;
 
 import java.awt.Color;
@@ -123,7 +126,7 @@ public class MainFrame extends JFrame {
 		contentPane.add(viewTripsPanel);
 		
 		cartLabel = new JLabel("Trips in cart: 0");
-		cartLabel.setBounds(747, 549, 136, 14);
+		cartLabel.setBounds(757, 548, 136, 14);
 		contentPane.add(cartLabel);
 
 		
@@ -143,6 +146,12 @@ public class MainFrame extends JFrame {
 		//because renderTrips can only run after Constructor of viewTripsPanel has been completed.
 		//To show trips based on the default criteria:
 		tripController.searchClicked();
+	}
+	
+	public void spawnTripInfoFrame(Trip trip, ArrayList<Review> reviews) {
+		TripInfoFrame frame = new TripInfoFrame(trip, reviews);
+		frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
 	}
 
 	public ViewTripsPanel getViewTripsPanel() {

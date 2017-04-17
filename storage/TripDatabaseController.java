@@ -112,7 +112,7 @@ public class TripDatabaseController {
 		try{
 			connect();
 			stmt = conn.prepareStatement(sql);
-			stmt.setString(0, name);
+			stmt.setString(1, name);
 			rs = stmt.executeQuery(); 
 			while(rs.next())
 			{

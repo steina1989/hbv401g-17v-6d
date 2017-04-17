@@ -33,11 +33,14 @@ import javax.swing.JTextArea;
 
 public class TripItem extends JPanel {
 	
+	TripController tripController;
 	BookingController bookingController;
+	
 	Color defaultColor;
 	Dimension preferredSize = new Dimension(560,100);
 	
-	public TripItem(Trip trip, BookingController bookingController) {
+	public TripItem(Trip trip, TripController tripController, BookingController bookingController) {
+		this.tripController = tripController;
 		this.bookingController = bookingController;
 		
 		setBorder(null);
@@ -85,9 +88,10 @@ public class TripItem extends JPanel {
 		btnSeeMore.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				TripInfoFrame frame = new TripInfoFrame(trip, bookingController);
-				frame.setLocationRelativeTo(null);
-				frame.setVisible(true);
+				tripController.tripSeeMoreClicked(trip);
+				//TripInfoFrame frame = new TripInfoFrame(trip, tripController, bookingController);
+				//frame.setLocationRelativeTo(null);
+				//frame.setVisible(true);
 			}
 		});
 		springLayout.putConstraint(SpringLayout.SOUTH, btnSeeMore, -10, SpringLayout.SOUTH, this);

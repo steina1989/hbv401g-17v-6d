@@ -51,7 +51,7 @@ public class ViewTripsPanel extends JPanel {
 		this.bookingController = bookingController;
 		setLayout(null);
 		
-		listOfTripsPanel = new ListOfTripsPanel(this.bookingController);
+		listOfTripsPanel = new ListOfTripsPanel(this.tripController, this.bookingController);
 		
 		filterPanel = new FilterPanel();
 		filterPanel.setBounds(10, 40, 246, 363);
@@ -149,7 +149,7 @@ public class ViewTripsPanel extends JPanel {
 	{
 		//Reset the ListOfTripspanel (else old trips will stay there)
 		listOfTripsPanel.clearTrips();
-		listOfTripsPanel.populateList(tripController.getListOfTrips());
+		listOfTripsPanel.populateList(tripsToRender);
 		//scrollPane.setViewportView(listOfTripsPanel);
 	}
 
