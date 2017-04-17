@@ -48,11 +48,7 @@ public class TripController {
 		renderTrips();
 	}
 	
-	public void addToCartClicked(Trip trip) {
-		System.out.println("Adding trip to cart: " + trip);
-		this.cart.add(trip);
-		renderTripsInCart();
-	}
+
 	
 	private void searchByFilterPanelCriteria() {
 		ViewTripsPanel viewTripsPanel = mainFrame.getViewTripsPanel();
@@ -85,19 +81,8 @@ public class TripController {
     this.mainFrame.getViewTripsPanel().renderTrips(listOfTrips);
 	}
 	
-	
-	private void renderTripsInCart() {
-		this.mainFrame.setCartLabelText(this.cart.size());
-		printTripsInCart();
-	}
-	
-	private void printTripsInCart() {
-		System.out.println("Trips currently in cart:");
-		for (Trip trip : cart) {
-			System.out.println("    " + trip);
-		}
-	}
 
+	
 	
 	}
 	

@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 import javax.swing.border.EmptyBorder;
 
+import controller.BookingController;
 import controller.TripController;
 import model.Guide;
 import model.Review;
@@ -27,10 +28,10 @@ import javax.swing.JButton;
 
 public class TripInfoFrame extends JFrame {
 
-	private TripController tripController;
 	private Trip trip;
 	private JPanel contentPane;
 	private ArrayList<Review> reviews;
+	private BookingController bookingController;
 
 	/**
 	 * Launch the application.
@@ -40,9 +41,9 @@ public class TripInfoFrame extends JFrame {
 	/**
 	 * Create the frame.g
 	 */
-	public TripInfoFrame(Trip trip, TripController tripController) {
+	public TripInfoFrame(Trip trip, BookingController bookingController) {
 		
-		this.tripController = tripController;
+		this.bookingController = bookingController;
 		this.trip = trip;
 
 
@@ -171,7 +172,7 @@ public class TripInfoFrame extends JFrame {
 		btnAddToCart.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				tripController.addToCartClicked(trip);
+				bookingController.addToCartClicked(trip);
 			}
 		});
 		panel.add(btnAddToCart);
@@ -189,8 +190,6 @@ public class TripInfoFrame extends JFrame {
 		btnSearch.setBounds(61, 414, 89, 23);
 		add(btnSearch);
 		*/
-
-
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);	
 		setBounds(100, 100, 566, 585);
 
