@@ -17,14 +17,16 @@ import model.TripSearchCriteria;
 
 public class TripController {
 	
-	MainFrame mainFrame;
-	TripSearchEngine tripSearchEngine;
-	ArrayList<Trip> listOfTrips;
+	private MainFrame mainFrame;
+	private TripSearchEngine tripSearchEngine;
+	private ArrayList<Trip> listOfTrips;
+	private ArrayList<Trip> cart;
 	
 	
 	public TripController(MainFrame mf){
-		mainFrame = mf;
-		tripSearchEngine = new TripSearchEngine();
+		this.mainFrame = mf;
+		this.tripSearchEngine = new TripSearchEngine();
+		this.cart = new ArrayList<Trip>();
 	}
 		
 	
@@ -38,6 +40,7 @@ public class TripController {
 		searchByFilterPanelCriteria();
 		applySortingByRadioButtons();
 		renderTrips();
+		printTripsInCart();
 	}
 	
 	public void sortClicked()
@@ -45,36 +48,11 @@ public class TripController {
 		applySortingByRadioButtons();
 		renderTrips();
 	}
-		/*
-		ArrayList<JRadioButton> radioAttributes = mainFrame.getViewTripsPanel().getSortingAttributeRadioButtons();
-		ArrayList<JRadioButton> radioSortDirection = mainFrame.getViewTripsPanel().getSortingDirectionRadioButtons();
-		String attribute = "Price";
-		String sortDirection = "Ascending";
-		for (JRadioButton radioButton : radioAttributes) {
-			if (radioButton.isSelected()) {
-				attribute = radioButton.getText();
-			}
-		}
-		for (JRadioButton radioButton : radioSortDirection) {
-			if (radioButton.isSelected()) {
-				sortDirection = radioButton.getText();
-			}
-		}
-		TripSearchEngine.Attribute attributeToSortBy = TripSearchEngine.Attribute.PRICE;
-		Boolean ascending = true;
-		if (Objects.equals(attribute, "Price")) attributeToSortBy = TripSearchEngine.Attribute.PRICE;
-		else if (Objects.equals(attribute, "Date")) attributeToSortBy = TripSearchEngine.Attribute.DATE;
-		if (Objects.equals(sortDirection, "Ascending")) ascending = true;
-		else if (Objects.equals(sortDirection, "Descending")) ascending = false;
-		this.listOfTrips = tripSearchEngine.sortBy(attributeToSortBy, this.listOfTrips, true);
-    this.mainFrame.getViewTripsPanel().renderTrips(listOfTrips);
-	}
 	
-	//Reviews need to be fetched separately when a user selects a trip to examine it in detail (in TripInfoFrame)
-	public ArrayList<Review> tripFromListClicked(Trip trip){
-		return tripSearchEngine.findReviews(trip);
+	public void addToCartClicked(Trip trip) {
+		System.out.println("Adding trip to cart: " + trip);
+		this.cart.add(trip);
 	}
-	*/
 	
 	private void searchByFilterPanelCriteria() {
 		ViewTripsPanel viewTripsPanel = mainFrame.getViewTripsPanel();
@@ -105,6 +83,13 @@ public class TripController {
 	
 	private void renderTrips() {
     this.mainFrame.getViewTripsPanel().renderTrips(listOfTrips);
+	}
+	
+	private void printTripsInCart() {
+		System.out.println("Trips currently in cart:");
+		for (Trip trip : cart) {
+			System.out.println("    " + trip);
+		}
 	}
 
 	

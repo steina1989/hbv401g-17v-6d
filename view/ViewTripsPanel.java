@@ -47,7 +47,7 @@ public class ViewTripsPanel extends JPanel {
 		this.tripController = tripctrl;
 		setLayout(null);
 		
-		listOfTripsPanel = new ListOfTripsPanel();
+		listOfTripsPanel = new ListOfTripsPanel(this.tripController);
 		
 		filterPanel = new FilterPanel();
 		filterPanel.setBounds(10, 40, 246, 363);

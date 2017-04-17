@@ -1,6 +1,8 @@
 package view;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.text.SimpleDateFormat;
@@ -15,6 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 import javax.swing.border.EmptyBorder;
 
+import controller.TripController;
 import model.Guide;
 import model.Review;
 import model.Trip;
@@ -24,6 +27,8 @@ import javax.swing.JButton;
 
 public class TripInfoFrame extends JFrame {
 
+	private TripController tripController;
+	private Trip trip;
 	private JPanel contentPane;
 	private ArrayList<Review> reviews;
 
@@ -35,7 +40,10 @@ public class TripInfoFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TripInfoFrame(Trip trip) {
+	public TripInfoFrame(Trip trip, TripController tripController) {
+		
+		this.tripController = tripController;
+		this.trip = trip;
 
 
 		SimpleDateFormat df = new SimpleDateFormat("EEE, d MMM yyyy HH:mm");
@@ -160,9 +168,27 @@ public class TripInfoFrame extends JFrame {
 		panel.add(Box.createRigidArea(space));
 		
 		JButton btnAddToCart = new JButton("Add to cart");
+		btnAddToCart.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				tripController.addToCartClicked(trip);
+			}
+		});
 		panel.add(btnAddToCart);
 		springLayout.putConstraint(SpringLayout.NORTH, btnAddToCart, -4, SpringLayout.NORTH, date2);
 		springLayout.putConstraint(SpringLayout.EAST, btnAddToCart, -5, SpringLayout.WEST, lblPrice);
+		
+		/*
+		btnSearch = new JButton("Search");
+		btnSearch.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				tripController.searchClicked();
+			}
+		});
+		btnSearch.setBounds(61, 414, 89, 23);
+		add(btnSearch);
+		*/
 
 
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);	

@@ -3,6 +3,8 @@ package view;
 import model.Trip;
 import javax.swing.JPanel;
 
+import controller.TripController;
+
 import java.awt.Dimension;
 import java.util.ArrayList;
 import javax.swing.BoxLayout;
@@ -13,27 +15,28 @@ import javax.swing.BoxLayout;
 
 public class ListOfTripsPanel extends JPanel {
 	
+	private TripController tripController;
 	
 
 	/**
 	 * Create the panel.
 	 */
-	public ListOfTripsPanel() {
-
+	public ListOfTripsPanel(TripController tripController) {
+		this.tripController = tripController;
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 	}
 	
 	public void populateList(ArrayList<Trip> trips)
 	{
 
-		System.out.println("Latest search:");
+		//System.out.println("Latest search:");
 		for (Trip trip : trips)
 		{
-			TripItem tripItem = new TripItem(trip);
+			TripItem tripItem = new TripItem(trip, this.tripController);
 			this.add(tripItem);
-			System.out.println(trip);
+			//System.out.println(trip);
 		}
-		System.out.println();
+		//System.out.println();
 
 	}
 	

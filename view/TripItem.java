@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.SpringLayout;
+
+import controller.TripController;
 import model.Trip;
 import java.awt.Font;
 import java.awt.Image;
@@ -30,11 +32,13 @@ import javax.swing.JTextArea;
 
 public class TripItem extends JPanel {
 	
-	
+	TripController tripController;
 	Color defaultColor;
 	Dimension preferredSize = new Dimension(560,100);
 	
-	public TripItem(Trip trip) {
+	public TripItem(Trip trip, TripController tripController) {
+		this.tripController = tripController;
+		
 		setBorder(null);
 		setPreferredSize(preferredSize); 
 		addMouseListener(new MouseAdapter() {
@@ -80,7 +84,7 @@ public class TripItem extends JPanel {
 		btnSeeMore.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				TripInfoFrame frame = new TripInfoFrame(trip);
+				TripInfoFrame frame = new TripInfoFrame(trip, tripController);
 				frame.setLocationRelativeTo(null);
 				frame.setVisible(true);
 			}
