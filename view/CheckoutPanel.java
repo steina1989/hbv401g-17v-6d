@@ -66,6 +66,7 @@ public class CheckoutPanel extends JPanel {
 	}
 	
 	private void populateJList(ArrayList<Trip> trips){
+		listModel.clear();
 		for (Trip trip : trips){
 			listModel.addElement(trip.getName() + ", ID: " + trip.getId());
 		}
