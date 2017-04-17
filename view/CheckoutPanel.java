@@ -44,7 +44,7 @@ public class CheckoutPanel extends JPanel {
 		jListorder.setLayoutOrientation(JList.HORIZONTAL_WRAP);
 		jListorder.setVisibleRowCount(-1);
 		
-		addBookingButton = new JButton("Add booking");
+		addBookingButton = new JButton("Confirm booking");
 		addBookingButton.setBounds(253, 226, 174, 23);
 		add(addBookingButton);
 		
