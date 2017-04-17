@@ -89,9 +89,6 @@ public class TripItem extends JPanel {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				tripController.tripSeeMoreClicked(trip);
-				//TripInfoFrame frame = new TripInfoFrame(trip, tripController, bookingController);
-				//frame.setLocationRelativeTo(null);
-				//frame.setVisible(true);
 			}
 		});
 		springLayout.putConstraint(SpringLayout.SOUTH, btnSeeMore, -10, SpringLayout.SOUTH, this);
