@@ -1,6 +1,7 @@
 package view;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
@@ -31,7 +32,6 @@ import javax.swing.ScrollPaneConstants;
 public class TripInfoFrame extends JFrame {
 
 	private final BookingController bookingController;
-	
 	private final Trip trip;
 	private JPanel contentPane;
 	private ArrayList<Review> reviews;
@@ -121,7 +121,7 @@ public class TripInfoFrame extends JFrame {
 		springLayout.putConstraint(SpringLayout.SOUTH, date1, 0, SpringLayout.SOUTH, categoryPicture);
 		springLayout.putConstraint(SpringLayout.EAST, date1, -21, SpringLayout.EAST, date2);
 		header.add(date1);
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setBounds(10, 102, 530, 434);
@@ -129,7 +129,7 @@ public class TripInfoFrame extends JFrame {
 
 		JPanel panel = new JPanel();
 		scrollPane.setViewportView(panel);
-		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
 
 		JLabel lblNewLabel = new JLabel("Full description");
 		lblNewLabel.setFont(sectionFont);
@@ -140,27 +140,6 @@ public class TripInfoFrame extends JFrame {
 		panel.add(lblFullDescription);
 		panel.add(Box.createRigidArea(space));
 
-		
-		JLabel lblNewLabel_2 = new JLabel("Reviews");
-		panel.add(lblNewLabel_2);
-		lblNewLabel_2.setFont(sectionFont);
-		panel.add(Box.createRigidArea(space));
-		
-		//System.out.println("here is the list of reviews:");
-		//for (Review review : reviews) {
-		//	System.out.println(review);
-		//}
-
-
-		//Uncomment when Reviews has been added in constructor.
-		//		JLabel lblText = new JLabel();
-		//		StringBuffer bufferedString = new StringBuffer();
-		//		for (Review review : reviews)
-		//		{
-		//			bufferedString.append(review.getText());
-		//			bufferedString.append("\n\n");
-		//		}
-		//		panel.add(lblText);
 
 
 		JLabel lbl = new JLabel("Seats left: "+trip.getSeatsLeft());
@@ -172,11 +151,11 @@ public class TripInfoFrame extends JFrame {
 		lblGuide.setFont(new Font("Arial", Font.BOLD, 16));
 		panel.add(lblGuide);
 		panel.add(Box.createRigidArea(space));
-		
+
 		JLabel guideDesc = new JLabel(guide.getDescription());
 		panel.add(guideDesc);
 		panel.add(Box.createRigidArea(space));
-		
+
 		JButton btnAddToCart = new JButton("Add to cart");
 		btnAddToCart.addMouseListener(new MouseAdapter() {
 			@Override
@@ -189,26 +168,26 @@ public class TripInfoFrame extends JFrame {
 		panel.add(btnAddToCart);
 		springLayout.putConstraint(SpringLayout.NORTH, btnAddToCart, -4, SpringLayout.NORTH, date2);
 		springLayout.putConstraint(SpringLayout.EAST, btnAddToCart, -5, SpringLayout.WEST, lblPrice);
-		
-		/*
-		for (Review review : reviews) {
-			JLabel lblReviewDescription = new JLabel("<html>"+ "Review from: " + review.getAuthor() + "<br></br>" + "Stars: " + review.getStars() + "<br></br>" + review.getText() + "</html>");
-			panel.add(lblReviewDescription);
-			panel.add(Box.createRigidArea(space));
+		Component rigidArea = Box.createRigidArea(space);
+		panel.add(rigidArea);
+
+
+		JLabel lblNewLabel_2 = new JLabel("Reviews");
+		panel.add(lblNewLabel_2);
+		lblNewLabel_2.setFont(sectionFont);
+
+
+		StringBuffer stringbuffer = new StringBuffer("<html>");
+		for (Review review : reviews){
+			stringbuffer.append("<b>"+review.getReviewHeader()+"</b><br>");
+			stringbuffer.append(review.getReviewText()+"<br>");
 		}
-		*/
+		stringbuffer.append("</html>");
 		
-		/*
-		btnSearch = new JButton("Search");
-		btnSearch.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				tripController.searchClicked();
-			}
-		});
-		btnSearch.setBounds(61, 414, 89, 23);
-		add(btnSearch);
-		*/
+		JLabel formattedReviews = new JLabel(stringbuffer.toString());
+		panel.add(formattedReviews);
+
+
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);	
 		setBounds(100, 100, 566, 585);
 

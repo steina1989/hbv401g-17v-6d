@@ -23,4 +23,32 @@ public class Review {
 		this.reviewText = reviewText;
 		this.stars = stars;
 	}
+
+	public String getReviewHeader() {
+		return reviewHeader;
+	}
+
+	public void setReviewHeader(String reviewHeader) {
+		this.reviewHeader = reviewHeader;
+	}
+
+	public String getReviewText() {
+		return reviewText;
+	}
+
+	public void setReviewText(String reviewText) {
+		this.reviewText = reviewText;
+	}
+
+	public int getStars() {
+		return stars;
+	}
+
+	public void setStars(int stars) {
+		this.stars = stars;
+	}
+	
+	
+	
+	
 }
