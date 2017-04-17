@@ -53,7 +53,7 @@ public class BookingDatabaseController {
 			int highestBookingId = rs.getInt("bookingId");
 			System.out.println(highestBookingId);
 			
-			
+			//BAADSD
 			sql = "INSERT INTO Bookings"
 					+ " VALUES (?,?,?,?,?,?)";
 			stmt = conn.prepareStatement(sql);
