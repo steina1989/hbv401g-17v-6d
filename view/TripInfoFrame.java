@@ -27,6 +27,8 @@ import java.awt.Component;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.JTextArea;
+import javax.swing.JTextPane;
 
 
 public class TripInfoFrame extends JFrame {
@@ -52,7 +54,8 @@ public class TripInfoFrame extends JFrame {
 		SimpleDateFormat df = new SimpleDateFormat("EEE, d MMM yyyy HH:mm");
 		Dimension space = new Dimension(0,5); //Space between components for 
 		Font sectionFont = new Font("Arial", Font.BOLD, 16);
-
+		Guide guide = trip.getGuide();
+		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -122,31 +125,34 @@ public class TripInfoFrame extends JFrame {
 		springLayout.putConstraint(SpringLayout.EAST, date1, -21, SpringLayout.EAST, date2);
 		header.add(date1);
 
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane.setBounds(10, 102, 530, 434);
-		contentPane.add(scrollPane);
+		StringBuffer stringbuffer = new StringBuffer("<html>");
+		for (Review review : reviews){
+			stringbuffer.append("<b>"+review.getReviewHeader()+"</b><br>");
+			stringbuffer.append(review.getReviewText()+"<br>");
+		}
+		stringbuffer.append("</html>");
 
 		JPanel panel = new JPanel();
-		scrollPane.setViewportView(panel);
-		panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
+		panel.setBounds(10, 115, 518, 317);
+		contentPane.add(panel);
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
 		JLabel lblNewLabel = new JLabel("Full description");
 		lblNewLabel.setFont(sectionFont);
 		panel.add(lblNewLabel);
 		panel.add(Box.createRigidArea(space));
 
-		JLabel lblFullDescription = new JLabel("<html>"+trip.getDescription()+"</html>");
+		JLabel lblFullDescription = new JLabel();
+		lblFullDescription.setText("<html>"+trip.getDescription()+"</html>");
+		lblFullDescription.setFocusable(false);
+		lblFullDescription.setOpaque(false);
 		panel.add(lblFullDescription);
 		panel.add(Box.createRigidArea(space));
-
-
 
 		JLabel lbl = new JLabel("Seats left: "+trip.getSeatsLeft());
 		lbl.setFont(new Font("Arial", Font.BOLD, 16));
 		panel.add(lbl);
 		panel.add(Box.createRigidArea(space));
-		Guide guide = trip.getGuide();
 		JLabel lblGuide = new JLabel("Your guide: " + guide.getName());
 		lblGuide.setFont(new Font("Arial", Font.BOLD, 16));
 		panel.add(lblGuide);
@@ -176,16 +182,10 @@ public class TripInfoFrame extends JFrame {
 		panel.add(lblNewLabel_2);
 		lblNewLabel_2.setFont(sectionFont);
 
-
-		StringBuffer stringbuffer = new StringBuffer("<html>");
-		for (Review review : reviews){
-			stringbuffer.append("<b>"+review.getReviewHeader()+"</b><br>");
-			stringbuffer.append(review.getReviewText()+"<br>");
-		}
-		stringbuffer.append("</html>");
-		
 		JLabel formattedReviews = new JLabel(stringbuffer.toString());
 		panel.add(formattedReviews);
+
+
 
 
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);	
