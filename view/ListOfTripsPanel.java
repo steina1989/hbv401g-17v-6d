@@ -37,7 +37,6 @@ public class ListOfTripsPanel extends JPanel {
 			//System.out.println(trip);
 		}
 		//System.out.println();
-
 	}
 	
 	public void clearTrips() {

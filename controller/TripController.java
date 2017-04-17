@@ -40,7 +40,6 @@ public class TripController {
 		searchByFilterPanelCriteria();
 		applySortingByRadioButtons();
 		renderTrips();
-		printTripsInCart();
 	}
 	
 	public void sortClicked()
@@ -89,6 +88,7 @@ public class TripController {
 	
 	private void renderTripsInCart() {
 		this.mainFrame.setCartLabelText(this.cart.size());
+		printTripsInCart();
 	}
 	
 	private void printTripsInCart() {
