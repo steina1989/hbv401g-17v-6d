@@ -32,7 +32,7 @@ public class MainFrame extends JFrame {
 	private JLabel cartLabel;
 	// This is the JPanel that contains everything in MainFrame
 	private JPanel contentPane;
-	private TripController tripcontroller;
+	private TripController tripController;
 	private BookingController bookingController;
 	private ViewTripsPanel viewTripsPanel;
 	private CheckoutPanel checkoutPanel;
@@ -65,7 +65,7 @@ public class MainFrame extends JFrame {
 	 */
 	public MainFrame() {
 		
-		this.tripcontroller = new TripController(this);
+		this.tripController = new TripController(this);
 		this.bookingController = new BookingController(this);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -114,7 +114,7 @@ public class MainFrame extends JFrame {
 		});
 		enterCheckoutPanelButton.setBounds(757, 564, 136, 23);
 		contentPane.add(enterCheckoutPanelButton);
-		viewTripsPanel = new ViewTripsPanel(tripcontroller);
+		viewTripsPanel = new ViewTripsPanel(tripController, bookingController);
 		viewTripsPanel.setBounds(10, 23, 1019, 454);
 		contentPane.add(viewTripsPanel);
 		
@@ -142,7 +142,7 @@ public class MainFrame extends JFrame {
 		//This needs to be here (as opposed to in the constructor of the viewTripsPanel itself), 
 		//because renderTrips can only run after Constructor of viewTripsPanel has been completed.
 		//To show trips based on the default criteria:
-		tripcontroller.searchClicked();
+		tripController.searchClicked();
 	}
 
 	public ViewTripsPanel getViewTripsPanel() {

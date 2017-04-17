@@ -4,6 +4,8 @@ import javax.swing.JPanel;
 import javax.swing.ButtonGroup;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
+
+import controller.BookingController;
 import controller.TripController;
 import model.Trip;
 
@@ -31,6 +33,7 @@ public class ViewTripsPanel extends JPanel {
 
 	private FilterPanel filterPanel;
 	private ListOfTripsPanel listOfTripsPanel;
+	private BookingController bookingController;
 	private TripController tripController;
 	private JButton btnSearch;
 	private JScrollPane scrollPane;
@@ -43,11 +46,12 @@ public class ViewTripsPanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public ViewTripsPanel(TripController tripctrl) {
-		this.tripController = tripctrl;
+	public ViewTripsPanel(TripController tripController, BookingController bookingController) {
+		this.tripController = tripController;
+		this.bookingController = bookingController;
 		setLayout(null);
 		
-		listOfTripsPanel = new ListOfTripsPanel(this.tripController);
+		listOfTripsPanel = new ListOfTripsPanel(this.bookingController);
 		
 		filterPanel = new FilterPanel();
 		filterPanel.setBounds(10, 40, 246, 363);
