@@ -102,7 +102,7 @@ public class MainFrame extends JFrame {
 		contentPane.add(viewBookingsPanel);
 		
 		checkoutPanel = new CheckoutPanel(this.bookingController);
-		checkoutPanel.setBackground(Color.MAGENTA);
+		checkoutPanel.setBackground(Color.LIGHT_GRAY);
 		checkoutPanel.setBounds(10, 23, 1019, 454);
 		checkoutPanel.setVisible(false);
 		contentPane.add(checkoutPanel);
