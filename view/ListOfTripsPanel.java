@@ -29,8 +29,10 @@ public class ListOfTripsPanel extends JPanel {
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 	}
 	
-	public void populateList(ArrayList<Trip> trips)
+	public void setListOfTrips(ArrayList<Trip> trips)
 	{
+		this.clearTrips();
+		
 		//System.out.println("Latest search:");
 		for (Trip trip : trips)
 		{
@@ -41,7 +43,7 @@ public class ListOfTripsPanel extends JPanel {
 		//System.out.println();
 	}
 	
-	public void clearTrips() {
+	private void clearTrips() {
 		this.removeAll();
 		this.revalidate();
 	}

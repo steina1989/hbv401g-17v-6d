@@ -33,8 +33,6 @@ public class BookingController {
 
 	public void enterCheckoutPanelClicked() {
 		mainFrame.openCheckOutPanel(this.cart);
-		
-		
 	}
 
 

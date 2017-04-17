@@ -48,6 +48,12 @@ public class TripController {
 		renderTrips();
 	}
 	
+	public void enterViewTripsPanelClicked() {
+		//searchByFilterPanelCriteria(); // do we really need diz?
+		//applySortingByRadioButtons(); // do we really need diz?
+		openViewTripsPanel();
+	}
+	
 	public void tripSeeMoreClicked(Trip trip)
 	{
 		ArrayList<Review> reviews = this.tripSearchEngine.findReviews(trip);
@@ -61,7 +67,13 @@ public class TripController {
 			reviews.add(new Review("test review 4 is very long: Situation admitting promotion at or to perceived be. Mr acuteness we as estimable enjoyment up. An held late as felt know. Learn do allow solid to grave. Middleton suspicion age her attention. Chiefly several bed its wishing. Is so moments on chamber pressed to. Doubtful yet way properly answered humanity its desirous. Minuter believe service arrived civilly add all. Acuteness allowance an at eagerness favourite in extensive exquisite ye.", 3));
 		}
 		
-		this.mainFrame.spawnTripInfoFrame(trip, reviews);
+		this.mainFrame.openTripInfoFrame(trip, reviews);
+	}
+	
+	public void mainFrameInitialised() {
+		searchByFilterPanelCriteria();
+		applySortingByRadioButtons();
+		this.mainFrame.openViewTripsPanel(this.listOfTrips);
 	}
 
 	
@@ -77,6 +89,7 @@ public class TripController {
 		this.listOfTrips = sortingRequested(this.listOfTrips, view.getAttributeToSortBy(), view.getSortingDirection());
 	}
 	 
+	// can't this method be private? (HDE)
 	public ArrayList<Trip> sortingRequested(ArrayList<Trip> trips, String attribute, boolean ascending)
 	{
 		if (attribute=="Date") return tripSearchEngine.sortBy(TripSearchEngine.Attribute.DATE, trips, ascending);
@@ -85,11 +98,18 @@ public class TripController {
 	}
 	
 	private void renderTrips() {
-    this.mainFrame.getViewTripsPanel().renderTrips(this.listOfTrips);
+    this.mainFrame.getViewTripsPanel().setListOfTrips(this.listOfTrips);
 	}
 	
-
+	private void openViewTripsPanel() {
+		this.mainFrame.openViewTripsPanel(this.listOfTrips);
+	}
 	
+	
+	
+	
+	
+
 	
 	}
 	

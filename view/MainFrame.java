@@ -112,11 +112,7 @@ public class MainFrame extends JFrame {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				System.out.println("Opening checkout panel");
-				viewTripsPanel.setVisible(false);
-				checkoutPanel.setVisible(true);
-				
-				enterCheckoutPanelButton.setEnabled(false);
-				enterViewTripsPanelButton.setEnabled(true);
+				bookingController.enterCheckoutPanelClicked();
 			}
 		});
 		enterCheckoutPanelButton.setBounds(757, 564, 136, 23);
@@ -138,17 +134,15 @@ public class MainFrame extends JFrame {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				System.out.println("Opening View Trips panel");
-
+				tripController.enterViewTripsPanelClicked();
 			}
 		});
 		
-		//This needs to be here (as opposed to in the constructor of the viewTripsPanel itself), 
-		//because renderTrips can only run after Constructor of viewTripsPanel has been completed.
-		//To show trips based on the default criteria:
-		tripController.searchClicked();
+		
+		tripController.mainFrameInitialised();
 	}
 	
-	public void spawnTripInfoFrame(Trip trip, ArrayList<Review> reviews) {
+	public void openTripInfoFrame(Trip trip, ArrayList<Review> reviews) {
 		TripInfoFrame frame = new TripInfoFrame(trip, reviews);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
@@ -158,17 +152,22 @@ public class MainFrame extends JFrame {
 		return viewTripsPanel;
 	}
 	
-
+	
 	public void openCheckOutPanel(ArrayList<Trip> tripsFromCart){
-		
 		checkoutPanel.setTrips(tripsFromCart);
-		checkoutPanel.setVisible(true);
 		viewTripsPanel.setVisible(false);
-		enterViewTripsPanelButton.setEnabled(false);
-		enterCheckoutPanelButton.setEnabled(true);
-
+		checkoutPanel.setVisible(true);
+		enterCheckoutPanelButton.setEnabled(false);
+		enterViewTripsPanelButton.setEnabled(true);
 	}
 	
+	public void openViewTripsPanel(ArrayList<Trip> listOfTrips) {
+		viewTripsPanel.setListOfTrips(listOfTrips);
+		checkoutPanel.setVisible(false);
+		viewTripsPanel.setVisible(true);
+		enterViewTripsPanelButton.setEnabled(false);
+		enterCheckoutPanelButton.setEnabled(true);
+	}
 	
 	public void setCartLabelText(int numTripsInCart) {
 		this.cartLabel.setText("Trips in cart: " + numTripsInCart);

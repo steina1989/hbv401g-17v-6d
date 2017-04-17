@@ -145,11 +145,9 @@ public class ViewTripsPanel extends JPanel {
 		
 	}
 
-	public void renderTrips(ArrayList<Trip> tripsToRender)
+	public void setListOfTrips(ArrayList<Trip> trips)
 	{
-		//Reset the ListOfTripspanel (else old trips will stay there)
-		listOfTripsPanel.clearTrips();
-		listOfTripsPanel.populateList(tripsToRender);
+		listOfTripsPanel.setListOfTrips(trips);
 		//scrollPane.setViewportView(listOfTripsPanel);
 	}
 
