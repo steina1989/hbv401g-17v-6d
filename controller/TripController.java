@@ -37,21 +37,21 @@ public class TripController {
 	
 	public void searchClicked()
 	{
-		searchByFilterPanelCriteria();
-		applySortingByRadioButtons();
-		renderTrips();
+		this.searchByFilterPanelCriteria();
+		this.applySortingByRadioButtons();
+		this.renderTrips();
 	}
 	
 	public void sortClicked()
 	{
-		applySortingByRadioButtons();
-		renderTrips();
+		this.applySortingByRadioButtons();
+		this.renderTrips();
 	}
 	
 	public void enterViewTripsPanelClicked() {
 		//searchByFilterPanelCriteria(); // do we really need diz?
 		//applySortingByRadioButtons(); // do we really need diz?
-		openViewTripsPanel();
+		this.openViewTripsPanel();
 	}
 	
 	public void tripSeeMoreClicked(Trip trip)

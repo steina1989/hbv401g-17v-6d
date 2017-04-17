@@ -8,6 +8,8 @@ import java.awt.Color;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
@@ -18,9 +20,11 @@ import javax.swing.JList;
 public class CheckoutPanel extends JPanel {
 	
 	private BookingController bookingController;
+	private JButton cancelTripButton;
 	private JPanel bookingInfoPanel;
 	private JButton addBookingButton;
 	private JButton cancelBookingButton;
+	
 	private ArrayList<Trip> tripsInCart;
 	private DefaultListModel<String> listModel;
 	private JList tripsInCartJList;
@@ -43,6 +47,12 @@ public class CheckoutPanel extends JPanel {
 		
 		tripsInCartJList = new JList(listModel);
 		tripsInCartJList.setBounds(0, 0, 204, 249);
+		tripsInCartJList.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				bookingController.tripsInCartJListClicked();
+			}
+		});
 		bookingInfoPanel.add(tripsInCartJList);
 		
 		addBookingButton = new JButton("Confirm booking");
@@ -56,6 +66,19 @@ public class CheckoutPanel extends JPanel {
 		});
 		cancelBookingButton.setBounds(253, 252, 174, 23);
 		add(cancelBookingButton);
+		
+		cancelTripButton = new JButton("Cancel trip");
+		cancelTripButton.setBounds(253, 26, 174, 23);
+		cancelTripButton.setEnabled(false);
+		cancelTripButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (!((JButton)e.getSource()).isEnabled()) return; // abort if button is not enabled
+				System.out.println("Opening View Trips panel");
+				bookingController.cancelTripButtonClicked();
+			}
+		});
+		add(cancelTripButton);
 		
 	}
 	
@@ -75,5 +98,13 @@ public class CheckoutPanel extends JPanel {
 	
 	private void calculateTotalPrice(){
 		
+	}
+	
+	public JList getTripsInCartJList() {
+		return this.tripsInCartJList;
+	}
+	
+	public JButton getCancelTripButton() {
+		return this.cancelTripButton;
 	}
 }

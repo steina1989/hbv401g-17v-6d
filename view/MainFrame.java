@@ -111,6 +111,7 @@ public class MainFrame extends JFrame {
 		enterCheckoutPanelButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
+				if (!((JButton)e.getSource()).isEnabled()) return; // abort if button is not enabled
 				System.out.println("Opening checkout panel");
 				bookingController.enterCheckoutPanelClicked();
 			}
@@ -133,6 +134,7 @@ public class MainFrame extends JFrame {
 		enterViewTripsPanelButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
+				if (!((JButton)e.getSource()).isEnabled()) return; // abort if button is not enabled
 				System.out.println("Opening View Trips panel");
 				tripController.enterViewTripsPanelClicked();
 			}
@@ -149,9 +151,12 @@ public class MainFrame extends JFrame {
 	}
 
 	public ViewTripsPanel getViewTripsPanel() {
-		return viewTripsPanel;
+		return this.viewTripsPanel;
 	}
 	
+	public CheckoutPanel getCheckoutPanel() {
+		return this.checkoutPanel;
+	}
 	
 	public void openCheckOutPanel(ArrayList<Trip> tripsFromCart){
 		checkoutPanel.setTrips(tripsFromCart);

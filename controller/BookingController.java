@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import model.Trip;
 import storage.BookingDatabaseController;
 import storage.TripDatabaseController;
+import view.CheckoutPanel;
 import view.MainFrame;
 
 public class BookingController {
@@ -24,17 +25,26 @@ public class BookingController {
 		if (!tripExistsInCart(trip)) {
 			System.out.println("Adding trip to cart: " + trip);
 			this.cart.add(trip);
-			renderTripsInCart();
+			refreshTripsInCartLabel();
 		}
-	}
-
-	private void renderTripsInCart() 
-	{
-		this.mainFrame.setCartLabelText(this.cart.size());
 	}
 
 	public void enterCheckoutPanelClicked() {
 		mainFrame.openCheckOutPanel(this.cart);
+	}
+	
+	public void tripsInCartJListClicked() {
+		this.updateCancelTripButton();
+	}
+	
+	public void cancelTripButtonClicked() {
+		int selectedTripIndex = this.getSelectedTripIndex();
+		if (selectedTripIndex >= 0) {
+			this.cart.remove(selectedTripIndex);
+			refreshTripsInCartJList();
+			refreshTripsInCartLabel();
+			refreshCancelTripButton();
+		}
 	}
 
 	private boolean tripExistsInCart(Trip candidate) {
@@ -44,5 +54,32 @@ public class BookingController {
 			}
 		}
 		return false;
+	}
+	
+	private void updateCancelTripButton() {
+		int selectedTripIndex = this.getSelectedTripIndex();
+		this.refreshCancelTripButton();
+	}
+
+	private void refreshTripsInCartLabel() 
+	{
+		this.mainFrame.setCartLabelText(this.cart.size());
+	}
+	
+	private void refreshTripsInCartJList() {
+		this.mainFrame.getCheckoutPanel().setTrips(this.cart);
+	}
+	
+	private void refreshCancelTripButton() {
+		if (this.getSelectedTripIndex() >= 0) {
+			this.mainFrame.getCheckoutPanel().getCancelTripButton().setEnabled(true);
+		} else {
+			this.mainFrame.getCheckoutPanel().getCancelTripButton().setEnabled(false);
+		}
+	}
+	
+	private int getSelectedTripIndex() {
+		CheckoutPanel checkoutPanel = this.mainFrame.getCheckoutPanel();
+		return checkoutPanel.getTripsInCartJList().getSelectedIndex();
 	}
 }
