@@ -3,18 +3,20 @@ package controller;
 import java.util.ArrayList;
 
 import model.Trip;
+import storage.BookingDatabaseController;
+import storage.TripDatabaseController;
 import view.MainFrame;
 
 public class BookingController {
 
 	private MainFrame mainFrame;
 	private ArrayList<Trip> cart;
-	private BookingController bookingController;
+	private TripDatabaseController bookingDatabaseController;
 
 	public BookingController(MainFrame mf){
 		this.mainFrame = mf;
 		this.cart = new ArrayList<Trip>();
-		this.bookingController = bookingController;
+
 	}
 
 
