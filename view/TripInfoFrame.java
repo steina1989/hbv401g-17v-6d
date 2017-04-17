@@ -133,7 +133,7 @@ public class TripInfoFrame extends JFrame {
 		stringbuffer.append("</html>");
 
 		JPanel panel = new JPanel();
-		panel.setBounds(10, 115, 518, 317);
+		panel.setBounds(10, 102, 530, 357);
 		contentPane.add(panel);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
@@ -189,7 +189,7 @@ public class TripInfoFrame extends JFrame {
 
 
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);	
-		setBounds(100, 100, 566, 585);
+		setBounds(100, 100, 562, 509);
 
 	}
 }

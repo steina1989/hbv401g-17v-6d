@@ -1,5 +1,6 @@
 package storage;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -19,7 +20,8 @@ public class BookingDatabaseController {
 
 	private void connect() throws ClassNotFoundException, SQLException
 	{
-		DB_URL = "jdbc:sqlite::resource:resources\\TripDatabase.db";
+		File resourcesDirectory = new File("src/resources");
+		DB_URL = "jdbc:sqlite:" + resourcesDirectory.getAbsolutePath() + "\\TripDatabase.db";
 		Class.forName("org.sqlite.JDBC");
 		conn = DriverManager.getConnection(DB_URL);
 	}
@@ -51,9 +53,12 @@ public class BookingDatabaseController {
 			stmt = conn.prepareStatement(sql);
 			rs = stmt.executeQuery();
 			int highestBookingId = rs.getInt("bookingId");
-			System.out.println(highestBookingId);
+			rs.close();
+			stmt.close();
+			conn.close();
+			System.out.println("Biggest bookingID: "+ highestBookingId);
 			
-			//BAADSD
+			connect();
 			sql = "INSERT INTO Bookings"
 					+ " VALUES (?,?,?,?,?,?)";
 			stmt = conn.prepareStatement(sql);
@@ -63,11 +68,15 @@ public class BookingDatabaseController {
 			stmt.setString(4,booking.getNameOfBuyer());
 			stmt.setInt(5, booking.getPhoneOfBuyer());
 			stmt.setString(6, booking.getEmailOfBuyer());
-			stmt.executeUpdate();
+			System.out.println("Execute update skilar: "+stmt.executeUpdate());
 			
-			stmt = conn.prepareStatement("SELECT COUNT(*)AS Fjoldi FROM Bookings");
+			conn.close();
+			stmt.close();
+			rs.close();
+			connect();
+			stmt = conn.prepareStatement("SELECT COUNT(*) AS Fjoldi FROM Bookings");
 			rs = stmt.executeQuery();
-			System.out.println(rs.getInt("Fjoldi"));
+			System.out.println("Count(*) frá Bookings: "+rs.getInt("Fjoldi"));
 			
 
 		} catch (ClassNotFoundException e) {
