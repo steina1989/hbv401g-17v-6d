@@ -39,7 +39,7 @@ public class TripItem extends JPanel {
 	Color defaultColor;
 	Dimension preferredSize = new Dimension(560,100);
 	
-	public TripItem(Trip trip, TripController tripController, BookingController bookingController) {
+	public TripItem(final Trip trip, final TripController tripController, BookingController bookingController) {
 		this.tripController = tripController;
 		this.bookingController = bookingController;
 		
