@@ -3,15 +3,11 @@ package storage;
 import java.io.File;
 import java.net.URL;
 import java.sql.*;
-import java.util.Date;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
-import model.Guide;
-import model.Review;
-import model.Trip;
 import model.Booking;
 import model.BookingSearchCriteria;
 
@@ -50,8 +46,8 @@ private void setUserBookingsGSS(BookingSearchCriteria criteria) throws SQLExcept
 	//Dates
 	stmt.setInt(2, criteria.getTrip());
 	stmt.setInt(3, criteria.getNumberOfGuests());;
-	//Prices
-	stmt.setString(4,"%" + criteria.getBuyer()+ "%" );
+	//Pricesn
+	stmt.setString(4,"%" + criteria.getNameOfBuyer()+ "%" );
 	stmt.setInt(5, criteria.getPhoneOfBuyer());
 	//Category
 	stmt.setString(6, "%" +criteria.getEmailOfBuyer()+ "%");
@@ -99,10 +95,10 @@ public ArrayList<Booking> getUserBookingsCriteria(BookingSearchCriteria criteria
 			}
 			return Bookings;
 		}
-public void setUserBookingsCriteria(BookingSearchCriteria criteria) throws SQLException{
+public  void setUserBookingsCriteria(BookingSearchCriteria criteria) throws SQLException{
 
 	String setUserBookingsSQL = "INSERT INTO Bookings(BookingId,TripId,NumberOfSeats,NameOfBuyer,PhoneOfBuyer,EmailOfBuyer) VALUES ( " 
-			+ "? ," + "? ," + "? ," + "? ," + "? ," + "? ;";
+			+ "? ," + "? ," + "? ," + "? ," + "? ," + "?" ;
 			stmt = null;
 			try{
 				connect();
@@ -123,6 +119,7 @@ public void setUserBookingsCriteria(BookingSearchCriteria criteria) throws SQLEx
 				if(stmt != null) stmt.close();
 				if(conn != null) conn.close();
 			}
+		System.out.println();
 			
 		}
 
@@ -157,15 +154,17 @@ public static void main(String[] args) throws ClassNotFoundException, SQLExcepti
 {
 	BookingTest tdbd = new BookingTest();
 	BookingSearchCriteria tsc = new BookingSearchCriteria();
-	tsc.setBookingId(0);
-	tsc.setTrip(0);
-	tsc.setNumberOfGuests(0);
-	tsc.setBuyer("");
-	tsc.setPhoneOfBuyer(0);
-	tsc.setEmailOfBuyer("");
+	tsc.setBookingId(1);
+	tsc.setTrip(3);
+	tsc.setNumberOfGuests(2);
+	tsc.setNameOfBuyer("Nonni");
+	tsc.setPhoneOfBuyer(8676259);
+	tsc.setEmailOfBuyer("Nonni@nonni.is"); 
 
-	ArrayList<Booking> trips = tdbd.getUserBookingsCriteria(tsc);
+	//ArrayList<Booking> booked = tdbd.getUserBookingsCriteria(tsc);
+	//for (Booking bookings : booked) System.out.println(bookings);
 	
+	tdbd.setUserBookingsCriteria(tsc);
 
 }
 }

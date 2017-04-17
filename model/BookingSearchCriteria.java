@@ -1,21 +1,23 @@
 package model;
 
-import java.util.Date;
+
 
 public class BookingSearchCriteria {
 
-	private String buyer;
+	
 	private int bookingId;
 	private int trip;
 	private int numberOfGuests;
+	private String nameOfBuyer;
 	private int phoneOfBuyer;
 	private String emailOfBuyer;
 	
 	public BookingSearchCriteria() {
 	  	this.bookingId = 0;
-	  	this.trip = 0; //lowDate is current time (a timestamp basically)
+	  	this.trip = 0; 
 	  	this.numberOfGuests = 0;
-	  	this.phoneOfBuyer = 8768788;
+	  	this.nameOfBuyer="";
+	  	this.phoneOfBuyer = 0;
 	  	this.emailOfBuyer = "";
 	  }
 	public BookingSearchCriteria(Integer bookingId, Integer trip, Integer numberOfGuests, String comment, Integer phoneOfBuyer, String emailOfBuyer) {
@@ -26,7 +28,14 @@ public class BookingSearchCriteria {
 		this.emailOfBuyer = emailOfBuyer;
 	}
 	
-	
+
+
+	public String getNameOfBuyer() {
+		return nameOfBuyer;
+	}
+	public void setNameOfBuyer(String nameOfBuyer) {
+		this.nameOfBuyer = nameOfBuyer;
+	}
 	public String getEmailOfBuyer() {
 		return emailOfBuyer;
 	}
@@ -38,13 +47,6 @@ public class BookingSearchCriteria {
 	}
 	public void setPhoneOfBuyer(int phoneOfBuyer) {
 		this.phoneOfBuyer = phoneOfBuyer;
-	}
-	
-	public String getBuyer() {
-		return buyer;
-	}
-	public void setBuyer(String buyer) {
-		this.buyer = buyer;
 	}
 	public int getBookingId() {
 		return bookingId;
@@ -64,6 +66,10 @@ public class BookingSearchCriteria {
 	public void setNumberOfGuests(int numberOfGuests) {
 		this.numberOfGuests = numberOfGuests;
 	}
+
 	
 	
+	
+	
+
 }

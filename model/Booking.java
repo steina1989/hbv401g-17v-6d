@@ -6,20 +6,28 @@ public class Booking {
 	private String buyer;
 	private int bookingId;
 	private int trip;
+	private String nameOfBuyer;
 	private int numberOfGuests;
 	private int phoneOfBuyer;
 	private String emailOfBuyer;
 	
-	public Booking(Integer bookingId, Integer trip, Integer numberOfGuests, String comment, Integer phoneOfBuyer, String emailOfBuyer) {
+	public Booking(Integer bookingId, Integer trip, Integer numberOfGuests, String nameOfBuyer, Integer phoneOfBuyer, String emailOfBuyer) {
 		super();
 		this.bookingId = bookingId;
 		this.trip = trip;
 		this.numberOfGuests = numberOfGuests;
+		this.nameOfBuyer = nameOfBuyer;
 		this.phoneOfBuyer = phoneOfBuyer;
 		this.emailOfBuyer = emailOfBuyer;
 	}
 	
 	
+	public String getNameOfBuyer() {
+		return nameOfBuyer;
+	}
+	public void setNameOfBuyer(String nameOfBuyer) {
+		this.nameOfBuyer = nameOfBuyer;
+	}
 	public String getEmailOfBuyer() {
 		return emailOfBuyer;
 	}
