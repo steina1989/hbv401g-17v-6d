@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class ViewBookingsPanel extends JPanel {
 	private final BookingController bookingController;
 	private CheckoutPanel checkoutPanel;
-	//private BookingInfoPanel bookingInfoPanel;
+	private BookingInfoPanel bookingInfoPanel;
 	
 	/**
 	 * Create the panel.
@@ -29,12 +29,11 @@ public class ViewBookingsPanel extends JPanel {
 		checkoutPanel.setVisible(true);
 		setLayout(null);
 		this.add(checkoutPanel);
+		bookingInfoPanel = new BookingInfoPanel(this.bookingController);
+		bookingInfoPanel.setBackground(new Color(224, 255, 255));
+		bookingInfoPanel.setBounds(453, 0, 462, 294);
+		add(bookingInfoPanel);
 		
-		//bookingInfoPanel = new BookingInfoPanel(this.bookingController);
-//		bookingInfoPanel.setBackground(new Color(224, 255, 255));
-//		bookingInfoPanel.setBounds(453, 0, 462, 294);
-//		add(bookingInfoPanel);
-//		
 		JButton confirmBookingButton = new JButton("Confirm booking");
 		confirmBookingButton.setBounds(730, 305, 185, 23);
 		add(confirmBookingButton);
