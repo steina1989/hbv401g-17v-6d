@@ -44,6 +44,7 @@ public class MainFrame extends JFrame {
 	private ViewTripsPanel viewTripsPanel;
 	private ViewBookingsPanel viewBookingsPanel;
 	private JButton cancelOldBookingButton;
+	private CancelBookingFrame cancelBookingFrame;
 
 	/**
 	 * Launch the application.
@@ -135,6 +136,13 @@ public class MainFrame extends JFrame {
 		enterViewTripsPanelButton.setEnabled(false);
 		
 		cancelOldBookingButton = new JButton("Cancel old booking");
+		cancelOldBookingButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				System.out.println("Opening CancelBookingFrame");
+				bookingController.cancelOldBookingButtonClicked();
+			}
+		});
 		cancelOldBookingButton.setBounds(10, 564, 121, 23);
 		contentPane.add(cancelOldBookingButton);
 		enterViewTripsPanelButton.addMouseListener(new MouseAdapter() {
@@ -154,6 +162,11 @@ public class MainFrame extends JFrame {
 		TripInfoFrame frame = new TripInfoFrame(trip, reviews, this.bookingController);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
+	}
+
+	
+	public CancelBookingFrame getCancelBookingFrame() {
+		return cancelBookingFrame;
 	}
 
 	public ViewTripsPanel getViewTripsPanel() {
@@ -185,7 +198,9 @@ public class MainFrame extends JFrame {
 	}
 
 	public void openCancelBookingFrame(){
-		CancelBookingFrame cancelBookingFrame = new CancelBookingFrame(this.bookingController);
+		System.out.println("MainFrame.openCancelBookingFrame");
+		cancelBookingFrame = new CancelBookingFrame(bookingController);
+		cancelBookingFrame.setLocationRelativeTo(null);
 		cancelBookingFrame.setVisible(true);
 	}
 

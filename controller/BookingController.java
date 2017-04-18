@@ -51,6 +51,18 @@ public class BookingController {
 		}
 	}
 	
+	public void cancelOldBookingButtonClicked(){
+		System.out.println("BookingController.cancelOldBookingButtonClicked");
+		this.mainFrame.openCancelBookingFrame();
+	}
+	
+	public void cancelBookingFrameCancelBookingClicked(int bookingId){
+		if (bookingDatabaseController.cancelBooking(bookingId));
+			mainFrame.getCancelBookingFrame().setConfirmationLabel("Booking canceled successfully");
+		else mainFrame.getCancelBookingFrame().setConfirmationLabel("Booking cancellation unsuccessful");
+
+	}
+	
 	public void confirmBookingClicked() {
 		ArrayList<Booking> bookings = createBookingsFromBookingInfoPanel();
 		

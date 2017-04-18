@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import controller.BookingController;
+
 import javax.swing.JLabel;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
@@ -14,29 +17,17 @@ import java.awt.Insets;
 import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.BoxLayout;
-import view.MainFrame;;
+import view.MainFrame;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;;
 
 public class CancelBookingFrame extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
 	private BookingController bookingController;
+	private JLabel lblConfirmationText;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					CancelBookingFrame frame = new CancelBookingFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
@@ -61,12 +52,26 @@ public class CancelBookingFrame extends JFrame {
 		textField.setColumns(50);
 		textField.setMaximumSize( textField.getPreferredSize() );
 		
+		lblConfirmationText = new JLabel("");
+		lblConfirmationText.setBounds(142, 81, 46, 14);
+		contentPane.add(lblConfirmationText);
+		
 		JButton btnCancelBooking = new JButton("Cancel booking");
+		btnCancelBooking.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				bookingController.cancelBookingFrameCancelBookingClicked(Integer.parseInt(textField.getText()));
+			}
+		});
 		btnCancelBooking.setBounds(114, 120, 105, 23);
 		contentPane.add(btnCancelBooking);
 		
-		JLabel lblConfirmationText = new JLabel("New label");
-		lblConfirmationText.setBounds(142, 81, 46, 14);
-		contentPane.add(lblConfirmationText);
+
+		}
+	
+	public void setConfirmationLabel(String message){
+		lblConfirmationText.setText(message);
+		
+
 	}
 }

@@ -35,7 +35,7 @@ public class BookingDatabaseController {
 	
 	
 
-private boolean cancelBooking(int bookingId) throws SQLException
+public boolean cancelBooking(int bookingId) throws SQLException
 	{
 		boolean IsItInWorkingOrder = false;
 		try {
