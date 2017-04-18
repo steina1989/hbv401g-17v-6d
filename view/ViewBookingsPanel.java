@@ -3,12 +3,11 @@ package view;
 import java.awt.Color;
 
 import javax.swing.*;
-
 import controller.BookingController;
 import model.Trip;
-
 import java.awt.FlowLayout;
 import java.awt.SystemColor;
+import view.BookingInfoPanel;
 import java.util.ArrayList;
 
 public class ViewBookingsPanel extends JPanel {
