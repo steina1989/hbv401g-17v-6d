@@ -3,7 +3,7 @@ package model;
 
 public class Booking {
 
-	private String buyer;
+	
 	private int bookingId;
 	private int tripId;
 	private String nameOfBuyer;
@@ -40,12 +40,7 @@ public class Booking {
 		this.phoneOfBuyer = phoneOfBuyer;
 	}
 	
-	public String getBuyer() {
-		return buyer;
-	}
-	public void setBuyer(String buyer) {
-		this.buyer = buyer;
-	}
+	
 	public int getBookingId() {
 		return bookingId;
 	}

@@ -33,10 +33,40 @@ public class BookingDatabaseController {
 		stmt.setInt(1,criteria.getBookingId());
 	}
 
-	private void cancelBookingGSS(BookingSearchCriteria criteria) throws SQLException
+	private void cancelUserBooking(Booking booking) throws SQLException
 	{
-		//Name. Padded with % so I can deal with the empty string and some valid criteria in one line.
-		stmt.setInt(1,criteria.getBookingId());
+		
+//		"DELETE FROM Bookings " + 
+//				"WHERE BookingId ==  ? ;";
+//		
+		try {
+
+			String sql = "SELECT SEATS FROM Bookings WHERE BOOKING";
+			connect();
+	
+
+			sql = "DELETE FROM Bookings"
+					+ " WHERE BookingId == ?";
+			stmt = conn.prepareStatement(sql);
+//     		stmt.setInt(1,booking.getBookingId());
+//			stmt.setInt(2,booking.getTripId());
+//			stmt.setInt(3, booking.getNumberOfGuests());
+//			stmt.setString(4,booking.getNameOfBuyer());
+//			stmt.setInt(5, booking.getPhoneOfBuyer());
+//			stmt.setString(6, booking.getEmailOfBuyer());
+			stmt.executeUpdate();
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();	
+		}
+
+		finally{
+			if(rs != null) rs.close();
+			if(stmt != null) stmt.close();
+			if(conn != null) conn.close();
+		}
+
 	}
 	public void setUserBookings(Booking booking) throws SQLException 
 	{				
@@ -64,7 +94,33 @@ public class BookingDatabaseController {
 			stmt.setInt(5, booking.getPhoneOfBuyer());
 			stmt.setString(6, booking.getEmailOfBuyer());
 			stmt.executeUpdate();
-
+			
+			// feching the trip ID to find tripId in Trips table
+			highestBookingId = highestBookingId + 1;
+			sql = "SELECT TripId FROM Bookings WHERE bookingId == " + highestBookingId;
+			stmt = conn.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			int TripId = rs.getInt("TripId");
+			
+			// find the number of seats already avaliable in a trip 
+			sql = "SELECT seatsLeft FROM Trips WHERE tripId == " + TripId;
+			stmt = conn.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			int CurrentNumSeaats = rs.getInt("seatsLeft");
+			
+			// find the number of seat bookings in the booking
+			sql = "SELECT NumberOfSeats FROM Bookings WHERE bookingId == " + highestBookingId;
+			stmt = conn.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			int numberOfSeatsBooked = rs.getInt("NumberOfSeats");
+			
+			int UpdatednumberOfSeats = CurrentNumSeaats - numberOfSeatsBooked;
+			//and deduct that from that the number of seats booked.
+			sql = "UPDATE Trips SET seatsLeft = " + UpdatednumberOfSeats + " WHERE tripId = " + TripId; 
+			stmt = conn.prepareStatement(sql);
+			stmt.executeUpdate();
+			
+			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();	
@@ -119,62 +175,40 @@ public class BookingDatabaseController {
 		}
 		return Bookings;
 	}
-	//private  void setUserBookingsCriteria(BookingSearchCriteria criteria) throws SQLException{
-	//
-	//	String setUserBookingsSQL = "INSERT INTO Bookings(BookingId,TripId,NumberOfSeats,NameOfBuyer,PhoneOfBuyer,EmailOfBuyer) VALUES ( " 
-	//			+ "?" + ",? " +",? " +",? " +",?"+ ",?"+ ");" ;
-	//			stmt = null;
-	//			try{
-	//				connect();
-	//				stmt = conn.prepareStatement(setUserBookingsSQL);
-	//				setUserBookingsGSS(criteria); //Stops sql injections!
-	//				rs = stmt.executeQuery(); // Send in completed secure SQL query.
-	//			}
-	//			//Handle errors for JDBC
-	//			catch(SQLException se) {se.printStackTrace();}
-	//			//Handle errors for Class.forName
-	//			catch(Exception e){e.printStackTrace();}
-	//			finally{
-	//				if(rs != null) rs.close();
-	//				if(stmt != null) stmt.close();
-	//				if(conn != null) conn.close();
-	//			}
-	//		System.out.println();
-	//			
-	//		}
-
-	public void cancelBookingCriteria(BookingSearchCriteria criteria) throws SQLException{
-
-		String cancelBookingSQL = 	
-				"DELETE FROM Bookings " + 
-						"WHERE BookingId ==  ? ;";
-
-		stmt = null;
-		try{
-			connect();
-			stmt = conn.prepareStatement(cancelBookingSQL);
-			cancelBookingGSS(criteria); //Stops sql injections!
-			rs = stmt.executeQuery(); // Send in completed secure SQL query.
-			// Extract data from result set
-			// We pass rs.get methods with name of column in the database. Lots of lines, but makes it easier to modify later.
-
-		}
-		//Handle errors for JDBC
-		catch(SQLException se) {se.printStackTrace();}
-		//Handle errors for Class.forName
-		catch(Exception e){e.printStackTrace();}
-		finally{
-			if(rs != null) rs.close();
-			if(stmt != null) stmt.close();
-			if(conn != null) conn.close();
-		}
-	}
+	
+//
+//	public void cancelBookingCriteria(BookingSearchCriteria criteria) throws SQLException{
+//
+//		String cancelBookingSQL = 	
+//				"DELETE FROM Bookings " + 
+//						"WHERE BookingId ==  ? ;";
+//
+//		stmt = null;
+//		try{
+//			connect();
+//			stmt = conn.prepareStatement(cancelBookingSQL);
+//			cancelBookingGSS(criteria); //Stops sql injections!
+//			rs = stmt.executeQuery(); // Send in completed secure SQL query.
+//			// Extract data from result set
+//			// We pass rs.get methods with name of column in the database. Lots of lines, but makes it easier to modify later.
+//
+//		}
+//		//Handle errors for JDBC
+//		catch(SQLException se) {se.printStackTrace();}
+//		//Handle errors for Class.forName
+//		catch(Exception e){e.printStackTrace();}
+//		finally{
+//			if(rs != null) rs.close();
+//			if(stmt != null) stmt.close();
+//			if(conn != null) conn.close();
+//		}
+//	}
 
 	public static void main(String[] args) 
 	{
 		BookingDatabaseController tdbd = new BookingDatabaseController();
+//		Booking tsc = new Booking(2,3,"lala",334455,"nana");
 		Booking tsc = new Booking(2,3,"lala",334455,"nana");
-
 
 		//ArrayList<Booking> booked = tdbd.getUserBookingsCriteria(tsc);
 		//for (Booking booking : booked) System.out.println(booking);
@@ -184,7 +218,12 @@ public class BookingDatabaseController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+//try{
+//	tdbd.cancelUserBooking(tsc);
+//}catch(SQLException e){
+//	e.printStackTrace();
+//}
+		
 
 
 	}
