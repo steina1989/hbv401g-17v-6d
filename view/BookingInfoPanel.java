@@ -59,6 +59,21 @@ public class BookingInfoPanel extends JPanel {
 		numberOfGuestsTextField.setBounds(123, 82, 43, 20);
 		add(numberOfGuestsTextField);
 		numberOfGuestsTextField.setColumns(10);
+	}
 
+	public String getNameOfBuyer() {
+		return nameOfBuyerTextField.getText();
+	}
+
+	public String getEmailOfBuyer() {
+		return emailOfBuyerTextField.getText();
+	}
+
+	public int getPhoneOfBuyer() {
+		return Integer.parseInt(phoneOfBuyerTextField.getText());
+	}
+
+	public int getNumberOfGuests() {
+		return Integer.parseInt(numberOfGuestsTextField.getText());
 	}
 }

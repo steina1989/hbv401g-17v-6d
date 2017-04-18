@@ -183,6 +183,12 @@ public class MainFrame extends JFrame {
 	public void setCartLabelText(int numTripsInCart) {
 		this.cartLabel.setText("Trips in cart: " + numTripsInCart);
 	}
+
+	public void openCancelBookingFrame(){
+		CancelBookingFrame cancelBookingFrame = new CancelBookingFrame(this.bookingController);
+		cancelBookingFrame.setVisible(true);
+	}
+
 	
 	private static void addPopup(Component component, final JPopupMenu popup) {
 		component.addMouseListener(new MouseAdapter() {

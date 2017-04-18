@@ -2,9 +2,11 @@ package controller;
 
 import java.util.ArrayList;
 
+import model.Booking;
 import model.Trip;
 import storage.BookingDatabaseController;
 import storage.TripDatabaseController;
+import view.BookingInfoPanel;
 import view.CheckoutPanel;
 import view.MainFrame;
 
@@ -77,6 +79,22 @@ public class BookingController {
 			this.mainFrame.getViewBookingsPanel().getCheckoutPanel().getCancelTripButton().setEnabled(false);
 		}
 	}
+	
+	private ArrayList<Booking> createBookingsFromBookingInfoPanel() {
+		BookingInfoPanel bip = this.mainFrame.getViewBookingsPanel().getBookingInfoPanel();
+		ArrayList<Booking> listOfBookings = new ArrayList<Booking>();
+		for (Trip trip : cart)
+		{
+			Booking booking = new Booking(trip.getId(),bip.getNumberOfGuests(), bip.getNameOfBuyer(), bip.getPhoneOfBuyer(),bip.getEmailOfBuyer());
+			listOfBookings.add(booking);
+		}
+		return listOfBookings;
+	}
+	
+	private boolean seatsAvailableOK(int tripId, int numOfGuests) {
+		return bookingDatabaseController.seatsAvailableOK(tripId, numOfGuests);
+	}
+	
 	
 	private int getSelectedTripIndex() {
 		CheckoutPanel checkoutPanel = this.mainFrame.getViewBookingsPanel().getCheckoutPanel();

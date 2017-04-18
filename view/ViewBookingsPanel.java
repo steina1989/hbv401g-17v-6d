@@ -52,6 +52,12 @@ public class ViewBookingsPanel extends JPanel {
 		
 	}
 	
+	
+	public BookingInfoPanel getBookingInfoPanel() {
+		return bookingInfoPanel;
+	}
+
+
 	public CheckoutPanel getCheckoutPanel() {
 		return this.checkoutPanel;
 	}
