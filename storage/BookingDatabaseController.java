@@ -223,7 +223,25 @@ public ArrayList<Booking> getUserBookingsCriteria(BookingSearchCriteria criteria
 		}
 		return awnswer;
 	}
+private boolean bookingWithBookingIDExists(int bookingID){
 	
+	boolean awnswer = false;
+	try{
+	connect();
+	String sql = "SELECT booking FROM bookings WHERE bookingId == " + tripid ;
+	
+
+	}catch(SQLException se) {se.printStackTrace();}
+	//Handle errors for Class.forName
+	catch(Exception e){e.printStackTrace();}
+	finally{
+		if(rs != null) rs.close();
+		if(stmt != null) stmt.close();
+		if(conn != null) conn.close();
+	}
+	return awnswer;
+	
+	}
 	
 	public static void main(String[] args) 
 	{
