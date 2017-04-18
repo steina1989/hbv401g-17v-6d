@@ -35,9 +35,9 @@ public class BookingDatabaseController {
 	
 	
 
-private void cancelBooking(int bookingId) throws SQLException
+private boolean cancelBooking(int bookingId) throws SQLException
 	{
-
+		boolean IsItInWorkingOrder = false;
 		try {
 			String sql;
 			connect();
@@ -71,8 +71,10 @@ private void cancelBooking(int bookingId) throws SQLException
 					+ " WHERE BookingId == " + bookingId;
 		
 			stmt = conn.prepareStatement(sql);
-			stmt.executeUpdate();
-
+			int numberOfLinesAffected = stmt.executeUpdate();
+			if(numberOfLinesAffected > 0){
+				IsItInWorkingOrder = true;
+			}
 
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -84,7 +86,7 @@ private void cancelBooking(int bookingId) throws SQLException
 			if(stmt != null) stmt.close();
 			if(conn != null) conn.close();
 		}
-
+		return IsItInWorkingOrder;
 	}
 public void setUserBookings(Booking booking) throws SQLException 
 	{				
@@ -228,8 +230,10 @@ private boolean bookingWithBookingIDExists(int bookingID){
 	boolean awnswer = false;
 	try{
 	connect();
-	String sql = "SELECT booking FROM bookings WHERE bookingId == " + tripid ;
-	
+	String sql = "SELECT booking FROM bookings WHERE bookingId == " + bookingID ;
+	if(resultSet.next()){
+		   //yes exist
+		}
 
 	}catch(SQLException se) {se.printStackTrace();}
 	//Handle errors for Class.forName
