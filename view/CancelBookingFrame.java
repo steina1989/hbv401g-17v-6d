@@ -1,25 +1,15 @@
 package view;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import controller.BookingController;
-
-import javax.swing.JLabel;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import javax.swing.JTextField;
-import java.awt.Insets;
-import java.awt.FlowLayout;
-import javax.swing.JButton;
-import javax.swing.BoxLayout;
-import view.MainFrame;
 import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;;
+import java.awt.event.MouseEvent;
+import java.sql.SQLException;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+import controller.BookingController;;
 
 public class CancelBookingFrame extends JFrame {
 
@@ -53,14 +43,22 @@ public class CancelBookingFrame extends JFrame {
 		textField.setMaximumSize( textField.getPreferredSize() );
 		
 		lblConfirmationText = new JLabel("");
-		lblConfirmationText.setBounds(142, 81, 46, 14);
+		lblConfirmationText.setBounds(61, 81, 202, 14);
 		contentPane.add(lblConfirmationText);
 		
 		JButton btnCancelBooking = new JButton("Cancel booking");
 		btnCancelBooking.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				bookingController.cancelBookingFrameCancelBookingClicked(Integer.parseInt(textField.getText()));
+				try {
+					bookingController.cancelBookingFrameCancelBookingClicked(Integer.parseInt(textField.getText()));
+				} catch (NumberFormatException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnCancelBooking.setBounds(114, 120, 105, 23);
@@ -71,7 +69,5 @@ public class CancelBookingFrame extends JFrame {
 	
 	public void setConfirmationLabel(String message){
 		lblConfirmationText.setText(message);
-		
-
 	}
 }

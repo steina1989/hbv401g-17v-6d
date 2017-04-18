@@ -225,12 +225,12 @@ public ArrayList<Booking> getUserBookingsCriteria(BookingSearchCriteria criteria
 		}
 		return awnswer;
 	}
-private boolean bookingWithBookingIDExists(int bookingID) throws SQLException{
+public boolean bookingWithBookingIDExists(int bookingID) throws SQLException{
 	
 	boolean awnswer = false;
 	try{
 	connect();
-	String sql = "SELECT booking FROM bookings WHERE bookingId == " + bookingID ;
+	String sql = "SELECT bookingId FROM bookings WHERE bookingId == " + bookingID ;
 	stmt = conn.prepareStatement(sql);
 	rs = stmt.executeQuery();
 	

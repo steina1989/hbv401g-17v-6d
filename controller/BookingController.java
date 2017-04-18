@@ -56,9 +56,13 @@ public class BookingController {
 		this.mainFrame.openCancelBookingFrame();
 	}
 	
-	public void cancelBookingFrameCancelBookingClicked(int bookingId){
-		if (bookingDatabaseController.cancelBooking(bookingId));
-			mainFrame.getCancelBookingFrame().setConfirmationLabel("Booking canceled successfully");
+	public void cancelBookingFrameCancelBookingClicked(int bookingId) throws SQLException{
+		if (bookingDatabaseController.bookingWithBookingIDExists(bookingId)){
+			if (bookingDatabaseController.cancelBooking(bookingId))
+			{
+				mainFrame.getCancelBookingFrame().setConfirmationLabel("Booking canceled successfully");
+			}
+		}
 		else mainFrame.getCancelBookingFrame().setConfirmationLabel("Booking cancellation unsuccessful");
 
 	}
