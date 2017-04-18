@@ -225,14 +225,17 @@ public ArrayList<Booking> getUserBookingsCriteria(BookingSearchCriteria criteria
 		}
 		return awnswer;
 	}
-private boolean bookingWithBookingIDExists(int bookingID){
+private boolean bookingWithBookingIDExists(int bookingID) throws SQLException{
 	
 	boolean awnswer = false;
 	try{
 	connect();
 	String sql = "SELECT booking FROM bookings WHERE bookingId == " + bookingID ;
-	if(resultSet.next()){
-		   //yes exist
+	stmt = conn.prepareStatement(sql);
+	rs = stmt.executeQuery();
+	
+	if(rs.next()){
+		awnswer= true; //yes exist
 		}
 
 	}catch(SQLException se) {se.printStackTrace();}
