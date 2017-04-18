@@ -26,35 +26,53 @@ public class BookingDatabaseController {
 		conn = DriverManager.getConnection(DB_URL);
 	}
 
-	// ----------------------->  Generate Secure SQL - beginning
+	
 	private void getUserBookingsGSS(BookingSearchCriteria criteria) throws SQLException
 	{ 
 		//Name. Padded with % so I can deal with the empty string and some valid criteria in one line.
 		stmt.setInt(1,criteria.getBookingId());
 	}
-
-	private void cancelUserBooking(Booking booking) throws SQLException
-	{
-		
-//		"DELETE FROM Bookings " + 
-//				"WHERE BookingId ==  ? ;";
-//		
-		try {
-
-			String sql = "SELECT SEATS FROM Bookings WHERE BOOKING";
-			connect();
+	
 	
 
-			sql = "DELETE FROM Bookings"
-					+ " WHERE BookingId == ?";
+private void cancelBooking(int bookingId) throws SQLException
+	{
+
+		try {
+			String sql;
+			connect();
+			// get the trip id of the trip to be canceled		
+			sql = "SELECT TripId FROM Bookings WHERE bookingId == " + bookingId;
 			stmt = conn.prepareStatement(sql);
-//     		stmt.setInt(1,booking.getBookingId());
-//			stmt.setInt(2,booking.getTripId());
-//			stmt.setInt(3, booking.getNumberOfGuests());
-//			stmt.setString(4,booking.getNameOfBuyer());
-//			stmt.setInt(5, booking.getPhoneOfBuyer());
-//			stmt.setString(6, booking.getEmailOfBuyer());
+			rs = stmt.executeQuery();
+			int TripId = rs.getInt("TripId");
+			
+			
+			// find the number of seats at the moment currently available the trip booked
+			sql = "SELECT seatsLeft FROM Trips WHERE tripId == " + TripId;
+			stmt = conn.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			int CurrentNumSeaats = rs.getInt("seatsLeft");
+						
+			// find the number of seats in the booking that is to be canseled 
+			sql = "SELECT NumberOfSeats FROM Bookings WHERE bookingId == " + bookingId;
+			stmt = conn.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			int numberOfSeatsBooked = rs.getInt("NumberOfSeats");
+						
+			int UpdatednumberOfSeats = CurrentNumSeaats + numberOfSeatsBooked;
+			//Add the seats from the canseled booking to the seats left.
+			sql = "UPDATE Trips SET seatsLeft = " + UpdatednumberOfSeats + " WHERE tripId = " + TripId; 
+			stmt = conn.prepareStatement(sql);
 			stmt.executeUpdate();
+			
+			
+			sql = "DELETE FROM Bookings "
+					+ " WHERE BookingId == " + bookingId;
+		
+			stmt = conn.prepareStatement(sql);
+			stmt.executeUpdate();
+
 
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -68,7 +86,7 @@ public class BookingDatabaseController {
 		}
 
 	}
-	public void setUserBookings(Booking booking) throws SQLException 
+public void setUserBookings(Booking booking) throws SQLException 
 	{				
 		/*
 		 * CREATE TABLE "Bookings" ("BookingId" INTEGER PRIMARY KEY  NOT NULL , "TripId" INTEGER NOT NULL , 
@@ -133,10 +151,9 @@ public class BookingDatabaseController {
 		}
 
 	}
-	//----------------------->  Generate Secure SQL - End
+	
 
-
-	public ArrayList<Booking> getUserBookingsCriteria(BookingSearchCriteria criteria) throws SQLException{
+public ArrayList<Booking> getUserBookingsCriteria(BookingSearchCriteria criteria) throws SQLException{
 
 		String getUserBookingsSQL = 	
 				"SELECT * FROM Bookings "
@@ -176,34 +193,38 @@ public class BookingDatabaseController {
 		return Bookings;
 	}
 	
-//
-//	public void cancelBookingCriteria(BookingSearchCriteria criteria) throws SQLException{
-//
-//		String cancelBookingSQL = 	
-//				"DELETE FROM Bookings " + 
-//						"WHERE BookingId ==  ? ;";
-//
-//		stmt = null;
-//		try{
-//			connect();
-//			stmt = conn.prepareStatement(cancelBookingSQL);
-//			cancelBookingGSS(criteria); //Stops sql injections!
-//			rs = stmt.executeQuery(); // Send in completed secure SQL query.
-//			// Extract data from result set
-//			// We pass rs.get methods with name of column in the database. Lots of lines, but makes it easier to modify later.
-//
-//		}
-//		//Handle errors for JDBC
-//		catch(SQLException se) {se.printStackTrace();}
-//		//Handle errors for Class.forName
-//		catch(Exception e){e.printStackTrace();}
-//		finally{
-//			if(rs != null) rs.close();
-//			if(stmt != null) stmt.close();
-//			if(conn != null) conn.close();
-//		}
-//	}
 
+	private boolean SeatsAvailableOK(int tripid, int seatsordered) throws SQLException{
+		boolean awnswer = false;
+		stmt = null;
+		try{
+			String sql = "SELECT seatsLeft FROM Trips WHERE tripId == " + tripid ;
+			connect();
+			stmt = conn.prepareStatement(sql);
+			rs = stmt.executeQuery(); // Send in completed secure SQL query.
+			int TripSeatsleft = rs.getInt("seatsLeft");
+			
+			int seats = TripSeatsleft - seatsordered;
+			if(seats >= 0){
+				awnswer = true;
+			}else{
+				awnswer = false;
+			}
+			
+		}
+		//Handle errors for JDBC
+		catch(SQLException se) {se.printStackTrace();}
+		//Handle errors for Class.forName
+		catch(Exception e){e.printStackTrace();}
+		finally{
+			if(rs != null) rs.close();
+			if(stmt != null) stmt.close();
+			if(conn != null) conn.close();
+		}
+		return awnswer;
+	}
+	
+	
 	public static void main(String[] args) 
 	{
 		BookingDatabaseController tdbd = new BookingDatabaseController();
@@ -212,12 +233,12 @@ public class BookingDatabaseController {
 
 		//ArrayList<Booking> booked = tdbd.getUserBookingsCriteria(tsc);
 		//for (Booking booking : booked) System.out.println(booking);
-		try {
-			tdbd.setUserBookings(tsc);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			tdbd.setUserBookings(tsc);
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 //try{
 //	tdbd.cancelUserBooking(tsc);
 //}catch(SQLException e){
