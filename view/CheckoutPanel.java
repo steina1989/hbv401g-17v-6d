@@ -22,7 +22,6 @@ public class CheckoutPanel extends JPanel {
 	private BookingController bookingController;
 	private JButton cancelTripButton;
 	private JPanel bookingInfoPanel;
-	private JButton addBookingButton;
 	
 	private ArrayList<Trip> tripsInCart;
 	private DefaultListModel<String> listModel;
@@ -53,10 +52,6 @@ public class CheckoutPanel extends JPanel {
 			}
 		});
 		bookingInfoPanel.add(tripsInCartJList);
-		
-		addBookingButton = new JButton("Confirm booking");
-		addBookingButton.setBounds(253, 252, 174, 23);
-		add(addBookingButton);
 		
 		cancelTripButton = new JButton("Cancel trip");
 		cancelTripButton.setBounds(253, 26, 174, 23);

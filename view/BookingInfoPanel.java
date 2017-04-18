@@ -5,6 +5,9 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import controller.BookingController;
+import javax.swing.SwingConstants;
+import java.awt.Font;
+import java.awt.Color;
 
 public class BookingInfoPanel extends JPanel {
 	
@@ -14,6 +17,7 @@ public class BookingInfoPanel extends JPanel {
 	private JTextField emailOfBuyerTextField;
 	private JTextField phoneOfBuyerTextField;
 	private JTextField numberOfGuestsTextField;
+	private JLabel bookingSuccessfulLabel;
 
 	/**
 	 * Create the panel.
@@ -59,10 +63,28 @@ public class BookingInfoPanel extends JPanel {
 		numberOfGuestsTextField.setBounds(123, 82, 43, 20);
 		add(numberOfGuestsTextField);
 		numberOfGuestsTextField.setColumns(10);
+		
+		bookingSuccessfulLabel = new JLabel("");
+		bookingSuccessfulLabel.setForeground(Color.GREEN);
+		bookingSuccessfulLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
+		bookingSuccessfulLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		bookingSuccessfulLabel.setBounds(176, 85, 246, 29);
+		add(bookingSuccessfulLabel);
 	}
 
 	public String getNameOfBuyer() {
 		return nameOfBuyerTextField.getText();
+	}
+	
+	public void setBookingSuccessfulLabel(String text) {
+		this.bookingSuccessfulLabel.setText(text);
+	}
+	
+	public void clearFillOutText() {
+		this.nameOfBuyerTextField.setText("");
+		this.emailOfBuyerTextField.setText("");
+		this.phoneOfBuyerTextField.setText("");
+		this.numberOfGuestsTextField.setText("");
 	}
 
 	public String getEmailOfBuyer() {

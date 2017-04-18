@@ -194,7 +194,7 @@ public ArrayList<Booking> getUserBookingsCriteria(BookingSearchCriteria criteria
 	}
 	
 
-	private boolean SeatsAvailableOK(int tripid, int seatsordered) throws SQLException{
+	public boolean seatsAvailableOK(int tripid, int seatsordered) throws SQLException{
 		boolean awnswer = false;
 		stmt = null;
 		try{

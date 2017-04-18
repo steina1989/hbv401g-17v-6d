@@ -1,5 +1,6 @@
 package controller;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import model.Booking;
@@ -14,7 +15,7 @@ public class BookingController {
 
 	private MainFrame mainFrame;
 	private ArrayList<Trip> cart;
-	private TripDatabaseController bookingDatabaseController;
+	private BookingDatabaseController bookingDatabaseController;
 
 	public BookingController(MainFrame mf){
 		this.mainFrame = mf;
@@ -47,6 +48,38 @@ public class BookingController {
 			refreshTripsInCartLabel();
 			refreshCancelTripButton();
 		}
+	}
+	
+	public void confirmBookingClicked() {
+		ArrayList<Booking> bookings = createBookingsFromBookingInfoPanel();
+		
+		for (Booking booking : bookings) {
+			if (!seatsAvailableOK(booking)) {
+				// one or more bookings cannot be made because of not enough seats available
+				// STOP
+			}
+		}
+		
+		setBookings(bookings);
+		
+		updateViewWithBookingCompleted();
+	}
+	
+	private void setBookings(ArrayList<Booking> bookings) {
+		for (Booking booking : bookings) {
+			try {
+				this.bookingDatabaseController.setUserBookings(booking);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	private void updateViewWithBookingCompleted() {
+		BookingInfoPanel bookingInfoPanel = this.mainFrame.getViewBookingsPanel().getBookingInfoPanel();
+		
+		bookingInfoPanel.clearFillOutText();
+		bookingInfoPanel.setBookingSuccessfulLabel("Booking Sucessfull");
 	}
 
 	private boolean tripExistsInCart(Trip candidate) {
@@ -91,8 +124,15 @@ public class BookingController {
 		return listOfBookings;
 	}
 	
-	private boolean seatsAvailableOK(int tripId, int numOfGuests) {
-		return bookingDatabaseController.seatsAvailableOK(tripId, numOfGuests);
+	private boolean seatsAvailableOK(Booking booking) {
+		int tripId = booking.getTripId();
+		int numOfGuests = booking.getNumberOfGuests();
+		try {
+			return bookingDatabaseController.seatsAvailableOK(tripId, numOfGuests);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 	
 	

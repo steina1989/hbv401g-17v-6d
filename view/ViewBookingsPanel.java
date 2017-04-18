@@ -7,6 +7,8 @@ import controller.BookingController;
 import model.Trip;
 import java.awt.FlowLayout;
 import java.awt.SystemColor;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent; 
 import view.BookingInfoPanel;
 import java.util.ArrayList;
 
@@ -35,6 +37,13 @@ public class ViewBookingsPanel extends JPanel {
 		
 		JButton confirmBookingButton = new JButton("Confirm booking");
 		confirmBookingButton.setBounds(730, 305, 185, 23);
+		confirmBookingButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (!((JButton)e.getSource()).isEnabled()) return; // abort if button is not enabled
+				bookingController.confirmBookingClicked();
+			}
+		});
 		add(confirmBookingButton);
 	}
 	
