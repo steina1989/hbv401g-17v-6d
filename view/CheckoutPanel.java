@@ -16,6 +16,8 @@ import java.awt.event.ActionEvent;
 import controller.BookingController;
 import model.Trip;
 import javax.swing.JList;
+import java.awt.SystemColor;
+import javax.swing.border.BevelBorder;
 
 public class CheckoutPanel extends JPanel {
 	
@@ -31,6 +33,7 @@ public class CheckoutPanel extends JPanel {
 	 * Create the panel.
 	 */
 	public CheckoutPanel(BookingController bookingController) {
+		setBackground(SystemColor.inactiveCaption);
 		this.bookingController = bookingController;
 		
 		this.listModel = new DefaultListModel<String>();
@@ -39,12 +42,13 @@ public class CheckoutPanel extends JPanel {
 		
 		bookingInfoPanel = new JPanel();
 		bookingInfoPanel.setBackground(Color.GRAY);
-		bookingInfoPanel.setBounds(21, 26, 204, 249);
+		bookingInfoPanel.setBounds(21, 26, 204, 213);
 		add(bookingInfoPanel);
 		bookingInfoPanel.setLayout(null);
 		
 		tripsInCartJList = new JList(listModel);
-		tripsInCartJList.setBounds(0, 0, 204, 249);
+		tripsInCartJList.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		tripsInCartJList.setBounds(0, 0, 204, 213);
 		tripsInCartJList.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -54,7 +58,7 @@ public class CheckoutPanel extends JPanel {
 		bookingInfoPanel.add(tripsInCartJList);
 		
 		cancelTripButton = new JButton("Cancel trip");
-		cancelTripButton.setBounds(253, 26, 174, 23);
+		cancelTripButton.setBounds(31, 250, 174, 23);
 		cancelTripButton.setEnabled(false);
 		cancelTripButton.addMouseListener(new MouseAdapter() {
 			@Override

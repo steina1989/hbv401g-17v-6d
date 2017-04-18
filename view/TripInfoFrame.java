@@ -169,6 +169,7 @@ public class TripInfoFrame extends JFrame {
 				System.out.println(trip);
 				System.out.println(bookingController);
 				bookingController.addToCartClicked(trip);
+				killThisWindow();
 			}
 		});
 		panel.add(btnAddToCart);
@@ -191,5 +192,10 @@ public class TripInfoFrame extends JFrame {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);	
 		setBounds(100, 100, 562, 509);
 
+	}
+	
+	public void killThisWindow() {
+		this.setVisible(false);
+		this.dispose();
 	}
 }

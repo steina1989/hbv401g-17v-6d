@@ -30,6 +30,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.JLabel;
+import java.awt.SystemColor;
 
 public class MainFrame extends JFrame {
 	
@@ -99,8 +100,9 @@ public class MainFrame extends JFrame {
 		contentPane.setLayout(null);
 		
 		viewBookingsPanel = new ViewBookingsPanel(this.bookingController);
-		viewBookingsPanel.setBackground(Color.LIGHT_GRAY);
-		viewBookingsPanel.setBounds(15, 15, 1029, 500);
+		System.out.println(this.getBackground());
+		viewBookingsPanel.setBackground(this.getBackground());
+		viewBookingsPanel.setBounds(0, 0, 1122, 537);
 		viewBookingsPanel.setVisible(false);
 		contentPane.add(viewBookingsPanel);
 		

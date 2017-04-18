@@ -13,6 +13,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Locale;
 import java.awt.Color;
+import java.awt.SystemColor;
 
 public class BookingInfoPanel extends JPanel {
 	
@@ -28,6 +29,7 @@ public class BookingInfoPanel extends JPanel {
 	 * Create the panel.
 	 */
 	public BookingInfoPanel(final BookingController bookingController) {
+		setBackground(SystemColor.inactiveCaption);
 		
 		this.bookingController = bookingController;
 		

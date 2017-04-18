@@ -63,7 +63,7 @@ public class BookingController {
 				mainFrame.getCancelBookingFrame().setConfirmationLabel("Booking canceled successfully");
 			}
 		}
-		else mainFrame.getCancelBookingFrame().setConfirmationLabel("Booking cancellation unsuccessful");
+		else mainFrame.getCancelBookingFrame().setConfirmationLabel("Booking ID not found in database");
 
 	}
 	
