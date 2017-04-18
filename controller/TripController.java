@@ -75,6 +75,7 @@ public class TripController {
 		FilterPanel fp = viewTripsPanel.getFilterPanel();
 		TripSearchCriteria criteria = fp.getCriteria();
 		this.listOfTrips = tripSearchEngine.search(criteria);
+		
 	}
 	
 	private void applySortingByRadioButtons() {
