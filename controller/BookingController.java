@@ -20,7 +20,8 @@ public class BookingController {
 	public BookingController(MainFrame mf){
 		this.mainFrame = mf;
 		this.cart = new ArrayList<Trip>();
-
+		
+		this.bookingDatabaseController = new BookingDatabaseController();
 	}
 
 
@@ -55,8 +56,8 @@ public class BookingController {
 		
 		for (Booking booking : bookings) {
 			if (!seatsAvailableOK(booking)) {
-				// one or more bookings cannot be made because of not enough seats available
-				// STOP
+				updateViewWithBookingFailed();
+				return;
 			}
 		}
 		
@@ -75,11 +76,19 @@ public class BookingController {
 		}
 	}
 	
+	private void updateViewWithBookingFailed() {
+		BookingInfoPanel bookingInfoPanel = this.mainFrame.getViewBookingsPanel().getBookingInfoPanel();
+		
+		bookingInfoPanel.setBookingSucessfulLabelColorRed();
+		bookingInfoPanel.setBookingSuccessfulLabel("Not enough seats available");
+	}
+	
 	private void updateViewWithBookingCompleted() {
 		BookingInfoPanel bookingInfoPanel = this.mainFrame.getViewBookingsPanel().getBookingInfoPanel();
 		
 		bookingInfoPanel.clearFillOutText();
-		bookingInfoPanel.setBookingSuccessfulLabel("Booking Sucessfull");
+		bookingInfoPanel.setBookingSucessfulLabelColorGreen();
+		bookingInfoPanel.setBookingSuccessfulLabel("Booking successful");
 	}
 
 	private boolean tripExistsInCart(Trip candidate) {

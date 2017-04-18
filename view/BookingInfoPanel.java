@@ -1,12 +1,17 @@
 package view;
 
 import javax.swing.JPanel;
+import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import controller.BookingController;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import java.beans.PropertyChangeListener;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.Locale;
 import java.awt.Color;
 
 public class BookingInfoPanel extends JPanel {
@@ -61,14 +66,14 @@ public class BookingInfoPanel extends JPanel {
 		
 		numberOfGuestsTextField = new JTextField();
 		numberOfGuestsTextField.setBounds(123, 82, 43, 20);
-		add(numberOfGuestsTextField);
 		numberOfGuestsTextField.setColumns(10);
+		add(numberOfGuestsTextField);
 		
 		bookingSuccessfulLabel = new JLabel("");
 		bookingSuccessfulLabel.setForeground(Color.GREEN);
-		bookingSuccessfulLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
-		bookingSuccessfulLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		bookingSuccessfulLabel.setBounds(176, 85, 246, 29);
+		bookingSuccessfulLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+		bookingSuccessfulLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		bookingSuccessfulLabel.setBounds(176, 85, 358, 29);
 		add(bookingSuccessfulLabel);
 	}
 
@@ -78,6 +83,16 @@ public class BookingInfoPanel extends JPanel {
 	
 	public void setBookingSuccessfulLabel(String text) {
 		this.bookingSuccessfulLabel.setText(text);
+	}
+	
+	public void setBookingSucessfulLabelColorRed() {
+		Color color = new Color(255, 0, 0);
+		this.bookingSuccessfulLabel.setForeground(color);
+	}
+	
+	public void setBookingSucessfulLabelColorGreen() {
+		Color color = new Color(0, 255, 0);
+		this.bookingSuccessfulLabel.setForeground(color);
 	}
 	
 	public void clearFillOutText() {
